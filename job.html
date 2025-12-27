@@ -1110,6 +1110,184 @@
             }
         }
 
+        // Update training programs section dynamically
+        const trainingEl = document.getElementById('training-programs');
+        if (trainingEl && career.education) {
+            const edu = career.education;
+            trainingEl.innerHTML = `
+                <div class="data-item">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <div class="font-semibold">${career.name} Training</div>
+                            <div class="text-sm text-secondary">Trade School/Training • ${edu.apprenticeship || 'Varies'}</div>
+                        </div>
+                        <div class="text-right">
+                            <div class="font-semibold">${career.tier <= 1 ? '$500 - $5,000' : '$5,000 - $15,000'}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="data-item">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <div class="font-semibold">On-the-Job Training</div>
+                            <div class="text-sm text-secondary">${career.tier >= 2 ? 'Apprenticeship' : 'Experience-based'} • ${edu.apprenticeship || '6-12 months'}</div>
+                        </div>
+                        <div class="text-right">
+                            <div class="font-semibold text-success">Paid Training</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Update license cards dynamically
+        const licensesEl = document.getElementById('licenses-list');
+        if (licensesEl && career.licensing) {
+            const lic = career.licensing;
+            const certs = career.certifications || [];
+            let licenseHTML = '';
+
+            // Add certifications as license cards
+            certs.forEach((cert, i) => {
+                licenseHTML += `
+                    <div class="license-card">
+                        <div class="license-header">
+                            <div>
+                                <div class="license-name">${cert.name}</div>
+                                <div class="text-sm text-tertiary">${i === 0 ? 'Primary Certification' : 'Optional'}</div>
+                            </div>
+                            <span class="license-required ${i === 0 ? 'yes' : 'no'}">${i === 0 ? 'Recommended' : 'Optional'}</span>
+                        </div>
+                        <div class="license-details">
+                            <div>
+                                <div class="data-label">Benefit</div>
+                                <div class="data-value">${cert.bonus}</div>
+                            </div>
+                            <div>
+                                <div class="data-label">Body</div>
+                                <div class="data-value">${lic.body || 'Industry'}</div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            // If no certs, show generic licensing info
+            if (certs.length === 0) {
+                licenseHTML = `
+                    <div class="license-card">
+                        <div class="license-header">
+                            <div>
+                                <div class="license-name">State/Local License</div>
+                                <div class="text-sm text-tertiary">${lic.body || 'Local jurisdiction'}</div>
+                            </div>
+                            <span class="license-required ${career.tier >= 2 ? 'yes' : 'no'}">${career.tier >= 2 ? 'Required' : 'Varies'}</span>
+                        </div>
+                    </div>
+                `;
+            }
+            licensesEl.innerHTML = licenseHTML;
+        }
+
+        // Update timeline dynamically
+        const timelineVisual = document.getElementById('timeline-visual');
+        const timelineDetailed = document.getElementById('timeline-detailed');
+        if (timelineVisual && career.timeToOwn) {
+            // Generate timeline based on tier
+            const timelineSteps = career.tier === 0 ? [
+                { month: 0, title: 'Start Training' },
+                { month: 1, title: 'First Jobs' },
+                { month: 3, title: 'Build Portfolio' },
+                { month: 6, title: 'Ready to Own' }
+            ] : career.tier === 1 ? [
+                { month: 0, title: 'Begin Training' },
+                { month: 2, title: 'Get Certified' },
+                { month: 6, title: 'Gain Experience' },
+                { month: 12, title: 'Owner Ready' }
+            ] : career.tier <= 3 ? [
+                { month: 0, title: 'Start Apprentice' },
+                { month: 24, title: 'Mid Training' },
+                { month: 48, title: 'Journeyman' },
+                { month: 72, title: 'Master/Own' }
+            ] : [
+                { month: 0, title: 'Begin Career' },
+                { month: 48, title: 'Specialization' },
+                { month: 96, title: 'Expert Level' },
+                { month: 144, title: 'Consultant/Own' }
+            ];
+
+            timelineVisual.innerHTML = timelineSteps.map(s => `
+                <div class="timeline-step">
+                    <div class="timeline-step-month">${s.month}</div>
+                    <div class="timeline-step-title">${s.title}</div>
+                </div>
+            `).join('');
+
+            if (timelineDetailed) {
+                timelineDetailed.innerHTML = timelineSteps.map((s, i) => `
+                    <div class="timeline-item">
+                        <div class="timeline-dot ${i === timelineSteps.length - 1 ? 'completed' : ''}"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-date">Month ${s.month}</div>
+                            <div class="timeline-title">${s.title}</div>
+                            <div class="timeline-description">${career.tier <= 1 ? 'Build skills and client base' : 'Complete requirements, gain experience'}</div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+        }
+
+        // Update compensation grid dynamically
+        const compSection = document.querySelector('#compensation .data-grid');
+        if (compSection && career.salary) {
+            const sal = career.salary;
+            compSection.innerHTML = `
+                <div class="data-item">
+                    <div class="data-label">Entry Level</div>
+                    <div class="data-value">${fmt(sal.entry)}</div>
+                </div>
+                <div class="data-item">
+                    <div class="data-label">Median</div>
+                    <div class="data-value" style="color: var(--color-accent-primary);">${fmt(sal.median)}</div>
+                </div>
+                <div class="data-item">
+                    <div class="data-label">75th Percentile</div>
+                    <div class="data-value">${fmt(sal.p75)}</div>
+                </div>
+                <div class="data-item">
+                    <div class="data-label">Top 10%</div>
+                    <div class="data-value">${fmt(sal.top10)}</div>
+                </div>
+            `;
+        }
+
+        // Update employment section dynamically
+        const empSection = document.querySelector('#employment .data-grid');
+        if (empSection && career.growth !== undefined) {
+            const growthText = career.growth >= 10 ? 'Much faster than avg' :
+                career.growth >= 5 ? 'Faster than avg' :
+                    career.growth >= 0 ? 'Average' : 'Declining';
+            empSection.innerHTML = `
+                <div class="data-item">
+                    <div class="data-label">Market Outlook</div>
+                    <div class="data-value">${career.growth >= 5 ? 'Strong' : 'Stable'}</div>
+                </div>
+                <div class="data-item">
+                    <div class="data-label">10-Year Growth</div>
+                    <div class="data-value ${career.growth >= 5 ? 'text-success' : ''}">+${career.growth}% (${growthText})</div>
+                </div>
+                <div class="data-item">
+                    <div class="data-label">Time to Ownership</div>
+                    <div class="data-value">${career.timeToOwn}</div>
+                </div>
+                <div class="data-item">
+                    <div class="data-label">Startup Investment</div>
+                    <div class="data-value">${career.business ? fmt(career.business.startupTypical) : 'Varies'}</div>
+                </div>
+            `;
+        }
+
+
         document.addEventListener('DOMContentLoaded', function () {
             // Generate salary values from career data
             const sal = career.salary || { entry: 35000, median: 55000, p75: 72000, top10: 95000 };

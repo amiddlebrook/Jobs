@@ -105,7 +105,7 @@ const T3_CAREERS = {
         dayInLife: "Work involves system design, crew management, utility interconnection, permit coordination, and managing installation operations.",
         salary: { entry: 40000, median: 52000, p75: 68000, top10: 90000 },
         growth: 42, timeToOwn: "4-5 years (electrical + NABCEP)",
-        education: { min: "High School / GED + electrical", preferred: "NABCEP certification + contractor license", apprenticeship: "4 years electrical + solar training", ce: "NABCEP renewal" },
+        education: { min: "High School / GED", preferred: "Technical training + NABCEP", apprenticeship: "1-12 months OJT", ce: "NABCEP renewal optional" },
         licensing: { body: "State electrical/contractor board", background: "Required", bonding: "$25,000", insurance: "$2M GL" },
         pros: ["Explosive market growth", "Tax credit incentives", "Climate policy support", "Technical innovation", "Commercial rooftop demand"],
         cons: ["Policy uncertainty", "Utility interconnection complexity", "Competition increasing", "Module price volatility", "Roof work hazards"],

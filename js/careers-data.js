@@ -13,7 +13,7 @@ const CAREERS_DATA = {
         salary: { entry: 37000, median: 51000, p75: 72000, top10: 81000 },
         growth: 6,
         timeToOwn: "1-2 months",
-        education: { min: "High School / GED", preferred: "On-the-job training", apprenticeship: "None required", ce: "Safety training annually" },
+        education: { min: "High School / GED (49% of workers)", preferred: "On-the-job training", apprenticeship: "3 years optional (DOL registered)", ce: "Safety training (OSHA 10)" },
         licensing: { body: "Local jurisdiction", background: "Varies by city", bonding: "$10,000-$25,000", insurance: "$1M GL" },
         licenses: [
             { name: "Business License", level: "Local", required: true, cost: 150, passRate: 100, time: "1-2 weeks", renewal: "Annual / $75" },

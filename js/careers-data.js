@@ -199,9 +199,9 @@ const CAREERS_DATA = {
         description: "Install various flooring materials including hardwood, laminate, LVP, tile, and carpet in residential and commercial properties.",
         dayInLife: "Days involve subfloor preparation, measuring and cutting materials, installation with proper transitions, and cleanup. Jobs range from single rooms to entire buildings.",
         salary: { entry: 36000, median: 52000, p75: 68000, top10: 86000 },
-        growth: 4,
+        growth: 6,
         timeToOwn: "Immediate",
-        education: { min: "High School / GED", preferred: "Trade training", apprenticeship: "None required", ce: "None required" },
+        education: { min: "No formal education required", preferred: "Trade training", apprenticeship: "2-4 years optional", ce: "CTI certification optional" },
         licensing: { body: "Local jurisdiction", background: "Varies", bonding: "$5,000", insurance: "$500K GL" },
         licenses: [
             { name: "Business License", level: "Local", required: true, cost: 100, passRate: 100, time: "1 week", renewal: "Annual / $50" }
@@ -261,10 +261,10 @@ const CAREERS_DATA = {
         onet: "37-3011.00",
         description: "Design and install landscaping features including plants, trees, mulch beds, grading, and decorative elements for residential and commercial properties.",
         dayInLife: "Days involve site preparation, grading, installing plants and trees, mulching, and creating garden beds. May include basic irrigation and lighting coordination.",
-        salary: { entry: 28000, median: 42000, p75: 58000, top10: 80000 },
+        salary: { entry: 28000, median: 38500, p75: 48000, top10: 57000 },
         growth: 5,
         timeToOwn: "Immediate",
-        education: { min: "None", preferred: "Horticulture knowledge", apprenticeship: "None required", ce: "Pesticide applicator license optional" },
+        education: { min: "No formal education required (65%)", preferred: "Horticulture knowledge", apprenticeship: "None required", ce: "Pesticide applicator license (some states)" },
         licensing: { body: "Local jurisdiction", background: "Varies", bonding: "$5,000", insurance: "$500K GL" },
         licenses: [
             { name: "Business License", level: "Local", required: true, cost: 100, passRate: 100, time: "1 week", renewal: "Annual / $50" },
@@ -293,10 +293,10 @@ const CAREERS_DATA = {
         onet: "47-2031.00",
         description: "Design and build outdoor living structures including wood and composite decks, pergolas, gazebos, and covered patios.",
         dayInLife: "Work involves site layout, post hole digging, framing, decking installation, and railing systems. Projects typically last 3-7 days for residential.",
-        salary: { entry: 36000, median: 55000, p75: 75000, top10: 100000 },
-        growth: 6,
+        salary: { entry: 39000, median: 59000, p75: 78000, top10: 98000 },
+        growth: 4,
         timeToOwn: "1-2 months",
-        education: { min: "High School / GED", preferred: "Carpentry experience", apprenticeship: "None required", ce: "None required" },
+        education: { min: "High School / GED", preferred: "Carpentry experience", apprenticeship: "3-4 years optional", ce: "None required" },
         licensing: { body: "Local jurisdiction", background: "Varies", bonding: "$10,000", insurance: "$1M GL" },
         licenses: [
             { name: "Contractor Registration", level: "State", required: true, cost: 200, passRate: 100, time: "2-4 weeks", renewal: "2 years / $100" }
@@ -324,10 +324,10 @@ const CAREERS_DATA = {
         onet: "47-2051.00",
         description: "Pour and finish concrete driveways, patios, sidewalks, garage floors, and other horizontal surfaces for residential and commercial projects.",
         dayInLife: "Work involves forming, pouring, screeding, floating, and finishing concrete. Early mornings are common due to curing requirements. Jobs are physically intense all day.",
-        salary: { entry: 35000, median: 52000, p75: 70000, top10: 95000 },
-        growth: 4,
+        salary: { entry: 39000, median: 55000, p75: 72000, top10: 90000 },
+        growth: 2,
         timeToOwn: "2-3 months",
-        education: { min: "High School / GED", preferred: "Finisher experience", apprenticeship: "None required", ce: "None required" },
+        education: { min: "High School / GED", preferred: "Mason experience", apprenticeship: "OJT or formal apprenticeship", ce: "ACI certification optional" },
         licensing: { body: "Local jurisdiction", background: "Varies", bonding: "$10,000-$25,000", insurance: "$1M GL" },
         licenses: [
             { name: "Contractor Registration", level: "State", required: true, cost: 200, passRate: 100, time: "2-4 weeks", renewal: "2 years / $100" }
@@ -355,10 +355,10 @@ const CAREERS_DATA = {
         onet: "37-2011.00",
         description: "Provide commercial cleaning services for offices, retail spaces, medical facilities, and other commercial properties on a recurring contract basis.",
         dayInLife: "Evening/night work is common. Tasks include vacuuming, mopping, trash removal, restroom cleaning, and surface sanitizing. Route-based work visiting multiple locations.",
-        salary: { entry: 24000, median: 35000, p75: 48000, top10: 70000 },
-        growth: 7,
+        salary: { entry: 28000, median: 36000, p75: 45000, top10: 49000 },
+        growth: 2,
         timeToOwn: "Immediate",
-        education: { min: "None", preferred: "None", apprenticeship: "None required", ce: "None required" },
+        education: { min: "No formal education required", preferred: "HS diploma preferred", apprenticeship: "Short-term OJT", ce: "ISSA/IEHA certifications optional" },
         licensing: { body: "Local jurisdiction", background: "Often required", bonding: "$5,000-$10,000", insurance: "$1M GL" },
         licenses: [
             { name: "Business License", level: "Local", required: true, cost: 100, passRate: 100, time: "1 week", renewal: "Annual / $50" }

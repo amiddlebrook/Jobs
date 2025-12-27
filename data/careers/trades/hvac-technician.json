@@ -1,0 +1,747 @@
+{
+    "id": "hvac-technician",
+    "name": "HVAC Technician",
+    "alternateTitles": [
+        "HVAC Tech",
+        "Heating and Cooling Technician",
+        "AC Technician",
+        "HVACR Technician"
+    ],
+    "category": "trades-mechanical",
+    "subcategory": "hvac",
+    "tier": 2,
+    "tierLabel": "T2 - Journeyman Path",
+    "onetCode": "49-9021.01",
+    "socCode": "49-9021",
+    "description": "Install, maintain, and repair heating, ventilation, air conditioning, and refrigeration systems in residential, commercial, and industrial settings.",
+    "summary": {
+        "pros": [
+            "Strong job security - essential service in all climate zones",
+            "Good salary progression with experience",
+            "Clear path to business ownership",
+            "Variety in daily work and locations",
+            "Increasing demand due to energy efficiency focus"
+        ],
+        "cons": [
+            "Physically demanding work",
+            "Exposure to extreme temperatures",
+            "On-call and emergency work common",
+            "4-year apprenticeship required for full licensing",
+            "Seasonal workload fluctuations"
+        ],
+        "dayInTheLife": "A typical day involves traveling to customer sites, diagnosing system issues using specialized tools, performing repairs or installations, and documenting work. Peak seasons (summer AC, winter heating) bring higher call volumes and longer hours."
+    },
+    "education": {
+        "minimum": "High School Diploma / GED",
+        "preferred": "Trade School Certificate or Associate Degree",
+        "yearsTypical": 1,
+        "degreeTypes": [
+            "Certificate",
+            "Associate"
+        ],
+        "majorFieldsOfStudy": [
+            "HVAC Technology",
+            "Refrigeration",
+            "Mechanical Systems",
+            "Building Automation"
+        ],
+        "trainingPrograms": [
+            {
+                "name": "HVAC Certificate Program",
+                "duration": "6-12 months",
+                "cost": {
+                    "min": 5000,
+                    "max": 15000
+                },
+                "type": "Trade School"
+            },
+            {
+                "name": "HVAC Associate Degree",
+                "duration": "2 years",
+                "cost": {
+                    "min": 10000,
+                    "max": 30000
+                },
+                "type": "Community College"
+            },
+            {
+                "name": "Registered Apprenticeship",
+                "duration": "4 years",
+                "cost": {
+                    "min": 0,
+                    "max": 0
+                },
+                "type": "Apprenticeship",
+                "notes": "Earn while you learn, often employer-sponsored"
+            }
+        ],
+        "apprenticeshipRequired": true,
+        "apprenticeshipDuration": 4,
+        "apprenticeshipHoursTotal": 8000,
+        "continuingEducationRequired": true,
+        "continuingEducationHoursAnnual": 16,
+        "continuingEducationTopics": [
+            "Code updates",
+            "Refrigerant handling",
+            "Energy efficiency",
+            "New technologies"
+        ]
+    },
+    "licensing": {
+        "body": "Colorado DORA (Department of Regulatory Agencies)",
+        "bodyUrl": "https://dora.colorado.gov",
+        "stateJurisdiction": "CO",
+        "licenses": [
+            {
+                "name": "EPA Section 608 Certification",
+                "required": true,
+                "level": "Federal",
+                "types": [
+                    "Type I",
+                    "Type II",
+                    "Type III",
+                    "Universal"
+                ],
+                "examCost": 150,
+                "examPassRate": 85,
+                "examFormat": "Multiple choice, open book",
+                "renewalRequired": false,
+                "timeToObtain": "1-2 weeks study + exam"
+            },
+            {
+                "name": "Journeyman HVAC License",
+                "required": true,
+                "level": "State",
+                "prerequisites": [
+                    "4 years supervised experience OR 4-year apprenticeship"
+                ],
+                "examCost": 100,
+                "examPassRate": 72,
+                "examFormat": "100 questions, 4 hours, closed book",
+                "renewalCycle": "3 years",
+                "renewalCost": 75,
+                "renewalRequirements": [
+                    "24 CE hours"
+                ],
+                "timeToObtain": "4 years"
+            },
+            {
+                "name": "Master HVAC License",
+                "required": false,
+                "requiredForOwnership": true,
+                "level": "State",
+                "prerequisites": [
+                    "Journeyman license",
+                    "2 additional years experience"
+                ],
+                "examCost": 150,
+                "examPassRate": 65,
+                "renewalCycle": "3 years",
+                "renewalCost": 100,
+                "timeToObtain": "6 years total"
+            }
+        ],
+        "backgroundCheckRequired": true,
+        "drugTestRequired": true,
+        "bondingRequired": true,
+        "bondingAmount": 25000,
+        "insuranceMinimum": {
+            "generalLiability": 1000000,
+            "workersComp": "Required if employees"
+        },
+        "reciprocityStates": [
+            "WY",
+            "NM",
+            "UT",
+            "NE",
+            "MT"
+        ]
+    },
+    "timeline": {
+        "timeToEntryLevelMonths": 0,
+        "timeToJourneymanMonths": 48,
+        "timeToMasterMonths": 72,
+        "timeToOwnershipMonths": 72,
+        "fastTrackAvailable": true,
+        "fastTrackTimelineMonths": 48,
+        "fastTrackMethod": "Direct apprenticeship with intensive program",
+        "priorExperienceCredit": true,
+        "priorExperienceMaxCredit": "2 years",
+        "militaryTransitionPathway": true,
+        "militaryTransitionNotes": "Military HVAC experience may count toward apprenticeship hours",
+        "milestones": [
+            {
+                "month": 0,
+                "title": "Begin Apprenticeship/Training",
+                "description": "Start formal training program or apprenticeship"
+            },
+            {
+                "month": 6,
+                "title": "EPA 608 Certification",
+                "description": "Required to handle refrigerants"
+            },
+            {
+                "month": 12,
+                "title": "First Year Apprentice",
+                "description": "Basic installations and service calls"
+            },
+            {
+                "month": 24,
+                "title": "Second Year Apprentice",
+                "description": "Complex diagnostics and repairs"
+            },
+            {
+                "month": 36,
+                "title": "Third Year Apprentice",
+                "description": "System design and advanced work"
+            },
+            {
+                "month": 48,
+                "title": "Journeyman License",
+                "description": "Pass exam, work independently"
+            },
+            {
+                "month": 72,
+                "title": "Master License Eligible",
+                "description": "Can own qualifying business"
+            }
+        ]
+    },
+    "compensation": {
+        "wageEntryLevel": 18.50,
+        "wageMedian": 28.75,
+        "wage75thPercentile": 38.00,
+        "wage90thPercentile": 48.50,
+        "salaryAnnualEntry": 38480,
+        "salaryAnnualMedian": 59800,
+        "salaryAnnual75th": 79040,
+        "salaryAnnualTop10": 100880,
+        "salaryByExperience": [
+            {
+                "years": 0,
+                "salary": 35000,
+                "title": "Apprentice Year 1"
+            },
+            {
+                "years": 1,
+                "salary": 40000,
+                "title": "Apprentice Year 2"
+            },
+            {
+                "years": 2,
+                "salary": 45000,
+                "title": "Apprentice Year 3"
+            },
+            {
+                "years": 3,
+                "salary": 50000,
+                "title": "Apprentice Year 4"
+            },
+            {
+                "years": 4,
+                "salary": 60000,
+                "title": "Journeyman"
+            },
+            {
+                "years": 6,
+                "salary": 70000,
+                "title": "Senior Journeyman"
+            },
+            {
+                "years": 8,
+                "salary": 80000,
+                "title": "Lead Technician"
+            },
+            {
+                "years": 10,
+                "salary": 95000,
+                "title": "Master / Supervisor"
+            },
+            {
+                "years": 15,
+                "salary": 110000,
+                "title": "Senior Master / Manager"
+            }
+        ],
+        "salaryByState": [
+            {
+                "state": "CO",
+                "median": 62000
+            },
+            {
+                "state": "CA",
+                "median": 68000
+            },
+            {
+                "state": "TX",
+                "median": 52000
+            },
+            {
+                "state": "FL",
+                "median": 48000
+            },
+            {
+                "state": "NY",
+                "median": 72000
+            },
+            {
+                "state": "AZ",
+                "median": 55000
+            }
+        ],
+        "salaryByMetro": [
+            {
+                "metro": "Denver-Aurora",
+                "median": 65000
+            },
+            {
+                "metro": "Colorado Springs",
+                "median": 58000
+            },
+            {
+                "metro": "Phoenix",
+                "median": 56000
+            },
+            {
+                "metro": "Los Angeles",
+                "median": 70000
+            }
+        ],
+        "overtimeCommon": true,
+        "overtimeAverageHoursWeekly": 8,
+        "overtimeSeasonalPeak": [
+            "June",
+            "July",
+            "August",
+            "December",
+            "January"
+        ],
+        "benefitsTypical": [
+            "Health Insurance",
+            "401k with match",
+            "PTO",
+            "Company vehicle",
+            "Tool allowance"
+        ],
+        "unionAvailable": true,
+        "unionName": "Sheet Metal Workers International Association (SMWIA)",
+        "unionWagePremium": 15,
+        "bonusTypical": {
+            "type": "Performance/Spiff",
+            "range": {
+                "min": 2000,
+                "max": 10000
+            }
+        }
+    },
+    "businessOwnership": {
+        "startupCostMinimum": 15000,
+        "startupCostTypical": 45000,
+        "startupCostMaximum": 150000,
+        "startupCostBreakdown": [
+            {
+                "category": "Vehicle",
+                "min": 8000,
+                "max": 45000
+            },
+            {
+                "category": "Tools & Equipment",
+                "min": 5000,
+                "max": 25000
+            },
+            {
+                "category": "Licensing & Bonds",
+                "min": 1000,
+                "max": 5000
+            },
+            {
+                "category": "Insurance (first year)",
+                "min": 3000,
+                "max": 15000
+            },
+            {
+                "category": "Marketing & Branding",
+                "min": 1000,
+                "max": 10000
+            },
+            {
+                "category": "Working Capital",
+                "min": 5000,
+                "max": 50000
+            }
+        ],
+        "startupEquipmentList": [
+            "Service van or truck",
+            "Manifold gauge sets",
+            "Vacuum pump",
+            "Recovery machine",
+            "Leak detectors",
+            "Multimeter",
+            "Combustion analyzer",
+            "Hand tools",
+            "Power tools",
+            "Ladders"
+        ],
+        "revenueYear1Typical": 150000,
+        "revenueYear3Typical": 350000,
+        "revenueYear5Typical": 600000,
+        "profitMarginTypical": {
+            "service": 35,
+            "installation": 22,
+            "blended": 28
+        },
+        "billableRateResidential": {
+            "min": 95,
+            "max": 150
+        },
+        "billableRateCommercial": {
+            "min": 125,
+            "max": 200
+        },
+        "breakEvenMonths": 6,
+        "franchiseAvailable": true,
+        "franchiseOptions": [
+            {
+                "name": "One Hour Heating & Air",
+                "investment": {
+                    "min": 125000,
+                    "max": 250000
+                }
+            },
+            {
+                "name": "Aire Serv",
+                "investment": {
+                    "min": 75000,
+                    "max": 150000
+                }
+            }
+        ]
+    },
+    "employment": {
+        "totalUS": 394200,
+        "totalColorado": 12500,
+        "employmentByState": [
+            {
+                "state": "CA",
+                "count": 42000
+            },
+            {
+                "state": "TX",
+                "count": 38000
+            },
+            {
+                "state": "FL",
+                "count": 28000
+            },
+            {
+                "state": "NY",
+                "count": 22000
+            },
+            {
+                "state": "CO",
+                "count": 12500
+            }
+        ],
+        "growthRate10Year": 6,
+        "growthOutlook": "faster",
+        "projectedOpeningsAnnual": 34800,
+        "replacementRate": 8.5,
+        "industryConcentration": [
+            {
+                "industry": "HVAC Contractors",
+                "share": 58
+            },
+            {
+                "industry": "Facilities Services",
+                "share": 15
+            },
+            {
+                "industry": "Self-Employed",
+                "share": 12
+            },
+            {
+                "industry": "Equipment Dealers",
+                "share": 8
+            },
+            {
+                "industry": "Government",
+                "share": 4
+            },
+            {
+                "industry": "Manufacturing",
+                "share": 3
+            }
+        ],
+        "employerTypes": [
+            "HVAC Contractors",
+            "Facilities Management",
+            "Property Management",
+            "Self-employed",
+            "Equipment Manufacturers"
+        ],
+        "selfEmploymentRate": 12,
+        "seasonality": {
+            "peak": [
+                "June",
+                "July",
+                "August"
+            ],
+            "secondary": [
+                "December",
+                "January"
+            ],
+            "low": [
+                "March",
+                "April",
+                "October"
+            ]
+        },
+        "automationRisk": "Low",
+        "automationRiskScore": 15,
+        "automationNotes": "Hands-on diagnostic and repair work difficult to automate. Smart thermostats increase service calls."
+    },
+    "skills": {
+        "technical": [
+            {
+                "name": "HVAC system diagnostics",
+                "importance": 95
+            },
+            {
+                "name": "Refrigerant handling",
+                "importance": 90
+            },
+            {
+                "name": "Electrical troubleshooting",
+                "importance": 85
+            },
+            {
+                "name": "Ductwork installation",
+                "importance": 75
+            },
+            {
+                "name": "Load calculations",
+                "importance": 70
+            },
+            {
+                "name": "Sheet metal work",
+                "importance": 60
+            },
+            {
+                "name": "Building automation",
+                "importance": 55
+            }
+        ],
+        "soft": [
+            {
+                "name": "Customer service",
+                "importance": 90
+            },
+            {
+                "name": "Problem solving",
+                "importance": 95
+            },
+            {
+                "name": "Communication",
+                "importance": 80
+            },
+            {
+                "name": "Time management",
+                "importance": 75
+            },
+            {
+                "name": "Attention to detail",
+                "importance": 85
+            }
+        ],
+        "physicalRequirements": [
+            "Lifting 50+ lbs regularly",
+            "Climbing ladders and scaffolding",
+            "Working in confined spaces",
+            "Working in extreme temperatures",
+            "Kneeling and crouching"
+        ],
+        "cognitiveAbilities": [
+            {
+                "name": "Mechanical reasoning",
+                "importance": 95
+            },
+            {
+                "name": "Troubleshooting",
+                "importance": 95
+            },
+            {
+                "name": "Mathematics",
+                "importance": 70
+            },
+            {
+                "name": "Reading comprehension",
+                "importance": 75
+            }
+        ],
+        "toolsAndTechnology": [
+            "Manifold gauges",
+            "Multimeters",
+            "Combustion analyzers",
+            "Leak detectors",
+            "Recovery machines",
+            "Vacuum pumps",
+            "Thermometers/Hygrometers"
+        ],
+        "softwareUsed": [
+            "ServiceTitan",
+            "Housecall Pro",
+            "Fieldwire",
+            "Manual J/D/S software",
+            "Building automation platforms"
+        ],
+        "certificationBonuses": [
+            {
+                "name": "NATE Certification",
+                "wageIncrease": 8
+            },
+            {
+                "name": "Building Performance Institute (BPI)",
+                "wageIncrease": 5
+            },
+            {
+                "name": "Indoor Air Quality (IAQ)",
+                "wageIncrease": 5
+            },
+            {
+                "name": "Commercial Refrigeration",
+                "wageIncrease": 10
+            }
+        ]
+    },
+    "workEnvironment": {
+        "settingPrimary": "Customer sites (residential/commercial)",
+        "settingSecondary": [
+            "Rooftops",
+            "Mechanical rooms",
+            "Crawlspaces",
+            "Attics",
+            "Shop"
+        ],
+        "indoorOutdoorSplit": {
+            "indoor": 45,
+            "outdoor": 55
+        },
+        "travelRequired": "Local daily travel",
+        "travelRadiusTypical": "30 miles",
+        "scheduleTypical": "Monday-Friday, 7am-4pm",
+        "scheduleFlexibility": "Moderate",
+        "onCallRequired": true,
+        "onCallFrequency": "Rotating weekly",
+        "weekendWorkCommon": "Occasional during peak season",
+        "holidayWorkCommon": "Emergency only",
+        "remoteWorkPossible": false,
+        "physicalDemandLevel": 4,
+        "hazardExposure": [
+            "Refrigerants",
+            "Electrical",
+            "Heights",
+            "Extreme temperatures",
+            "Confined spaces"
+        ],
+        "injuryRatePerK": 4.2,
+        "stressLevel": 3,
+        "jobSatisfactionMedian": 72
+    },
+    "careerPath": {
+        "entryPositions": [
+            "HVAC Apprentice",
+            "HVAC Helper",
+            "Installer Trainee"
+        ],
+        "midCareerPositions": [
+            "Journeyman HVAC Technician",
+            "Service Technician",
+            "Installation Technician"
+        ],
+        "seniorPositions": [
+            "Lead Technician",
+            "Master HVAC Technician",
+            "Service Manager"
+        ],
+        "managementPositions": [
+            "Operations Manager",
+            "Branch Manager",
+            "General Manager"
+        ],
+        "ownershipPositions": [
+            "Business Owner",
+            "HVAC Contractor"
+        ],
+        "lateralMoves": [
+            {
+                "title": "Building Automation Technician",
+                "additionalTraining": "6 months"
+            },
+            {
+                "title": "Energy Auditor",
+                "additionalTraining": "BPI certification"
+            },
+            {
+                "title": "Controls Specialist",
+                "additionalTraining": "1 year"
+            },
+            {
+                "title": "Refrigeration Technician",
+                "additionalTraining": "Additional licensing"
+            }
+        ],
+        "advancementTimeline": {
+            "entryToMid": 4,
+            "midToSenior": 3,
+            "seniorToMgmt": 4,
+            "mgmtToOwnership": 2
+        },
+        "promotionFactors": [
+            "Certifications",
+            "Technical skills",
+            "Customer ratings",
+            "Sales ability",
+            "Leadership"
+        ]
+    },
+    "investmentAnalysis": {
+        "totalEducationCost": {
+            "min": 0,
+            "max": 30000
+        },
+        "avgStudentDebt": 8500,
+        "educationROIYears": 2.5,
+        "lifetimeEarningsProjection": 2400000,
+        "educationAlternatives": [
+            "Union apprenticeship (paid)",
+            "Military training",
+            "Employer-sponsored training"
+        ],
+        "scholarshipsAvailable": [
+            "HVACR Workforce Development",
+            "Trade school grants",
+            "Union sponsorship"
+        ],
+        "employerTuitionAssistance": true
+    },
+    "comparativeMetrics": {
+        "educationToEarningsRatio": 59800,
+        "timeToRevenueRatio": "High",
+        "barrierToEntryScore": 45,
+        "ownershipAccessibilityScore": 72,
+        "marketStabilityScore": 88,
+        "growthPotentialScore": 78,
+        "workLifeBalanceScore": 62,
+        "overallCareerScore": 76
+    },
+    "metadata": {
+        "lastUpdated": "2024-12-27",
+        "dataSource": [
+            "BLS OOH",
+            "O*NET",
+            "Colorado DORA",
+            "Industry surveys"
+        ],
+        "notes": "Data reflects Colorado/Denver market. May vary by jurisdiction."
+    }
+}

@@ -1,0 +1,634 @@
+{
+    "id": "electrician",
+    "name": "Electrician",
+    "alternateTitles": [
+        "Electrical Technician",
+        "Journeyman Electrician",
+        "Master Electrician",
+        "Wireman"
+    ],
+    "category": "trades-electrical",
+    "subcategory": "residential-electrical",
+    "tier": 3,
+    "tierLabel": "T3 - Master License Required",
+    "onetCode": "47-2111.00",
+    "socCode": "47-2111",
+    "description": "Install, maintain, and repair electrical systems in residential, commercial, and industrial buildings. Master license required to own a qualifying electrical contracting business.",
+    "summary": {
+        "pros": [
+            "Excellent job security - electricity is essential everywhere",
+            "High earning potential especially with master license",
+            "Diverse work environments and specializations",
+            "Strong demand for EV charger and solar installations",
+            "Clear unionized pathway available"
+        ],
+        "cons": [
+            "6-8 year timeline to business ownership",
+            "High-stakes safety requirements (electrocution risk)",
+            "Physically demanding - heights, confined spaces",
+            "Continuous code education mandatory",
+            "Lengthy apprenticeship required"
+        ],
+        "dayInTheLife": "Daily work varies from reading blueprints, running conduit and wire, installing panels and fixtures, to troubleshooting electrical failures. Commercial work often involves early starts, while residential service calls may include evenings and weekends."
+    },
+    "education": {
+        "minimum": "High School Diploma / GED",
+        "preferred": "Trade School + Apprenticeship",
+        "yearsTypical": 1,
+        "degreeTypes": [
+            "Certificate",
+            "Associate"
+        ],
+        "majorFieldsOfStudy": [
+            "Electrical Technology",
+            "Industrial Electricity",
+            "Electronics"
+        ],
+        "trainingPrograms": [
+            {
+                "name": "Electrical Certificate Program",
+                "duration": "6-12 months",
+                "cost": {
+                    "min": 3000,
+                    "max": 15000
+                },
+                "type": "Trade School"
+            },
+            {
+                "name": "IBEW Apprenticeship",
+                "duration": "5 years",
+                "cost": {
+                    "min": 0,
+                    "max": 0
+                },
+                "type": "Union Apprenticeship",
+                "notes": "Paid training, excellent benefits during apprenticeship"
+            },
+            {
+                "name": "Non-Union Apprenticeship",
+                "duration": "4 years",
+                "cost": {
+                    "min": 0,
+                    "max": 2000
+                },
+                "type": "Apprenticeship"
+            }
+        ],
+        "apprenticeshipRequired": true,
+        "apprenticeshipDuration": 4,
+        "apprenticeshipHoursTotal": 8000,
+        "continuingEducationRequired": true,
+        "continuingEducationHoursAnnual": 24,
+        "continuingEducationTopics": [
+            "NEC Code updates",
+            "Safety",
+            "Energy efficiency",
+            "Renewable energy"
+        ]
+    },
+    "licensing": {
+        "body": "Colorado State Electrical Board",
+        "bodyUrl": "https://dora.colorado.gov/electricians",
+        "stateJurisdiction": "CO",
+        "licenses": [
+            {
+                "name": "Residential Wireman License",
+                "required": false,
+                "level": "State",
+                "prerequisites": [
+                    "2 years supervised experience in residential work"
+                ],
+                "examCost": 75,
+                "examPassRate": 75,
+                "renewalCycle": "3 years",
+                "renewalCost": 50,
+                "timeToObtain": "2 years",
+                "scope": "Residential only, limited voltage"
+            },
+            {
+                "name": "Journeyman Electrician License",
+                "required": true,
+                "level": "State",
+                "prerequisites": [
+                    "4 years / 8000 hours supervised experience OR approved apprenticeship"
+                ],
+                "examCost": 100,
+                "examPassRate": 68,
+                "examFormat": "80 questions, 4 hours, closed book (code book allowed)",
+                "renewalCycle": "3 years",
+                "renewalCost": 75,
+                "renewalRequirements": [
+                    "24 CE hours including NEC updates"
+                ],
+                "timeToObtain": "4 years"
+            },
+            {
+                "name": "Master Electrician License",
+                "required": true,
+                "requiredForOwnership": true,
+                "level": "State",
+                "prerequisites": [
+                    "Journeyman license",
+                    "2 additional years experience",
+                    "Proof of supervision experience"
+                ],
+                "examCost": 150,
+                "examPassRate": 55,
+                "examFormat": "100 questions, 4.5 hours, open code book",
+                "renewalCycle": "3 years",
+                "renewalCost": 100,
+                "renewalRequirements": [
+                    "24 CE hours"
+                ],
+                "timeToObtain": "6-8 years total"
+            }
+        ],
+        "backgroundCheckRequired": true,
+        "drugTestRequired": true,
+        "bondingRequired": true,
+        "bondingAmount": 50000,
+        "insuranceMinimum": {
+            "generalLiability": 1000000,
+            "workersComp": "Required if employees",
+            "errorsOmissions": "Recommended"
+        },
+        "reciprocityStates": [
+            "None - most states require own exam"
+        ]
+    },
+    "timeline": {
+        "timeToEntryLevelMonths": 0,
+        "timeToJourneymanMonths": 48,
+        "timeToMasterMonths": 72,
+        "timeToOwnershipMonths": 84,
+        "fastTrackAvailable": false,
+        "priorExperienceCredit": true,
+        "priorExperienceMaxCredit": "2 years with documentation",
+        "militaryTransitionPathway": true,
+        "militaryTransitionNotes": "Military electrical experience may count toward hours; some states have vet-specific licensing",
+        "milestones": [
+            {
+                "month": 0,
+                "title": "Begin Apprenticeship",
+                "description": "Start formal apprenticeship program or work as helper"
+            },
+            {
+                "month": 12,
+                "title": "First Year Complete",
+                "description": "Basic wiring, conduit bending, safety protocols"
+            },
+            {
+                "month": 24,
+                "title": "Second Year - Residential Focus",
+                "description": "Complete residential systems, service upgrades"
+            },
+            {
+                "month": 36,
+                "title": "Third Year - Commercial",
+                "description": "Commercial installations, motor controls"
+            },
+            {
+                "month": 48,
+                "title": "Journeyman License",
+                "description": "Pass exam, work independently on any electrical work"
+            },
+            {
+                "month": 60,
+                "title": "5 Years Experience",
+                "description": "Accumulate supervision and advanced experience"
+            },
+            {
+                "month": 72,
+                "title": "Master Eligible",
+                "description": "Can sit for master exam"
+            },
+            {
+                "month": 84,
+                "title": "Business Owner",
+                "description": "Open qualifying electrical contracting business"
+            }
+        ]
+    },
+    "compensation": {
+        "wageEntryLevel": 17.00,
+        "wageMedian": 29.61,
+        "wage75thPercentile": 40.52,
+        "wage90thPercentile": 52.45,
+        "salaryAnnualEntry": 35360,
+        "salaryAnnualMedian": 61590,
+        "salaryAnnual75th": 84280,
+        "salaryAnnualTop10": 109100,
+        "salaryByExperience": [
+            {
+                "years": 0,
+                "salary": 32000,
+                "title": "Apprentice Year 1"
+            },
+            {
+                "years": 1,
+                "salary": 38000,
+                "title": "Apprentice Year 2"
+            },
+            {
+                "years": 2,
+                "salary": 44000,
+                "title": "Apprentice Year 3"
+            },
+            {
+                "years": 3,
+                "salary": 50000,
+                "title": "Apprentice Year 4"
+            },
+            {
+                "years": 4,
+                "salary": 62000,
+                "title": "Journeyman"
+            },
+            {
+                "years": 6,
+                "salary": 72000,
+                "title": "Senior Journeyman"
+            },
+            {
+                "years": 8,
+                "salary": 85000,
+                "title": "Master Electrician"
+            },
+            {
+                "years": 10,
+                "salary": 100000,
+                "title": "Foreman / Lead"
+            },
+            {
+                "years": 15,
+                "salary": 120000,
+                "title": "Superintendent / Owner"
+            }
+        ],
+        "salaryByState": [
+            {
+                "state": "CO",
+                "median": 65000
+            },
+            {
+                "state": "CA",
+                "median": 78000
+            },
+            {
+                "state": "NY",
+                "median": 82000
+            },
+            {
+                "state": "TX",
+                "median": 52000
+            },
+            {
+                "state": "IL",
+                "median": 76000
+            },
+            {
+                "state": "WA",
+                "median": 75000
+            }
+        ],
+        "overtimeCommon": true,
+        "overtimeAverageHoursWeekly": 6,
+        "benefitsTypical": [
+            "Health Insurance",
+            "401k",
+            "PTO",
+            "Union pension (if IBEW)",
+            "Tool allowance"
+        ],
+        "unionAvailable": true,
+        "unionName": "International Brotherhood of Electrical Workers (IBEW)",
+        "unionWagePremium": 22,
+        "bonusTypical": {
+            "type": "Project completion",
+            "range": {
+                "min": 1000,
+                "max": 15000
+            }
+        }
+    },
+    "businessOwnership": {
+        "startupCostMinimum": 20000,
+        "startupCostTypical": 75000,
+        "startupCostMaximum": 250000,
+        "startupCostBreakdown": [
+            {
+                "category": "Vehicle(s)",
+                "min": 10000,
+                "max": 60000
+            },
+            {
+                "category": "Tools & Equipment",
+                "min": 8000,
+                "max": 35000
+            },
+            {
+                "category": "Licensing & Bonds",
+                "min": 2000,
+                "max": 10000
+            },
+            {
+                "category": "Insurance (first year)",
+                "min": 5000,
+                "max": 25000
+            },
+            {
+                "category": "Working Capital",
+                "min": 10000,
+                "max": 100000
+            },
+            {
+                "category": "Office/Shop",
+                "min": 0,
+                "max": 20000
+            }
+        ],
+        "revenueYear1Typical": 200000,
+        "revenueYear3Typical": 500000,
+        "revenueYear5Typical": 1000000,
+        "profitMarginTypical": {
+            "service": 32,
+            "new-construction": 18,
+            "blended": 24
+        },
+        "billableRateResidential": {
+            "min": 85,
+            "max": 165
+        },
+        "billableRateCommercial": {
+            "min": 95,
+            "max": 200
+        },
+        "breakEvenMonths": 8,
+        "franchiseAvailable": true,
+        "franchiseOptions": [
+            {
+                "name": "Mister Sparky",
+                "investment": {
+                    "min": 125000,
+                    "max": 275000
+                }
+            },
+            {
+                "name": "Mr. Electric",
+                "investment": {
+                    "min": 100000,
+                    "max": 250000
+                }
+            }
+        ]
+    },
+    "employment": {
+        "totalUS": 762600,
+        "totalColorado": 22500,
+        "growthRate10Year": 7,
+        "growthOutlook": "faster",
+        "projectedOpeningsAnnual": 73500,
+        "replacementRate": 7.2,
+        "industryConcentration": [
+            {
+                "industry": "Electrical Contractors",
+                "share": 62
+            },
+            {
+                "industry": "Self-Employed",
+                "share": 9
+            },
+            {
+                "industry": "Manufacturing",
+                "share": 8
+            },
+            {
+                "industry": "Government",
+                "share": 5
+            },
+            {
+                "industry": "Utilities",
+                "share": 4
+            }
+        ],
+        "selfEmploymentRate": 9,
+        "seasonality": {
+            "peak": [
+                "March",
+                "April",
+                "May",
+                "September",
+                "October"
+            ],
+            "low": [
+                "December",
+                "January",
+                "February"
+            ]
+        },
+        "automationRisk": "Low",
+        "automationRiskScore": 12,
+        "automationNotes": "Physical installation work resistant to automation. EV and solar driving new demand."
+    },
+    "skills": {
+        "technical": [
+            {
+                "name": "Electrical code knowledge",
+                "importance": 98
+            },
+            {
+                "name": "Circuit design and troubleshooting",
+                "importance": 95
+            },
+            {
+                "name": "Blueprint reading",
+                "importance": 90
+            },
+            {
+                "name": "Conduit bending",
+                "importance": 85
+            },
+            {
+                "name": "Motor controls",
+                "importance": 75
+            },
+            {
+                "name": "PLC/Automation (commercial)",
+                "importance": 60
+            },
+            {
+                "name": "Solar/renewable systems",
+                "importance": 55
+            }
+        ],
+        "soft": [
+            {
+                "name": "Attention to detail",
+                "importance": 98
+            },
+            {
+                "name": "Problem solving",
+                "importance": 95
+            },
+            {
+                "name": "Safety awareness",
+                "importance": 98
+            },
+            {
+                "name": "Communication",
+                "importance": 80
+            },
+            {
+                "name": "Physical stamina",
+                "importance": 85
+            }
+        ],
+        "physicalRequirements": [
+            "Lifting 50+ lbs",
+            "Climbing ladders and scaffolding",
+            "Working in confined spaces",
+            "Standing for extended periods",
+            "Color vision for wire identification"
+        ],
+        "toolsAndTechnology": [
+            "Multimeters",
+            "Wire strippers/crimpers",
+            "Conduit benders",
+            "Fish tape",
+            "Voltage testers",
+            "Oscilloscopes (advanced)",
+            "Thermal imaging cameras"
+        ],
+        "certificationBonuses": [
+            {
+                "name": "NABCEP Solar Installer",
+                "wageIncrease": 12
+            },
+            {
+                "name": "OSHA 30",
+                "wageIncrease": 3
+            },
+            {
+                "name": "EV Charging Certification",
+                "wageIncrease": 8
+            },
+            {
+                "name": "Industrial Controls",
+                "wageIncrease": 10
+            }
+        ]
+    },
+    "workEnvironment": {
+        "settingPrimary": "Construction sites and customer premises",
+        "settingSecondary": [
+            "Commercial buildings",
+            "Industrial facilities",
+            "Residential homes"
+        ],
+        "indoorOutdoorSplit": {
+            "indoor": 65,
+            "outdoor": 35
+        },
+        "travelRequired": "Local daily travel",
+        "scheduleTypical": "Monday-Friday, 6am-3pm (construction typical)",
+        "scheduleFlexibility": "Low during construction, moderate for service",
+        "onCallRequired": true,
+        "onCallFrequency": "Rotating or by employer policy",
+        "weekendWorkCommon": "Occasional, especially service work",
+        "remoteWorkPossible": false,
+        "physicalDemandLevel": 4,
+        "hazardExposure": [
+            "Electrical shock",
+            "Falls",
+            "Burns",
+            "Confined spaces",
+            "Dust/particles"
+        ],
+        "injuryRatePerK": 3.8,
+        "stressLevel": 3,
+        "jobSatisfactionMedian": 74
+    },
+    "careerPath": {
+        "entryPositions": [
+            "Electrical Apprentice",
+            "Electrical Helper",
+            "Pre-Apprentice"
+        ],
+        "midCareerPositions": [
+            "Journeyman Electrician",
+            "Service Electrician",
+            "Commercial Electrician"
+        ],
+        "seniorPositions": [
+            "Master Electrician",
+            "Foreman",
+            "Lead Electrician"
+        ],
+        "managementPositions": [
+            "Superintendent",
+            "Project Manager",
+            "Estimator"
+        ],
+        "ownershipPositions": [
+            "Electrical Contractor",
+            "Business Owner"
+        ],
+        "lateralMoves": [
+            {
+                "title": "Electrical Inspector",
+                "additionalTraining": "Inspection certification"
+            },
+            {
+                "title": "Solar Installer",
+                "additionalTraining": "NABCEP certification"
+            },
+            {
+                "title": "Building Automation Specialist",
+                "additionalTraining": "Controls training"
+            },
+            {
+                "title": "Electrical Estimator",
+                "additionalTraining": "Software and takeoff training"
+            }
+        ],
+        "advancementTimeline": {
+            "entryToMid": 4,
+            "midToSenior": 4,
+            "seniorToMgmt": 3,
+            "mgmtToOwnership": 2
+        }
+    },
+    "investmentAnalysis": {
+        "totalEducationCost": {
+            "min": 0,
+            "max": 15000
+        },
+        "avgStudentDebt": 5000,
+        "educationROIYears": 2,
+        "lifetimeEarningsProjection": 2800000,
+        "educationAlternatives": [
+            "IBEW apprenticeship (paid)",
+            "Military training",
+            "ABC apprenticeship"
+        ]
+    },
+    "comparativeMetrics": {
+        "educationToEarningsRatio": 61590,
+        "barrierToEntryScore": 55,
+        "ownershipAccessibilityScore": 58,
+        "marketStabilityScore": 92,
+        "growthPotentialScore": 82,
+        "workLifeBalanceScore": 65,
+        "overallCareerScore": 79
+    },
+    "metadata": {
+        "lastUpdated": "2024-12-27",
+        "dataSource": [
+            "BLS OOH",
+            "O*NET",
+            "Colorado DORA",
+            "IBEW"
+        ],
+        "notes": "Master license required in CO. Some jurisdictions allow journeymen to own businesses with a master as qualifier."
+    }
+}

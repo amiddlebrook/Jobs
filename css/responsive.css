@@ -1,0 +1,383 @@
+/* ==========================================================================
+   RESPONSIVE - Jobs Data Analytics Platform
+   ========================================================================== */
+
+/* Mobile First Approach - Base styles are mobile, media queries add complexity */
+
+/* ========================================
+   MOBILE (< 640px)
+   ======================================== */
+
+/* Stack everything vertically on mobile */
+.mobile-stack {
+    display: flex;
+    flex-direction: column;
+}
+
+.mobile-full {
+    width: 100%;
+}
+
+.mobile-hide {
+    display: none;
+}
+
+/* Container padding */
+.container {
+    padding-inline: var(--space-4);
+}
+
+/* Cards take full width */
+.job-card,
+.stat-card,
+.chart-container {
+    width: 100%;
+}
+
+/* Header adjustments */
+.page-header h1 {
+    font-size: var(--font-size-2xl);
+}
+
+.display-1 {
+    font-size: var(--font-size-3xl);
+}
+
+.display-2 {
+    font-size: var(--font-size-2xl);
+}
+
+/* ========================================
+   SMALL DEVICES (640px+)
+   ======================================== */
+
+@media (min-width: 640px) {
+    .mobile-hide {
+        display: block;
+    }
+
+    .sm-show {
+        display: block;
+    }
+
+    .sm-hide {
+        display: none;
+    }
+
+    .container {
+        padding-inline: var(--space-5);
+    }
+
+    .page-header h1 {
+        font-size: var(--font-size-3xl);
+    }
+
+    .display-1 {
+        font-size: var(--font-size-4xl);
+    }
+}
+
+/* ========================================
+   MEDIUM DEVICES - TABLETS (768px+)
+   ======================================== */
+
+@media (min-width: 768px) {
+    .container {
+        padding-inline: var(--space-6);
+    }
+
+    .md-show {
+        display: block;
+    }
+
+    .md-hide {
+        display: none;
+    }
+
+    /* Page header */
+    .page-header h1 {
+        font-size: var(--font-size-3xl);
+    }
+
+    .display-1 {
+        font-size: var(--font-size-5xl);
+    }
+
+    /* Side by side layouts */
+    .md-row {
+        flex-direction: row;
+    }
+
+    .md-cols-2 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* Job card grid */
+    .job-card-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* Stats grid */
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* Comparison layout */
+    .comparison-layout {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--space-6);
+    }
+}
+
+/* ========================================
+   LARGE DEVICES - DESKTOPS (1024px+)
+   ======================================== */
+
+@media (min-width: 1024px) {
+    .container {
+        padding-inline: var(--space-8);
+    }
+
+    .lg-show {
+        display: block;
+    }
+
+    .lg-hide {
+        display: none;
+    }
+
+    .display-1 {
+        font-size: var(--font-size-6xl);
+    }
+
+    /* Multi-column layouts */
+    .lg-cols-3 {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .lg-cols-4 {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    /* Job card grid */
+    .job-card-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    /* Stats grid */
+    .stats-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    /* Sidebar layout */
+    .sidebar-layout {
+        display: grid;
+        grid-template-columns: 280px 1fr;
+        gap: var(--space-6);
+    }
+
+    .sidebar {
+        position: sticky;
+        top: calc(var(--header-height) + var(--space-4));
+        height: fit-content;
+        max-height: calc(100vh - var(--header-height) - var(--space-8));
+        overflow-y: auto;
+    }
+
+    /* Two panel comparison */
+    .comparison-panels {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--space-6);
+    }
+
+    /* Dashboard grid */
+    .dashboard-grid {
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        gap: var(--space-5);
+    }
+
+    .dashboard-full {
+        grid-column: span 12;
+    }
+
+    .dashboard-half {
+        grid-column: span 6;
+    }
+
+    .dashboard-third {
+        grid-column: span 4;
+    }
+
+    .dashboard-quarter {
+        grid-column: span 3;
+    }
+
+    .dashboard-two-thirds {
+        grid-column: span 8;
+    }
+}
+
+/* ========================================
+   EXTRA LARGE DEVICES (1280px+)
+   ======================================== */
+
+@media (min-width: 1280px) {
+    .xl-show {
+        display: block;
+    }
+
+    .xl-hide {
+        display: none;
+    }
+
+    /* Wider sidebar */
+    .sidebar-layout {
+        grid-template-columns: 320px 1fr;
+    }
+
+    /* More columns */
+    .xl-cols-4 {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .xl-cols-5 {
+        grid-template-columns: repeat(5, 1fr);
+    }
+
+    /* Job card grid */
+    .job-card-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+/* ========================================
+   2XL DEVICES (1536px+)
+   ======================================== */
+
+@media (min-width: 1536px) {
+    .container {
+        max-width: 1536px;
+    }
+
+    .job-card-grid {
+        grid-template-columns: repeat(5, 1fr);
+    }
+}
+
+/* ========================================
+   TOUCH DEVICE OPTIMIZATIONS
+   ======================================== */
+
+@media (hover: none) and (pointer: coarse) {
+
+    /* Larger touch targets */
+    .btn {
+        min-height: 44px;
+        min-width: 44px;
+    }
+
+    .tab {
+        padding: var(--space-4) var(--space-5);
+    }
+
+    .input {
+        min-height: 48px;
+        font-size: 16px;
+        /* Prevent iOS zoom */
+    }
+
+    /* Disable hover effects on touch */
+    .card:hover,
+    .job-card:hover,
+    .card-interactive:hover {
+        transform: none;
+        box-shadow: none;
+    }
+
+    /* Make tooltips tappable */
+    [data-tooltip]::after {
+        display: none;
+    }
+}
+
+/* ========================================
+   REDUCED MOTION
+   ======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+
+    .skeleton {
+        animation: none;
+        background: var(--color-bg-elevated);
+    }
+}
+
+/* ========================================
+   PRINT STYLES
+   ======================================== */
+
+@media print {
+    body {
+        background: white;
+        color: black;
+    }
+
+    .app-header,
+    .app-footer,
+    .sidebar,
+    .btn,
+    .tabs,
+    .mobile-hide {
+        display: none !important;
+    }
+
+    .card,
+    .job-card,
+    .stat-card {
+        border: 1px solid #ddd;
+        box-shadow: none;
+        page-break-inside: avoid;
+    }
+
+    .chart-container {
+        page-break-inside: avoid;
+    }
+
+    a {
+        color: black;
+        text-decoration: underline;
+    }
+
+    .container {
+        max-width: 100%;
+        padding: 0;
+    }
+}
+
+/* ========================================
+   ORIENTATION
+   ======================================== */
+
+@media (orientation: landscape) and (max-height: 500px) {
+
+    /* Compact header for landscape phones */
+    .app-header {
+        height: 48px;
+    }
+
+    .page-header {
+        padding: var(--space-4) 0;
+    }
+}

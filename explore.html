@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explore Careers | CareerData</title>
+
+    <link rel="stylesheet" href="css/design-tokens.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/typography.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/charts.css">
+    <link rel="stylesheet" href="css/responsive.css">
+
+    <style>
+        .explore-header {
+            padding: var(--space-8) 0;
+            background: var(--color-bg-secondary);
+            border-bottom: 1px solid var(--color-border-subtle);
+        }
+
+        .explore-layout {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: var(--space-6, 1.5rem);
+            padding: var(--space-6, 1.5rem) 0;
+            min-height: 600px;
+        }
+
+        @media (max-width: 1024px) {
+            .explore-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .filter-sidebar {
+                position: fixed;
+                left: -320px;
+                top: 0;
+                height: 100vh;
+                width: 300px;
+                z-index: 1000;
+                transition: left 0.3s ease;
+                background: var(--color-bg-secondary);
+                padding: var(--space-4);
+                overflow-y: auto;
+            }
+
+            .filter-sidebar.open {
+                left: 0;
+            }
+
+            .filter-overlay {
+                position: fixed;
+                inset: 0;
+                background: rgba(0, 0, 0, 0.5);
+                z-index: 999;
+                display: none;
+            }
+
+            .filter-overlay.open {
+                display: block;
+            }
+        }
+
+        /* CRITICAL: overlay must be fixed positioned to not affect grid */
+        .filter-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            display: none;
+        }
+
+        .filter-sidebar {
+            position: sticky;
+            top: calc(var(--header-height, 64px) + var(--space-4, 1rem));
+            height: fit-content;
+            max-height: calc(100vh - var(--header-height, 64px) - var(--space-8, 2rem));
+            overflow-y: auto;
+            background: var(--color-surface-card, #121924);
+            border: 1px solid var(--color-border-subtle, rgba(255, 255, 255, 0.06));
+            border-radius: var(--radius-xl, 1rem);
+            padding: var(--space-5, 1.25rem);
+        }
+
+        .filter-section {
+            margin-bottom: var(--space-5);
+            padding-bottom: var(--space-5);
+            border-bottom: 1px solid var(--color-border-subtle);
+        }
+
+        .filter-section:last-child {
+            border-bottom: none;
+        }
+
+        .filter-title {
+            font-size: var(--font-size-sm);
+            font-weight: var(--font-weight-semibold);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--color-text-tertiary);
+            margin-bottom: var(--space-3);
+        }
+
+        .filter-option {
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+            padding: var(--space-2);
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: var(--transition-colors);
+        }
+
+        .filter-option:hover {
+            background: var(--color-bg-elevated);
+        }
+
+        .filter-option input[type="checkbox"] {
+            accent-color: var(--color-accent-primary);
+        }
+
+        .filter-option label {
+            cursor: pointer;
+            font-size: var(--font-size-sm);
+        }
+
+        .filter-option .count {
+            margin-left: auto;
+            font-size: var(--font-size-xs);
+            color: var(--color-text-tertiary);
+        }
+
+        .range-slider {
+            width: 100%;
+            margin: var(--space-2) 0;
+        }
+
+        .range-values {
+            display: flex;
+            justify-content: space-between;
+            font-size: var(--font-size-xs);
+            color: var(--color-text-tertiary);
+        }
+
+        .results-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: var(--space-4);
+            margin-bottom: var(--space-4);
+            flex-wrap: wrap;
+        }
+
+        .results-count {
+            font-size: var(--font-size-sm);
+            color: var(--color-text-secondary);
+        }
+
+        .sort-controls {
+            display: flex;
+            align-items: center;
+            gap: var(--space-3);
+        }
+
+        .sort-select {
+            padding: var(--space-2) var(--space-3);
+            background: var(--color-bg-elevated);
+            border: 1px solid var(--color-border-default);
+            border-radius: var(--radius-md);
+            color: var(--color-text-primary);
+            font-size: var(--font-size-sm);
+        }
+
+        .view-toggle {
+            display: flex;
+            background: var(--color-bg-elevated);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            border: 1px solid var(--color-border-subtle);
+        }
+
+        .view-toggle button {
+            padding: var(--space-2) var(--space-3);
+            background: transparent;
+            border: none;
+            color: var(--color-text-tertiary);
+            cursor: pointer;
+            transition: var(--transition-colors);
+        }
+
+        .view-toggle button.active {
+            background: var(--color-accent-primary);
+            color: var(--color-text-inverse);
+        }
+
+        .careers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: var(--space-4, 1rem);
+            width: 100%;
+        }
+
+        .careers-list .job-card {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: var(--space-4);
+        }
+
+        .careers-list .job-card-header {
+            flex: 1;
+        }
+
+        .careers-list .job-card-stats {
+            flex-shrink: 0;
+        }
+
+        .mobile-filter-btn {
+            display: none;
+            position: fixed;
+            bottom: var(--space-4);
+            right: var(--space-4);
+            z-index: 100;
+        }
+
+        @media (max-width: 1024px) {
+            .mobile-filter-btn {
+                display: flex;
+            }
+        }
+
+        .tier-filter-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-2);
+        }
+
+        .tier-chip {
+            padding: var(--space-2) var(--space-3);
+            border-radius: var(--radius-full);
+            font-size: var(--font-size-xs);
+            font-weight: var(--font-weight-medium);
+            cursor: pointer;
+            transition: var(--transition-all);
+            border: 1px solid var(--color-border-subtle);
+            background: transparent;
+        }
+
+        .tier-chip:hover {
+            background: var(--color-bg-elevated);
+        }
+
+        .tier-chip.active {
+            border-color: var(--color-accent-primary);
+            background: rgba(106, 169, 255, 0.1);
+        }
+
+        .tier-chip.tier-0 {
+            color: var(--color-tier-0);
+        }
+
+        .tier-chip.tier-1 {
+            color: var(--color-tier-1);
+        }
+
+        .tier-chip.tier-2 {
+            color: var(--color-tier-2);
+        }
+
+        .tier-chip.tier-3 {
+            color: var(--color-tier-3);
+        }
+
+        .tier-chip.tier-4 {
+            color: var(--color-tier-4);
+        }
+
+        .tier-chip.tier-5 {
+            color: var(--color-tier-5);
+        }
+
+        .tier-chip.tier-0.active {
+            background: var(--color-tier-0-bg);
+            border-color: var(--color-tier-0);
+        }
+
+        .tier-chip.tier-1.active {
+            background: var(--color-tier-1-bg);
+            border-color: var(--color-tier-1);
+        }
+
+        .tier-chip.tier-2.active {
+            background: var(--color-tier-2-bg);
+            border-color: var(--color-tier-2);
+        }
+
+        .tier-chip.tier-3.active {
+            background: var(--color-tier-3-bg);
+            border-color: var(--color-tier-3);
+        }
+
+        .tier-chip.tier-4.active {
+            background: var(--color-tier-4-bg);
+            border-color: var(--color-tier-4);
+        }
+
+        .tier-chip.tier-5.active {
+            background: var(--color-tier-5-bg);
+            border-color: var(--color-tier-5);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="app">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="container flex items-center justify-between h-full">
+                <a href="index.html" class="flex items-center gap-2" style="text-decoration: none;">
+                    <span style="font-size: 1.5rem;">📊</span>
+                    <span class="font-bold text-lg">CareerData</span>
+                </a>
+
+                <nav class="flex items-center gap-6 md-show">
+                    <a href="explore.html" class="text-accent font-medium" style="text-decoration: none;">Explore</a>
+                    <a href="compare.html" class="text-secondary font-medium" style="text-decoration: none;">Compare</a>
+                    <a href="analytics.html" class="text-secondary font-medium"
+                        style="text-decoration: none;">Analytics</a>
+                </nav>
+
+                <div class="flex items-center gap-3">
+                    <input type="text" class="input search-input" placeholder="Search careers..." style="width: 200px;"
+                        id="search-input">
+                </div>
+            </div>
+        </header>
+
+        <!-- Explore Header -->
+        <section class="explore-header">
+            <div class="container">
+                <h1 class="h2 mb-4">Explore Careers</h1>
+
+                <!-- Quick Tier Filters -->
+                <div class="tier-filter-chips">
+                    <button class="tier-chip active" data-tier="all">All Tiers</button>
+                    <button class="tier-chip tier-0" data-tier="0">T0 Owner Now</button>
+                    <button class="tier-chip tier-1" data-tier="1">T1 Cert-Based</button>
+                    <button class="tier-chip tier-2" data-tier="2">T2 Journeyman</button>
+                    <button class="tier-chip tier-3" data-tier="3">T3 Master</button>
+                    <button class="tier-chip tier-4" data-tier="4">T4 Supervisor</button>
+                    <button class="tier-chip tier-5" data-tier="5">T5 Via Subs</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Main Content -->
+        <main class="container">
+            <div class="explore-layout">
+                <!-- Filter Sidebar -->
+                <aside class="filter-sidebar" id="filter-sidebar">
+                    <div class="flex justify-between items-center mb-4 lg-hide">
+                        <span class="font-semibold">Filters</span>
+                        <button class="btn btn-ghost btn-sm" onclick="toggleFilters()">✕</button>
+                    </div>
+
+                    <div class="filter-section">
+                        <div class="filter-title">Category</div>
+                        <div class="filter-option">
+                            <input type="checkbox" id="cat-mechanical" checked>
+                            <label for="cat-mechanical">Mechanical Trades</label>
+                            <span class="count">18</span>
+                        </div>
+                        <div class="filter-option">
+                            <input type="checkbox" id="cat-electrical" checked>
+                            <label for="cat-electrical">Electrical Trades</label>
+                            <span class="count">12</span>
+                        </div>
+                        <div class="filter-option">
+                            <input type="checkbox" id="cat-construction" checked>
+                            <label for="cat-construction">Construction</label>
+                            <span class="count">24</span>
+                        </div>
+                        <div class="filter-option">
+                            <input type="checkbox" id="cat-technology" checked>
+                            <label for="cat-technology">Technology Systems</label>
+                            <span class="count">15</span>
+                        </div>
+                        <div class="filter-option">
+                            <input type="checkbox" id="cat-interior" checked>
+                            <label for="cat-interior">Interior Finishing</label>
+                            <span class="count">10</span>
+                        </div>
+                        <div class="filter-option">
+                            <input type="checkbox" id="cat-exterior" checked>
+                            <label for="cat-exterior">Exterior & Landscaping</label>
+                            <span class="count">14</span>
+                        </div>
+                        <div class="filter-option">
+                            <input type="checkbox" id="cat-specialty" checked>
+                            <label for="cat-specialty">Specialty Trades</label>
+                            <span class="count">8</span>
+                        </div>
+                    </div>
+
+                    <div class="filter-section">
+                        <div class="filter-title">Salary Range</div>
+                        <input type="range" class="range-slider" min="30000" max="120000" value="30000" id="salary-min">
+                        <div class="range-values">
+                            <span>$30k</span>
+                            <span id="salary-display">$30k+</span>
+                        </div>
+                    </div>
+
+                    <div class="filter-section">
+                        <div class="filter-title">Time to Ownership</div>
+                        <div class="filter-option">
+                            <input type="checkbox" id="time-immediate" checked>
+                            <label for="time-immediate">Immediate (0-6 mo)</label>
+                        </div>
+                        <div class="filter-option">
+                            <input type="checkbox" id="time-short" checked>
+                            <label for="time-short">Short (6mo - 2yr)</label>
+                        </div>
+                        <div class="filter-option">
+                            <input type="checkbox" id="time-medium" checked>
+                            <label for="time-medium">Medium (2-5yr)</label>
+                        </div>
+                        <div class="filter-option">
+                            <input type="checkbox" id="time-long" checked>
+                            <label for="time-long">Long (5+ yr)</label>
+                        </div>
+                    </div>
+
+                    <div class="filter-section">
+                        <div class="filter-title">Growth Outlook</div>
+                        <div class="filter-option">
+                            <input type="checkbox" id="growth-high" checked>
+                            <label for="growth-high">High Growth (8%+)</label>
+                        </div>
+                        <div class="filter-option">
+                            <input type="checkbox" id="growth-avg" checked>
+                            <label for="growth-avg">Average (4-8%)</label>
+                        </div>
+                        <div class="filter-option">
+                            <input type="checkbox" id="growth-low" checked>
+                            <label for="growth-low">Below Average</label>
+                        </div>
+                    </div>
+
+                    <div class="filter-section">
+                        <div class="filter-title">Physical Demands</div>
+                        <div class="filter-option">
+                            <input type="checkbox" id="phys-light" checked>
+                            <label for="phys-light">Light</label>
+                        </div>
+                        <div class="filter-option">
+                            <input type="checkbox" id="phys-medium" checked>
+                            <label for="phys-medium">Medium</label>
+                        </div>
+                        <div class="filter-option">
+                            <input type="checkbox" id="phys-heavy" checked>
+                            <label for="phys-heavy">Heavy</label>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-secondary w-full" onclick="clearFilters()">Clear All Filters</button>
+                </aside>
+
+                <div class="filter-overlay" id="filter-overlay" onclick="toggleFilters()"></div>
+
+                <!-- Results -->
+                <section class="results">
+                    <div class="results-header">
+                        <div>
+                            <span class="results-count"><strong id="results-count">20</strong> careers found</span>
+                        </div>
+
+                        <div class="sort-controls">
+                            <label class="text-sm text-secondary">Sort by:</label>
+                            <select class="sort-select" id="sort-select">
+                                <option value="salary-desc">Salary (High to Low)</option>
+                                <option value="salary-asc">Salary (Low to High)</option>
+                                <option value="time-asc">Time to Start (Fastest)</option>
+                                <option value="growth-desc">Growth (Highest)</option>
+                                <option value="name-asc">Name (A-Z)</option>
+                            </select>
+
+                            <div class="view-toggle">
+                                <button class="active" data-view="grid" title="Grid View">▦</button>
+                                <button data-view="list" title="List View">☰</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="careers-grid" id="careers-container">
+                        <!-- Cards generated by JavaScript -->
+                    </div>
+                </section>
+            </div>
+        </main>
+
+        <!-- Mobile Filter Button -->
+        <button class="mobile-filter-btn btn btn-primary" onclick="toggleFilters()">
+            🎚️ Filters
+        </button>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container text-center">
+                <p class="text-sm text-tertiary">
+                    © 2024 CareerData. Data for informational purposes only.
+                </p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // ALL 125 CAREERS DATA
+        const allCareers = [
+            // T0 - OWNER NOW (54 careers)
+            { name: "Roofing (retail)", tier: 0, cat: "Construction" },
+            { name: "Storm & Insurance Restoration Roofing", tier: 0, cat: "Construction" },
+            { name: "Gutters & Leaf-guard Systems", tier: 0, cat: "Exterior" },
+            { name: "Siding Installation", tier: 0, cat: "Exterior" },
+            { name: "Stucco & EIFS Work", tier: 0, cat: "Exterior" },
+            { name: "Window Replacement", tier: 0, cat: "Construction" },
+            { name: "Exterior Door Replacement", tier: 0, cat: "Construction" },
+            { name: "Garage Door Installation & Service", tier: 0, cat: "Construction" },
+            { name: "Skylight Installation", tier: 0, cat: "Construction" },
+            { name: "Insulation Installation", tier: 0, cat: "Construction" },
+            { name: "Attic Restoration", tier: 0, cat: "Specialty" },
+            { name: "Crawlspace Encapsulation", tier: 0, cat: "Specialty" },
+            { name: "Basement Waterproofing", tier: 0, cat: "Specialty" },
+            { name: "Foundation Repair", tier: 0, cat: "Construction" },
+            { name: "Water Treatment Systems", tier: 0, cat: "Specialty" },
+            { name: "Drain Cleaning & Jetting", tier: 0, cat: "Mechanical" },
+            { name: "Kitchen Remodeling Sales", tier: 0, cat: "Interior" },
+            { name: "Bathroom Remodeling Sales", tier: 0, cat: "Interior" },
+            { name: "Flooring Installation", tier: 0, cat: "Interior" },
+            { name: "Tile & Stone Installation", tier: 0, cat: "Interior" },
+            { name: "Countertop Fabrication & Install", tier: 0, cat: "Interior" },
+            { name: "Cabinet Refacing & Cabinetry", tier: 0, cat: "Interior" },
+            { name: "Painting Services", tier: 0, cat: "Interior" },
+            { name: "Drywall & Texture Services", tier: 0, cat: "Interior" },
+            { name: "Finish Carpentry & Built-ins", tier: 0, cat: "Interior" },
+            { name: "Closet Systems", tier: 0, cat: "Interior" },
+            { name: "Window Coverings", tier: 0, cat: "Interior" },
+            { name: "Home Organization Systems", tier: 0, cat: "Interior" },
+            { name: "Epoxy Garage Floor Coatings", tier: 0, cat: "Interior" },
+            { name: "Landscaping Construction", tier: 0, cat: "Exterior" },
+            { name: "Hardscape Installation", tier: 0, cat: "Exterior" },
+            { name: "Deck & Pergola Construction", tier: 0, cat: "Exterior" },
+            { name: "Fencing & Gates", tier: 0, cat: "Exterior" },
+            { name: "Concrete Flatwork", tier: 0, cat: "Construction" },
+            { name: "Asphalt Paving & Sealcoating", tier: 0, cat: "Exterior" },
+            { name: "Snow Removal Services", tier: 0, cat: "Exterior" },
+            { name: "Shade Systems & Awnings", tier: 0, cat: "Exterior" },
+            { name: "Patio Enclosures", tier: 0, cat: "Exterior" },
+            { name: "Commercial Roofing", tier: 0, cat: "Construction" },
+            { name: "Janitorial Services", tier: 0, cat: "Commercial" },
+            { name: "Facility Maintenance", tier: 0, cat: "Commercial" },
+            { name: "Specialty Coatings & Industrial Epoxy", tier: 0, cat: "Specialty" },
+            { name: "Welding & Fabrication Shops", tier: 0, cat: "Specialty" },
+            { name: "Utility Locating & Hydro-excavation", tier: 0, cat: "Specialty" },
+            { name: "Trenching & Directional Boring", tier: 0, cat: "Specialty" },
+            { name: "Traffic Control & Striping", tier: 0, cat: "Specialty" },
+            { name: "Contents Pack-out & Storage", tier: 0, cat: "Restoration" },
+            { name: "Emergency Board-up & Tarping", tier: 0, cat: "Restoration" },
+            { name: "Commercial Drying Equipment Rental", tier: 0, cat: "Restoration" },
+            // T1 - CERT-BASED (28 careers)
+            { name: "Spray Foam Insulation", tier: 1, cat: "Specialty" },
+            { name: "Air Sealing & Energy Retrofit", tier: 1, cat: "Specialty" },
+            { name: "Mold Remediation", tier: 1, cat: "Restoration" },
+            { name: "Radon Mitigation", tier: 1, cat: "Specialty" },
+            { name: "Chimney Services", tier: 1, cat: "Specialty" },
+            { name: "Home Theater & Residential AV", tier: 1, cat: "Technology" },
+            { name: "Smart Home Automation", tier: 1, cat: "Technology" },
+            { name: "Irrigation Systems", tier: 1, cat: "Exterior" },
+            { name: "Tree Service Operations", tier: 1, cat: "Exterior" },
+            { name: "Pest Control Services", tier: 1, cat: "Specialty" },
+            { name: "Building Automation & Controls", tier: 1, cat: "Technology" },
+            { name: "Testing, Adjusting & Balancing", tier: 1, cat: "Mechanical" },
+            { name: "Backflow Testing", tier: 1, cat: "Mechanical" },
+            { name: "Fire Alarm Installation", tier: 1, cat: "Technology" },
+            { name: "Security Systems & Access Control", tier: 1, cat: "Technology" },
+            { name: "Commercial Audiovisual Systems", tier: 1, cat: "Technology" },
+            { name: "Structured Cabling & Fiber", tier: 1, cat: "Technology" },
+            { name: "IT Closet Buildouts", tier: 1, cat: "Technology" },
+            { name: "Overhead Doors & Dock Equipment", tier: 1, cat: "Commercial" },
+            { name: "Commercial Kitchen Equipment Service", tier: 1, cat: "Commercial" },
+            { name: "Instrumentation & Controls", tier: 1, cat: "Technology" },
+            { name: "SCADA Integration", tier: 1, cat: "Technology" },
+            { name: "Automation & Robotics Integration", tier: 1, cat: "Technology" },
+            { name: "Conveyor & Material Handling", tier: 1, cat: "Commercial" },
+            { name: "Environmental Remediation", tier: 1, cat: "Specialty" },
+            { name: "Tank Installation & Repair", tier: 1, cat: "Specialty" },
+            { name: "Commercial Signage Installation", tier: 1, cat: "Commercial" },
+            { name: "Water Damage Mitigation", tier: 1, cat: "Restoration" },
+            { name: "Fire & Smoke Restoration", tier: 1, cat: "Restoration" },
+            { name: "Biohazard Cleanup", tier: 1, cat: "Restoration" },
+            { name: "Leak Detection Services", tier: 1, cat: "Specialty" },
+            { name: "Asbestos & Lead Abatement", tier: 1, cat: "Specialty" },
+            // T2 - JOURNEYMAN (~4 yrs)
+            { name: "Residential HVAC Replacement", tier: 2, cat: "Mechanical" },
+            { name: "Residential HVAC Service", tier: 2, cat: "Mechanical" },
+            { name: "Ductwork, Zoning & Air Balancing", tier: 2, cat: "Mechanical" },
+            { name: "Radiant Floor Heating", tier: 2, cat: "Mechanical" },
+            { name: "Mini-split & Multi-zone HVAC", tier: 2, cat: "Mechanical" },
+            { name: "Whole-home Dehumidification", tier: 2, cat: "Mechanical" },
+            { name: "Water Heater & Tankless Install", tier: 2, cat: "Mechanical" },
+            { name: "Electrical Panel Upgrades", tier: 2, cat: "Electrical" },
+            { name: "Whole-home Electrical Rewiring", tier: 2, cat: "Electrical" },
+            { name: "EV Charger Installation", tier: 2, cat: "Electrical" },
+            { name: "Commercial HVAC Service Sales", tier: 2, cat: "Mechanical" },
+            { name: "Commercial Plumbing Service", tier: 2, cat: "Mechanical" },
+            { name: "Lighting Retrofit Projects", tier: 2, cat: "Electrical" },
+            { name: "Compressed Air Systems", tier: 2, cat: "Mechanical" },
+            { name: "Water & Wastewater Systems", tier: 2, cat: "Mechanical" },
+            { name: "Pump Systems & Lift Stations", tier: 2, cat: "Mechanical" },
+            { name: "Power Quality & UPS Systems", tier: 2, cat: "Electrical" },
+            { name: "Critical Power Distribution", tier: 2, cat: "Electrical" },
+            { name: "Data Center Mechanical", tier: 2, cat: "Mechanical" },
+            { name: "Data Center Electrical", tier: 2, cat: "Electrical" },
+            { name: "Generator Plants", tier: 2, cat: "Electrical" },
+            { name: "Industrial Ventilation & Dust Collection", tier: 2, cat: "Mechanical" },
+            // T3 - MASTER (>4 yrs)
+            { name: "Whole-home Plumbing Repipes", tier: 3, cat: "Mechanical" },
+            { name: "Sewer Line Replacement", tier: 3, cat: "Mechanical" },
+            { name: "Water Main Replacement", tier: 3, cat: "Mechanical" },
+            { name: "Electrical Panel Business Owner", tier: 3, cat: "Electrical" },
+            { name: "Electrical Rewiring Business Owner", tier: 3, cat: "Electrical" },
+            { name: "EV Charger Business Owner", tier: 3, cat: "Electrical" },
+            { name: "Lighting Retrofit Contractor", tier: 3, cat: "Electrical" },
+            { name: "Switchgear & Critical Electrical", tier: 3, cat: "Electrical" },
+            { name: "Data Center Electrical Contractor", tier: 3, cat: "Electrical" },
+            // T4 - SUPERVISOR/QUALIFIER
+            { name: "Residential & Commercial Refrigeration", tier: 4, cat: "Mechanical" },
+            { name: "Boilers & Hydronics Systems", tier: 4, cat: "Mechanical" },
+            { name: "Steam Systems & Steamfitting", tier: 4, cat: "Mechanical" },
+            { name: "Gas Service Installation", tier: 4, cat: "Mechanical" },
+            { name: "Commercial Refrigeration Service", tier: 4, cat: "Mechanical" },
+            { name: "Industrial Refrigeration Systems", tier: 4, cat: "Mechanical" },
+            { name: "Industrial Boiler Plants", tier: 4, cat: "Mechanical" },
+            { name: "Steam System Retrofits", tier: 4, cat: "Mechanical" },
+            // T5 - OWNER VIA SUBS
+            { name: "Standby Generator Sales & Install", tier: 5, cat: "Electrical" },
+            { name: "Fireplace Inserts & Fuel Appliances", tier: 5, cat: "Mechanical" },
+            { name: "Outdoor Kitchens", tier: 5, cat: "Exterior" },
+            { name: "Swimming Pools & Spas", tier: 5, cat: "Exterior" },
+            { name: "Hot Tubs & Swim Spas", tier: 5, cat: "Exterior" },
+            { name: "Building Automation Projects", tier: 5, cat: "Technology" },
+            { name: "Fire Sprinkler Installation", tier: 5, cat: "Specialty" },
+            { name: "Elevator Modernization Sales", tier: 5, cat: "Commercial" },
+            { name: "Facility Maintenance (Permits)", tier: 5, cat: "Commercial" },
+            { name: "Process Piping Projects", tier: 5, cat: "Mechanical" },
+            { name: "Compressed Air Contracting", tier: 5, cat: "Mechanical" },
+            { name: "Water/Wastewater Contracting", tier: 5, cat: "Mechanical" },
+            { name: "Pump Station Contracting", tier: 5, cat: "Mechanical" },
+            { name: "Power Quality Contracting", tier: 5, cat: "Electrical" },
+            { name: "Data Center Mechanical Contracting", tier: 5, cat: "Mechanical" },
+            { name: "Data Center Electrical Contracting", tier: 5, cat: "Electrical" },
+            { name: "Generator Plants & Large Standby", tier: 5, cat: "Electrical" },
+            { name: "Industrial Ventilation Contracting", tier: 5, cat: "Mechanical" },
+            { name: "Insurance Reconstruction Contracting", tier: 5, cat: "Construction" }
+        ];
+
+        // Generate career cards
+        function renderCareers(careers) {
+            const container = document.getElementById('careers-container');
+            container.innerHTML = '';
+            careers.forEach(c => {
+                const id = c.name.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+                container.innerHTML += `
+                <div class="job-card" data-tier="${c.tier}" data-cat="${c.cat}" onclick="location.href='job.html?id=${id}'">
+                    <div class="job-card-header">
+                        <div>
+                            <h3 class="job-card-title">${c.name}</h3>
+                            <span class="job-card-category">${c.cat}</span>
+                        </div>
+                        <span class="tier-badge tier-badge-${c.tier}">T${c.tier}</span>
+                    </div>
+                    <div class="job-card-stats">
+                        <div class="job-card-stat">
+                            <span class="job-card-stat-label">Tier</span>
+                            <span class="job-card-stat-value">${['Owner Now', 'Cert-Based', 'Journeyman', 'Master', 'Supervisor', 'Via Subs'][c.tier]}</span>
+                        </div>
+                        <div class="job-card-stat">
+                            <span class="job-card-stat-label">Category</span>
+                            <span class="job-card-stat-value">${c.cat}</span>
+                        </div>
+                    </div>
+                </div>`;
+            });
+            document.getElementById('results-count').textContent = careers.length;
+        }
+
+        // Initial render
+        renderCareers(allCareers);
+
+        // Toggle filters on mobile
+        function toggleFilters() {
+            document.getElementById('filter-sidebar').classList.toggle('open');
+            document.getElementById('filter-overlay').classList.toggle('open');
+        }
+
+        function clearFilters() {
+            document.querySelectorAll('.filter-sidebar input[type="checkbox"]').forEach(cb => cb.checked = true);
+            document.getElementById('salary-min').value = 30000;
+            document.getElementById('salary-display').textContent = '$30k+';
+            renderCareers(allCareers);
+            document.querySelectorAll('.tier-chip').forEach(c => c.classList.remove('active'));
+            document.querySelector('.tier-chip[data-tier="all"]').classList.add('active');
+        }
+
+        // Tier filter chips
+        document.querySelectorAll('.tier-chip').forEach(chip => {
+            chip.addEventListener('click', function () {
+                document.querySelectorAll('.tier-chip').forEach(c => c.classList.remove('active'));
+                this.classList.add('active');
+                const tier = this.dataset.tier;
+                if (tier === 'all') {
+                    renderCareers(allCareers);
+                } else {
+                    renderCareers(allCareers.filter(c => c.tier === parseInt(tier)));
+                }
+            });
+        });
+
+        // Salary slider
+        document.getElementById('salary-min').addEventListener('input', function () {
+            const val = parseInt(this.value);
+            document.getElementById('salary-display').textContent = '$' + (val / 1000) + 'k+';
+        });
+
+        // View toggle
+        document.querySelectorAll('.view-toggle button').forEach(btn => {
+            btn.addEventListener('click', function () {
+                document.querySelectorAll('.view-toggle button').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                const container = document.getElementById('careers-container');
+                if (this.dataset.view === 'list') {
+                    container.classList.remove('careers-grid');
+                    container.classList.add('careers-list');
+                } else {
+                    container.classList.remove('careers-list');
+                    container.classList.add('careers-grid');
+                }
+            });
+        });
+
+        // Search
+        document.getElementById('search-input').addEventListener('input', function () {
+            const query = this.value.toLowerCase();
+            const filtered = allCareers.filter(c =>
+                c.name.toLowerCase().includes(query) || c.cat.toLowerCase().includes(query)
+            );
+            renderCareers(filtered);
+        });
+    </script>
+</body>
+
+</html>

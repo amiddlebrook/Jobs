@@ -1,0 +1,442 @@
+{
+    "id": "security-systems",
+    "name": "Security Systems Installer",
+    "alternateTitles": [
+        "Alarm Installer",
+        "Security Technician",
+        "Low Voltage Technician",
+        "Electronic Security Installer"
+    ],
+    "category": "technology",
+    "subcategory": "security",
+    "tier": 1,
+    "tierLabel": "T1 - Certification-Based",
+    "onetCode": "49-2098.00",
+    "socCode": "49-2098",
+    "description": "Install, program, maintain, and repair security systems including alarms, access control, video surveillance, and fire detection systems. Short certification pathway allows quick entry and business ownership.",
+    "summary": {
+        "pros": [
+            "Fast track to ownership - certifications only take weeks",
+            "High growth industry (+9% projected)",
+            "Recurring revenue potential from monitoring",
+            "Technology-focused, less physically demanding than trades",
+            "Smart home integration driving new demand"
+        ],
+        "cons": [
+            "Some jurisdictions require alarm contractor license",
+            "Night/weekend work for some installations",
+            "Competition from DIY security systems",
+            "Requires ongoing technology training",
+            "Customer acquisition can be challenging"
+        ],
+        "dayInTheLife": "Daily work includes installing alarm panels, running low-voltage wire, mounting cameras and sensors, programming systems, and training customers. Service calls involve troubleshooting false alarms and system upgrades."
+    },
+    "education": {
+        "minimum": "High School Diploma / GED",
+        "preferred": "Technical training or military experience",
+        "yearsTypical": 0.5,
+        "degreeTypes": [
+            "Certificate",
+            "None"
+        ],
+        "trainingPrograms": [
+            {
+                "name": "ESA NTS Level 1",
+                "duration": "40 hours",
+                "cost": {
+                    "min": 400,
+                    "max": 800
+                },
+                "type": "Industry Certification",
+                "notes": "Electronic Security Association certification"
+            },
+            {
+                "name": "NICET Level 1-2",
+                "duration": "Self-study + exam",
+                "cost": {
+                    "min": 200,
+                    "max": 400
+                },
+                "type": "Industry Certification",
+                "notes": "Fire alarm systems"
+            },
+            {
+                "name": "Manufacturer Training",
+                "duration": "1-3 days per system",
+                "cost": {
+                    "min": 0,
+                    "max": 500
+                },
+                "type": "Vendor Training",
+                "notes": "Honeywell, DSC, Hikvision, etc."
+            }
+        ],
+        "apprenticeshipRequired": false,
+        "continuingEducationRequired": true,
+        "continuingEducationHoursAnnual": 8,
+        "continuingEducationTopics": [
+            "New technology",
+            "Code updates",
+            "Cybersecurity"
+        ]
+    },
+    "licensing": {
+        "body": "Colorado DORA (Alarm Installer Registration)",
+        "stateJurisdiction": "CO",
+        "licenses": [
+            {
+                "name": "Alarm Installer Registration",
+                "required": true,
+                "level": "State",
+                "prerequisites": [
+                    "Background check",
+                    "Fingerprinting"
+                ],
+                "examCost": 0,
+                "examPassRate": 100,
+                "renewalCycle": "2 years",
+                "renewalCost": 50,
+                "timeToObtain": "2-4 weeks"
+            },
+            {
+                "name": "Alarm Company License",
+                "required": true,
+                "requiredForOwnership": true,
+                "level": "State",
+                "prerequisites": [
+                    "Insurance",
+                    "Bonding",
+                    "Registered manager"
+                ],
+                "examCost": 100,
+                "renewalCycle": "2 years",
+                "renewalCost": 150,
+                "timeToObtain": "2-4 weeks"
+            }
+        ],
+        "backgroundCheckRequired": true,
+        "drugTestRequired": false,
+        "bondingRequired": true,
+        "bondingAmount": 10000,
+        "insuranceMinimum": {
+            "generalLiability": 500000,
+            "errorsOmissions": "Recommended"
+        }
+    },
+    "timeline": {
+        "timeToEntryLevelMonths": 0,
+        "timeToOwnershipMonths": 4,
+        "fastTrackAvailable": true,
+        "fastTrackTimelineMonths": 2,
+        "fastTrackMethod": "Complete ESA NTS + state registration simultaneously",
+        "milestones": [
+            {
+                "month": 0,
+                "title": "Start Training",
+                "description": "Begin ESA/NICET certification courses"
+            },
+            {
+                "month": 1,
+                "title": "Certification Complete",
+                "description": "Pass ESA NTS Level 1"
+            },
+            {
+                "month": 2,
+                "title": "State Registration",
+                "description": "Complete background check, receive installer registration"
+            },
+            {
+                "month": 3,
+                "title": "Manufacturer Certs",
+                "description": "Get certified on 2-3 major brands"
+            },
+            {
+                "month": 4,
+                "title": "Business Launch",
+                "description": "Open alarm company with all licenses"
+            }
+        ]
+    },
+    "compensation": {
+        "wageEntryLevel": 16.50,
+        "wageMedian": 23.45,
+        "wage75thPercentile": 31.20,
+        "wage90thPercentile": 40.00,
+        "salaryAnnualEntry": 34320,
+        "salaryAnnualMedian": 48780,
+        "salaryAnnual75th": 64900,
+        "salaryAnnualTop10": 83200,
+        "salaryByExperience": [
+            {
+                "years": 0,
+                "salary": 34000,
+                "title": "Entry Level Installer"
+            },
+            {
+                "years": 1,
+                "salary": 40000,
+                "title": "Installer"
+            },
+            {
+                "years": 2,
+                "salary": 45000,
+                "title": "Senior Installer"
+            },
+            {
+                "years": 3,
+                "salary": 52000,
+                "title": "Lead Technician"
+            },
+            {
+                "years": 5,
+                "salary": 60000,
+                "title": "Service Manager/Owner"
+            },
+            {
+                "years": 7,
+                "salary": 75000,
+                "title": "Established Owner"
+            },
+            {
+                "years": 10,
+                "salary": 100000,
+                "title": "Multi-Tech Owner"
+            }
+        ],
+        "ownerEarningsPotential": {
+            "year1": {
+                "min": 50000,
+                "max": 100000
+            },
+            "year3": {
+                "min": 80000,
+                "max": 200000
+            },
+            "year5": {
+                "min": 120000,
+                "max": 350000
+            }
+        },
+        "benefitsTypical": [
+            "Health Insurance (larger companies)",
+            "Company vehicle",
+            "Tool allowance"
+        ],
+        "unionAvailable": false
+    },
+    "businessOwnership": {
+        "startupCostMinimum": 5000,
+        "startupCostTypical": 20000,
+        "startupCostMaximum": 75000,
+        "startupCostBreakdown": [
+            {
+                "category": "Tools & Test Equipment",
+                "min": 2000,
+                "max": 8000
+            },
+            {
+                "category": "Vehicle",
+                "min": 0,
+                "max": 25000
+            },
+            {
+                "category": "Initial Inventory",
+                "min": 1000,
+                "max": 10000
+            },
+            {
+                "category": "Licensing & Insurance",
+                "min": 1000,
+                "max": 5000
+            },
+            {
+                "category": "Marketing",
+                "min": 500,
+                "max": 5000
+            },
+            {
+                "category": "Working Capital",
+                "min": 2000,
+                "max": 20000
+            }
+        ],
+        "revenueYear1Typical": 100000,
+        "revenueYear3Typical": 300000,
+        "revenueYear5Typical": 600000,
+        "profitMarginTypical": {
+            "installation": 35,
+            "monitoring": 65,
+            "service": 45,
+            "blended": 42
+        },
+        "recurringRevenueModel": {
+            "available": true,
+            "type": "Monitoring subscriptions",
+            "avgMonthlyPerCustomer": 35,
+            "churnRate": 12
+        },
+        "billableRateResidential": {
+            "min": 75,
+            "max": 125
+        },
+        "billableRateCommercial": {
+            "min": 95,
+            "max": 175
+        },
+        "breakEvenMonths": 4
+    },
+    "employment": {
+        "totalUS": 74400,
+        "totalColorado": 2200,
+        "growthRate10Year": 9,
+        "growthOutlook": "faster",
+        "projectedOpeningsAnnual": 8500,
+        "industryConcentration": [
+            {
+                "industry": "Security System Services",
+                "share": 55
+            },
+            {
+                "industry": "Electrical Contractors",
+                "share": 18
+            },
+            {
+                "industry": "Self-Employed",
+                "share": 15
+            },
+            {
+                "industry": "Commercial Building Services",
+                "share": 12
+            }
+        ],
+        "selfEmploymentRate": 15,
+        "automationRisk": "Low",
+        "automationRiskScore": 18,
+        "automationNotes": "DIY systems compete but professional installation remains preferred for commercial and higher-end residential."
+    },
+    "skills": {
+        "technical": [
+            {
+                "name": "Alarm system installation",
+                "importance": 95
+            },
+            {
+                "name": "Low voltage wiring",
+                "importance": 90
+            },
+            {
+                "name": "IP/network configuration",
+                "importance": 85
+            },
+            {
+                "name": "Video surveillance setup",
+                "importance": 80
+            },
+            {
+                "name": "Access control systems",
+                "importance": 75
+            },
+            {
+                "name": "Fire alarm basics",
+                "importance": 70
+            }
+        ],
+        "soft": [
+            {
+                "name": "Customer service",
+                "importance": 90
+            },
+            {
+                "name": "Problem solving",
+                "importance": 85
+            },
+            {
+                "name": "Tech communication",
+                "importance": 80
+            },
+            {
+                "name": "Sales ability",
+                "importance": 75
+            }
+        ],
+        "physicalRequirements": [
+            "Climbing ladders",
+            "Working in attics/crawlspaces",
+            "Lifting 30-40 lbs",
+            "Working overhead"
+        ],
+        "toolsAndTechnology": [
+            "Wire strippers/crimpers",
+            "Multimeter",
+            "IP camera tester",
+            "Cat6/fiber tools",
+            "Programming software"
+        ]
+    },
+    "workEnvironment": {
+        "settingPrimary": "Customer premises",
+        "indoorOutdoorSplit": {
+            "indoor": 80,
+            "outdoor": 20
+        },
+        "travelRequired": "Local daily travel",
+        "scheduleTypical": "Monday-Friday, 8am-5pm",
+        "scheduleFlexibility": "Moderate",
+        "onCallRequired": false,
+        "weekendWorkCommon": "Occasional for residential",
+        "remoteWorkPossible": false,
+        "physicalDemandLevel": 3,
+        "stressLevel": 2,
+        "jobSatisfactionMedian": 74
+    },
+    "careerPath": {
+        "entryPositions": [
+            "Install Helper",
+            "Apprentice Installer"
+        ],
+        "midCareerPositions": [
+            "Installer",
+            "Service Technician"
+        ],
+        "seniorPositions": [
+            "Lead Technician",
+            "Project Manager"
+        ],
+        "ownershipPositions": [
+            "Alarm Company Owner",
+            "Integrator Owner"
+        ],
+        "lateralMoves": [
+            {
+                "title": "IT Network Technician",
+                "additionalTraining": "Network+ certification"
+            },
+            {
+                "title": "Smart Home Integrator",
+                "additionalTraining": "Crestron/Control4 training"
+            },
+            {
+                "title": "Fire Alarm Specialist",
+                "additionalTraining": "NICET Level 3-4"
+            }
+        ]
+    },
+    "comparativeMetrics": {
+        "barrierToEntryScore": 28,
+        "ownershipAccessibilityScore": 88,
+        "marketStabilityScore": 78,
+        "growthPotentialScore": 85,
+        "workLifeBalanceScore": 75,
+        "overallCareerScore": 77
+    },
+    "metadata": {
+        "lastUpdated": "2024-12-27",
+        "dataSource": [
+            "BLS OOH",
+            "O*NET",
+            "ESA",
+            "Colorado DORA"
+        ],
+        "notes": "T1 career with fast path to ownership. Recurring revenue from monitoring is key differentiator."
+    }
+}

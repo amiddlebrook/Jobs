@@ -1,0 +1,542 @@
+{
+    "id": "roofing-contractor",
+    "name": "Roofing Contractor",
+    "alternateTitles": [
+        "Roofer",
+        "Roofing Company Owner",
+        "Storm Restoration Contractor"
+    ],
+    "category": "trades-construction",
+    "subcategory": "roofing",
+    "tier": 0,
+    "tierLabel": "T0 - Owner Now",
+    "onetCode": "47-2181.00",
+    "socCode": "47-2181",
+    "description": "Install, repair, and replace roofing systems on residential and commercial buildings. No multi-year trade license required in most jurisdictions - can start business immediately with basic setup.",
+    "summary": {
+        "pros": [
+            "Immediate business ownership - no trade license ladder",
+            "High demand in storm-prone and aging-roof markets",
+            "Strong revenue potential ($250k-$1M+ in early years)",
+            "Scalable - add crews and grow quickly",
+            "Insurance claim work provides steady income"
+        ],
+        "cons": [
+            "Physically demanding and dangerous (fall risk)",
+            "Weather-dependent scheduling",
+            "Seasonal slowdowns in some regions",
+            "High insurance costs due to risk profile",
+            "Competitive market with many contractors"
+        ],
+        "dayInTheLife": "Owner-operators divide time between sales (inspections, estimates), crew management, material ordering, and job site supervision. Larger operations focus on sales and admin while crews handle installations."
+    },
+    "education": {
+        "minimum": "None required",
+        "preferred": "High School Diploma + On-the-job training",
+        "yearsTypical": 0,
+        "degreeTypes": [
+            "None",
+            "Certificate optional"
+        ],
+        "majorFieldsOfStudy": [
+            "Construction Management (optional)",
+            "Business Administration (helpful)"
+        ],
+        "trainingPrograms": [
+            {
+                "name": "Manufacturer Certifications (GAF, Owens Corning, CertainTeed)",
+                "duration": "1-3 days each",
+                "cost": {
+                    "min": 0,
+                    "max": 500
+                },
+                "type": "Manufacturer Training",
+                "notes": "Often free; provides marketing benefits and warranty options"
+            },
+            {
+                "name": "OSHA 10/30 Hour",
+                "duration": "10-30 hours",
+                "cost": {
+                    "min": 50,
+                    "max": 300
+                },
+                "type": "Safety Certification"
+            },
+            {
+                "name": "Haag Certified Inspector",
+                "duration": "2-4 days",
+                "cost": {
+                    "min": 1500,
+                    "max": 2500
+                },
+                "type": "Industry Certification",
+                "notes": "Valuable for insurance/storm work"
+            }
+        ],
+        "apprenticeshipRequired": false,
+        "continuingEducationRequired": false,
+        "continuingEducationNotes": "Manufacturer certifications require periodic renewal"
+    },
+    "licensing": {
+        "body": "Colorado Contractors Board (varies by municipality)",
+        "stateJurisdiction": "CO",
+        "licenses": [
+            {
+                "name": "Business License",
+                "required": true,
+                "level": "Local/State",
+                "examCost": 50,
+                "examPassRate": 100,
+                "renewalCycle": "1 year",
+                "renewalCost": 50,
+                "timeToObtain": "1-2 weeks"
+            },
+            {
+                "name": "Contractor Registration (Denver)",
+                "required": true,
+                "level": "Municipal",
+                "prerequisites": [
+                    "Insurance proof",
+                    "Business license"
+                ],
+                "examCost": 150,
+                "renewalCycle": "1 year",
+                "renewalCost": 100,
+                "timeToObtain": "1-2 weeks"
+            }
+        ],
+        "backgroundCheckRequired": false,
+        "drugTestRequired": false,
+        "bondingRequired": true,
+        "bondingAmount": 15000,
+        "insuranceMinimum": {
+            "generalLiability": 1000000,
+            "workersComp": "Required if employees",
+            "autoCommercial": "Required for vehicles"
+        },
+        "reciprocityStates": [
+            "Most states have similar minimal requirements"
+        ]
+    },
+    "timeline": {
+        "timeToEntryLevelMonths": 0,
+        "timeToOwnershipMonths": 1,
+        "fastTrackAvailable": true,
+        "fastTrackTimelineMonths": 1,
+        "fastTrackMethod": "Direct to ownership - no trade license required",
+        "priorExperienceCredit": true,
+        "milestones": [
+            {
+                "month": 0,
+                "title": "Business Formation",
+                "description": "Form LLC, obtain EIN"
+            },
+            {
+                "month": 0.5,
+                "title": "Insurance & Bonding",
+                "description": "Secure GL, WC, and bond"
+            },
+            {
+                "month": 1,
+                "title": "Licensed & Registered",
+                "description": "Complete contractor registration"
+            },
+            {
+                "month": 1,
+                "title": "Manufacturer Certified",
+                "description": "Complete at least one manufacturer cert"
+            },
+            {
+                "month": 2,
+                "title": "First Jobs",
+                "description": "Begin taking and completing jobs"
+            },
+            {
+                "month": 6,
+                "title": "Crew Building",
+                "description": "Hire subcontractors or employees"
+            },
+            {
+                "month": 12,
+                "title": "Established",
+                "description": "Full revenue from multiple job streams"
+            }
+        ]
+    },
+    "compensation": {
+        "wageEntryLevel": 16.00,
+        "wageMedian": 24.04,
+        "wage75thPercentile": 32.48,
+        "wage90thPercentile": 42.15,
+        "salaryAnnualEntry": 33280,
+        "salaryAnnualMedian": 50000,
+        "salaryAnnual75th": 67560,
+        "salaryAnnualTop10": 87670,
+        "salaryByExperience": [
+            {
+                "years": 0,
+                "salary": 35000,
+                "title": "Crew Member"
+            },
+            {
+                "years": 2,
+                "salary": 45000,
+                "title": "Experienced Roofer"
+            },
+            {
+                "years": 4,
+                "salary": 55000,
+                "title": "Crew Lead"
+            },
+            {
+                "years": 5,
+                "salary": 75000,
+                "title": "Foreman / Small Owner"
+            },
+            {
+                "years": 7,
+                "salary": 120000,
+                "title": "Established Owner"
+            },
+            {
+                "years": 10,
+                "salary": 200000,
+                "title": "Multi-Crew Owner"
+            }
+        ],
+        "ownerEarningsPotential": {
+            "year1": {
+                "min": 60000,
+                "max": 150000
+            },
+            "year3": {
+                "min": 100000,
+                "max": 300000
+            },
+            "year5": {
+                "min": 150000,
+                "max": 500000
+            }
+        },
+        "salaryByState": [
+            {
+                "state": "CO",
+                "median": 52000
+            },
+            {
+                "state": "TX",
+                "median": 45000
+            },
+            {
+                "state": "FL",
+                "median": 48000
+            },
+            {
+                "state": "CA",
+                "median": 58000
+            }
+        ],
+        "overtimeCommon": true,
+        "overtimeAverageHoursWeekly": 10,
+        "overtimeSeasonalPeak": [
+            "May",
+            "June",
+            "July",
+            "August",
+            "After major storms"
+        ],
+        "benefitsTypical": [
+            "Typically none for crew - owner sets own benefits"
+        ],
+        "unionAvailable": true,
+        "unionName": "United Union of Roofers, Waterproofers",
+        "unionWagePremium": 20
+    },
+    "businessOwnership": {
+        "startupCostMinimum": 8000,
+        "startupCostTypical": 35000,
+        "startupCostMaximum": 100000,
+        "startupCostBreakdown": [
+            {
+                "category": "Truck/Trailer",
+                "min": 5000,
+                "max": 40000
+            },
+            {
+                "category": "Tools & Equipment",
+                "min": 2000,
+                "max": 15000
+            },
+            {
+                "category": "Licensing & Bonds",
+                "min": 500,
+                "max": 2000
+            },
+            {
+                "category": "Insurance (first year)",
+                "min": 5000,
+                "max": 20000
+            },
+            {
+                "category": "Marketing",
+                "min": 500,
+                "max": 10000
+            },
+            {
+                "category": "Working Capital",
+                "min": 2000,
+                "max": 25000
+            }
+        ],
+        "startupEquipmentList": [
+            "Roofing nailers",
+            "Compressors",
+            "Ladders and safety equipment",
+            "Tear-off tools (shovels, pry bars)",
+            "Truck with utility bed or trailer",
+            "Signature inspection tools",
+            "Drone (optional, for inspections)"
+        ],
+        "revenueYear1Typical": 250000,
+        "revenueYear3Typical": 750000,
+        "revenueYear5Typical": 1500000,
+        "profitMarginTypical": {
+            "retail": 35,
+            "insurance": 28,
+            "commercial": 22,
+            "blended": 30
+        },
+        "jobPricingTypical": {
+            "residentialReroof": {
+                "min": 8000,
+                "max": 25000
+            },
+            "residentialRepair": {
+                "min": 300,
+                "max": 2500
+            },
+            "commercialFlat": {
+                "min": 15000,
+                "max": 150000
+            }
+        },
+        "breakEvenMonths": 3,
+        "franchiseAvailable": false,
+        "franchiseNotes": "Few roofing franchises exist; most are independent operations"
+    },
+    "employment": {
+        "totalUS": 156800,
+        "totalColorado": 4800,
+        "growthRate10Year": 4,
+        "growthOutlook": "average",
+        "projectedOpeningsAnnual": 15100,
+        "replacementRate": 11.5,
+        "industryConcentration": [
+            {
+                "industry": "Roofing Contractors",
+                "share": 72
+            },
+            {
+                "industry": "Building Exterior Contractors",
+                "share": 12
+            },
+            {
+                "industry": "Self-Employed",
+                "share": 14
+            }
+        ],
+        "selfEmploymentRate": 14,
+        "seasonality": {
+            "peak": [
+                "May",
+                "June",
+                "July",
+                "August",
+                "September"
+            ],
+            "low": [
+                "December",
+                "January",
+                "February"
+            ]
+        },
+        "automationRisk": "Very Low",
+        "automationRiskScore": 5,
+        "automationNotes": "Physical roofing work extremely resistant to automation due to varied conditions."
+    },
+    "skills": {
+        "technical": [
+            {
+                "name": "Shingle installation",
+                "importance": 95
+            },
+            {
+                "name": "Flat roofing systems",
+                "importance": 75
+            },
+            {
+                "name": "Flashing and waterproofing",
+                "importance": 90
+            },
+            {
+                "name": "Roof inspection and assessment",
+                "importance": 85
+            },
+            {
+                "name": "Material estimation",
+                "importance": 80
+            },
+            {
+                "name": "Safety systems (fall protection)",
+                "importance": 95
+            }
+        ],
+        "soft": [
+            {
+                "name": "Sales and customer service",
+                "importance": 90
+            },
+            {
+                "name": "Crew leadership",
+                "importance": 85
+            },
+            {
+                "name": "Physical stamina",
+                "importance": 95
+            },
+            {
+                "name": "Weather decision making",
+                "importance": 80
+            }
+        ],
+        "physicalRequirements": [
+            "Working at heights constantly",
+            "Lifting 70+ lbs (shingle bundles)",
+            "Hot weather tolerance",
+            "Balance and coordination",
+            "Bending and kneeling"
+        ],
+        "toolsAndTechnology": [
+            "Roofing nailers (pneumatic/cordless)",
+            "Air compressors",
+            "Tear-off tools",
+            "Fall protection systems",
+            "Drones (inspection)",
+            "Roofing software (JobNimbus, etc.)"
+        ],
+        "certificationBonuses": [
+            {
+                "name": "GAF Master Elite",
+                "benefitType": "marketing",
+                "description": "Top 2% of contractors"
+            },
+            {
+                "name": "Haag Certified Inspector",
+                "benefitType": "skill",
+                "description": "Insurance claim credibility"
+            },
+            {
+                "name": "OSHA 30",
+                "benefitType": "safety",
+                "description": "Safety compliance"
+            }
+        ]
+    },
+    "workEnvironment": {
+        "settingPrimary": "Rooftops - residential and commercial",
+        "indoorOutdoorSplit": {
+            "indoor": 5,
+            "outdoor": 95
+        },
+        "travelRequired": "Local daily travel",
+        "travelRadiusTypical": "50 miles (more for storm work)",
+        "scheduleTypical": "Monday-Saturday, 6am-3pm, weather dependent",
+        "scheduleFlexibility": "Moderate - weather dictates schedule",
+        "onCallRequired": false,
+        "weekendWorkCommon": "Common to meet deadlines",
+        "remoteWorkPossible": false,
+        "physicalDemandLevel": 5,
+        "hazardExposure": [
+            "Falls (primary)",
+            "Heat exhaustion",
+            "Sharp materials",
+            "UV exposure"
+        ],
+        "injuryRatePerK": 29.9,
+        "stressLevel": 3,
+        "jobSatisfactionMedian": 68,
+        "weatherDependency": "High - rain/snow/extreme heat stop work"
+    },
+    "careerPath": {
+        "entryPositions": [
+            "Roofing Laborer",
+            "Helper",
+            "Crew Member"
+        ],
+        "midCareerPositions": [
+            "Experienced Roofer",
+            "Crew Lead"
+        ],
+        "seniorPositions": [
+            "Foreman",
+            "Superintendent"
+        ],
+        "managementPositions": [
+            "Production Manager",
+            "Sales Manager",
+            "Operations Manager"
+        ],
+        "ownershipPositions": [
+            "Roofing Contractor Owner",
+            "Multiple-Location Owner"
+        ],
+        "lateralMoves": [
+            {
+                "title": "General Contractor",
+                "additionalTraining": "Broader construction knowledge"
+            },
+            {
+                "title": "Insurance Adjuster",
+                "additionalTraining": "Insurance certification"
+            },
+            {
+                "title": "Siding/Gutter Contractor",
+                "additionalTraining": "Minimal - similar market"
+            }
+        ],
+        "advancementTimeline": {
+            "entryToMid": 2,
+            "midToSenior": 2,
+            "seniorToOwnership": 1
+        }
+    },
+    "investmentAnalysis": {
+        "totalEducationCost": {
+            "min": 0,
+            "max": 5000
+        },
+        "avgStudentDebt": 0,
+        "educationROIYears": 0.5,
+        "lifetimeEarningsProjection": 2200000,
+        "startupToRevenueRatio": "7:1"
+    },
+    "comparativeMetrics": {
+        "educationToEarningsRatio": 50000,
+        "barrierToEntryScore": 15,
+        "ownershipAccessibilityScore": 95,
+        "marketStabilityScore": 75,
+        "growthPotentialScore": 70,
+        "workLifeBalanceScore": 55,
+        "overallCareerScore": 72
+    },
+    "metadata": {
+        "lastUpdated": "2024-12-27",
+        "dataSource": [
+            "BLS OOH",
+            "O*NET",
+            "Industry surveys",
+            "NRCA"
+        ],
+        "notes": "T0 career - immediate ownership possible. Physical demands and injury rate are significant considerations."
+    }
+}

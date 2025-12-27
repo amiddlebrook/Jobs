@@ -1,0 +1,222 @@
+[
+    {
+        "id": "hvac-technician",
+        "name": "HVAC Technician",
+        "category": "trades-mechanical",
+        "tier": 2,
+        "tierLabel": "T2",
+        "salaryMedian": 59800,
+        "timeToOwnership": 72,
+        "growthRate": 6,
+        "file": "trades/hvac-technician.json"
+    },
+    {
+        "id": "roofing-contractor",
+        "name": "Roofing Contractor",
+        "category": "trades-construction",
+        "tier": 0,
+        "tierLabel": "T0",
+        "salaryMedian": 52000,
+        "timeToOwnership": 2,
+        "growthRate": 4,
+        "file": "trades/roofing-contractor.json"
+    },
+    {
+        "id": "electrician",
+        "name": "Electrician",
+        "category": "trades-electrical",
+        "tier": 3,
+        "tierLabel": "T3",
+        "salaryMedian": 61590,
+        "timeToOwnership": 84,
+        "growthRate": 7,
+        "file": "trades/electrician.json"
+    },
+    {
+        "id": "plumber",
+        "name": "Plumber",
+        "category": "trades-mechanical",
+        "tier": 3,
+        "tierLabel": "T3",
+        "salaryMedian": 60090,
+        "timeToOwnership": 84,
+        "growthRate": 5,
+        "file": "trades/plumber.json"
+    },
+    {
+        "id": "security-systems",
+        "name": "Security Systems Installer",
+        "category": "technology",
+        "tier": 1,
+        "tierLabel": "T1",
+        "salaryMedian": 48780,
+        "timeToOwnership": 4,
+        "growthRate": 9,
+        "file": "technology/security-systems.json"
+    },
+    {
+        "id": "flooring-installer",
+        "name": "Flooring Installer",
+        "category": "trades-interior",
+        "tier": 0,
+        "tierLabel": "T0",
+        "salaryMedian": 45700,
+        "timeToOwnership": 1,
+        "growthRate": 4,
+        "file": "trades/flooring-installer.json"
+    },
+    {
+        "id": "painting-contractor",
+        "name": "Painting Contractor",
+        "category": "trades-interior",
+        "tier": 0,
+        "tierLabel": "T0",
+        "salaryMedian": 44500,
+        "timeToOwnership": 1,
+        "growthRate": 3,
+        "file": "trades/painting-contractor.json"
+    },
+    {
+        "id": "landscaping",
+        "name": "Landscaping Contractor",
+        "category": "trades-exterior",
+        "tier": 0,
+        "tierLabel": "T0",
+        "salaryMedian": 38000,
+        "timeToOwnership": 1,
+        "growthRate": 5,
+        "file": "trades/landscaping.json"
+    },
+    {
+        "id": "mold-remediation",
+        "name": "Mold Remediation Specialist",
+        "category": "trades-specialty",
+        "tier": 1,
+        "tierLabel": "T1",
+        "salaryMedian": 52000,
+        "timeToOwnership": 3,
+        "growthRate": 8,
+        "file": "specialty/mold-remediation.json"
+    },
+    {
+        "id": "fire-alarm-technician",
+        "name": "Fire Alarm Technician",
+        "category": "technology",
+        "tier": 1,
+        "tierLabel": "T1",
+        "salaryMedian": 54500,
+        "timeToOwnership": 6,
+        "growthRate": 7,
+        "file": "technology/fire-alarm-technician.json"
+    },
+    {
+        "id": "refrigeration-technician",
+        "name": "Refrigeration Technician",
+        "category": "trades-mechanical",
+        "tier": 4,
+        "tierLabel": "T4",
+        "salaryMedian": 56500,
+        "timeToOwnership": 96,
+        "growthRate": 6,
+        "file": "trades/refrigeration-technician.json"
+    },
+    {
+        "id": "boiler-technician",
+        "name": "Boiler Technician",
+        "category": "trades-mechanical",
+        "tier": 4,
+        "tierLabel": "T4",
+        "salaryMedian": 62000,
+        "timeToOwnership": 96,
+        "growthRate": 4,
+        "file": "trades/boiler-technician.json"
+    },
+    {
+        "id": "generator-sales",
+        "name": "Generator Sales & Installation",
+        "category": "trades-electrical",
+        "tier": 5,
+        "tierLabel": "T5",
+        "salaryMedian": 58000,
+        "timeToOwnership": 2,
+        "growthRate": 12,
+        "file": "trades/generator-sales.json"
+    },
+    {
+        "id": "pool-spa-contractor",
+        "name": "Pool & Spa Contractor",
+        "category": "trades-exterior",
+        "tier": 5,
+        "tierLabel": "T5",
+        "salaryMedian": 55000,
+        "timeToOwnership": 2,
+        "growthRate": 5,
+        "file": "trades/pool-spa-contractor.json"
+    },
+    {
+        "id": "concrete-flatwork",
+        "name": "Concrete Flatwork Contractor",
+        "category": "trades-construction",
+        "tier": 0,
+        "tierLabel": "T0",
+        "salaryMedian": 48000,
+        "timeToOwnership": 2,
+        "growthRate": 4,
+        "file": "construction/concrete-flatwork.json"
+    },
+    {
+        "id": "fence-contractor",
+        "name": "Fence Contractor",
+        "category": "trades-exterior",
+        "tier": 0,
+        "tierLabel": "T0",
+        "salaryMedian": 42000,
+        "timeToOwnership": 1,
+        "growthRate": 4,
+        "file": "construction/fence-contractor.json"
+    },
+    {
+        "id": "home-theater",
+        "name": "Home Theater Installer",
+        "category": "technology",
+        "tier": 1,
+        "tierLabel": "T1",
+        "salaryMedian": 50500,
+        "timeToOwnership": 3,
+        "growthRate": 6,
+        "file": "technology/home-theater.json"
+    },
+    {
+        "id": "radon-mitigation",
+        "name": "Radon Mitigation Specialist",
+        "category": "trades-specialty",
+        "tier": 1,
+        "tierLabel": "T1",
+        "salaryMedian": 48000,
+        "timeToOwnership": 2,
+        "growthRate": 10,
+        "file": "specialty/radon-mitigation.json"
+    },
+    {
+        "id": "pest-control",
+        "name": "Pest Control Operator",
+        "category": "service-commercial",
+        "tier": 1,
+        "tierLabel": "T1",
+        "salaryMedian": 42000,
+        "timeToOwnership": 3,
+        "growthRate": 5,
+        "file": "services/pest-control.json"
+    },
+    {
+        "id": "garage-door",
+        "name": "Garage Door Installer",
+        "category": "trades-construction",
+        "tier": 0,
+        "tierLabel": "T0",
+        "salaryMedian": 44500,
+        "timeToOwnership": 2,
+        "growthRate": 4,
+        "file": "construction/garage-door.json"
+    }
+]

@@ -1,0 +1,167 @@
+{
+  "categories": [
+    {
+      "id": "trades-mechanical",
+      "name": "Mechanical Trades",
+      "description": "HVAC, refrigeration, plumbing, and mechanical system careers",
+      "icon": "wrench",
+      "color": "#f59e0b",
+      "subcategories": ["hvac", "plumbing", "refrigeration", "gas-fitting", "boilers"]
+    },
+    {
+      "id": "trades-electrical",
+      "name": "Electrical Trades",
+      "description": "Electrical installation, maintenance, and systems work",
+      "icon": "zap",
+      "color": "#3b82f6",
+      "subcategories": ["residential-electrical", "commercial-electrical", "industrial-electrical", "low-voltage"]
+    },
+    {
+      "id": "trades-construction",
+      "name": "Construction Trades",
+      "description": "Building, renovation, and structural work",
+      "icon": "building",
+      "color": "#10b981",
+      "subcategories": ["carpentry", "framing", "roofing", "siding", "concrete", "masonry"]
+    },
+    {
+      "id": "trades-specialty",
+      "name": "Specialty Trades",
+      "description": "Specialized technical and restoration services",
+      "icon": "tool",
+      "color": "#a855f7",
+      "subcategories": ["restoration", "remediation", "insulation", "coatings", "automation"]
+    },
+    {
+      "id": "trades-exterior",
+      "name": "Exterior & Landscaping",
+      "description": "Outdoor, landscape, and exterior improvement work",
+      "icon": "tree",
+      "color": "#22c55e",
+      "subcategories": ["landscaping", "hardscape", "fencing", "irrigation", "paving"]
+    },
+    {
+      "id": "trades-interior",
+      "name": "Interior Finishing",
+      "description": "Interior finishing, flooring, and aesthetic work",
+      "icon": "paint-bucket",
+      "color": "#ec4899",
+      "subcategories": ["flooring", "painting", "drywall", "cabinetry", "countertops"]
+    },
+    {
+      "id": "technology",
+      "name": "Technology Systems",
+      "description": "Low-voltage, automation, and technology integration",
+      "icon": "cpu",
+      "color": "#6aa9ff",
+      "subcategories": ["security", "audiovisual", "networking", "automation", "data-center"]
+    },
+    {
+      "id": "service-commercial",
+      "name": "Commercial Services",
+      "description": "Commercial and industrial service operations",
+      "icon": "briefcase",
+      "color": "#f97316",
+      "subcategories": ["facilities", "janitorial", "maintenance", "equipment-service"]
+    }
+  ],
+  "tiers": [
+    {
+      "id": 0,
+      "code": "T0",
+      "name": "Owner Now",
+      "shortName": "Owner",
+      "description": "No multi-year license ladder required. Business setup, insurance, and local registration may apply.",
+      "color": "#10b981",
+      "typicalTimeToOwnership": "0-3 months",
+      "pathType": "owner",
+      "requirements": ["Business license", "General liability insurance", "Local registration (varies)"]
+    },
+    {
+      "id": 1,
+      "code": "T1",
+      "name": "Certification-Based",
+      "shortName": "Cert",
+      "description": "Short certifications or registrations required (weeks to months, not multi-year apprenticeship).",
+      "color": "#3b82f6",
+      "typicalTimeToOwnership": "1-6 months",
+      "pathType": "owner",
+      "requirements": ["Industry certification", "Specialized training", "Registration with authority"]
+    },
+    {
+      "id": 2,
+      "code": "T2",
+      "name": "Journeyman Path",
+      "shortName": "Journey",
+      "description": "Journeyman-equivalent ladder (~4 years) for the work class. Can work as technician or on sales path.",
+      "color": "#f59e0b",
+      "typicalTimeToOwnership": "4 years (via tech path) or immediate (via sales)",
+      "pathType": "technician",
+      "requirements": ["Apprenticeship program", "Supervised hours", "Journeyman exam"]
+    },
+    {
+      "id": 3,
+      "code": "T3",
+      "name": "Master License",
+      "shortName": "Master",
+      "description": "Master-level license required to personally qualify permits and own a qualifying business.",
+      "color": "#ef4444",
+      "typicalTimeToOwnership": "6-8 years",
+      "pathType": "technician",
+      "requirements": ["Journeyman license", "Additional experience", "Master exam", "Continuing education"]
+    },
+    {
+      "id": 4,
+      "code": "T4",
+      "name": "Supervisor/Qualifier",
+      "shortName": "Supervisor",
+      "description": "Supervisor or qualifier ladder common in mechanical/refrigeration/gas/boiler/steam scopes.",
+      "color": "#a855f7",
+      "typicalTimeToOwnership": "6-10 years",
+      "pathType": "technician",
+      "requirements": ["Progressive licensing", "Supervisor certification", "Extensive experience"]
+    },
+    {
+      "id": 5,
+      "code": "T5",
+      "name": "Owner via Subs",
+      "shortName": "Via Subs",
+      "description": "Own/sell/manage immediately, but permitted scopes require licensed qualifier or subcontractor.",
+      "color": "#6b7280",
+      "typicalTimeToOwnership": "0-3 months (ownership), optional later licensing",
+      "pathType": "owner",
+      "requirements": ["Business license", "Relationships with licensed subs", "Project management capability"]
+    }
+  ],
+  "educationLevels": [
+    { "id": "none", "name": "No Formal Education", "years": 0 },
+    { "id": "ged", "name": "High School / GED", "years": 0 },
+    { "id": "certificate", "name": "Certificate Program", "years": 0.5 },
+    { "id": "trade-school", "name": "Trade School", "years": 1 },
+    { "id": "associate", "name": "Associate Degree", "years": 2 },
+    { "id": "bachelor", "name": "Bachelor's Degree", "years": 4 },
+    { "id": "master", "name": "Master's Degree", "years": 6 },
+    { "id": "doctorate", "name": "Doctorate", "years": 8 }
+  ],
+  "physicalDemandLevels": [
+    { "id": 1, "name": "Sedentary", "description": "Primarily desk/office work" },
+    { "id": 2, "name": "Light", "description": "Some walking, light lifting" },
+    { "id": 3, "name": "Medium", "description": "Regular physical activity, moderate lifting" },
+    { "id": 4, "name": "Heavy", "description": "Significant physical labor, heavy lifting" },
+    { "id": 5, "name": "Very Heavy", "description": "Extreme physical demands, strenuous conditions" }
+  ],
+  "stressLevels": [
+    { "id": 1, "name": "Low", "description": "Predictable, low-pressure environment" },
+    { "id": 2, "name": "Moderate-Low", "description": "Generally calm with occasional pressure" },
+    { "id": 3, "name": "Moderate", "description": "Regular deadlines and customer expectations" },
+    { "id": 4, "name": "Moderate-High", "description": "Frequent pressure, emergency situations" },
+    { "id": 5, "name": "High", "description": "Constant pressure, high stakes decisions" }
+  ],
+  "growthOutlook": [
+    { "id": "declining", "name": "Declining", "description": "Expected job losses", "color": "#ef4444" },
+    { "id": "stable", "name": "Stable", "description": "Little to no change expected", "color": "#6b7280" },
+    { "id": "average", "name": "Average", "description": "Growing at economy average (~3-5%)", "color": "#f59e0b" },
+    { "id": "faster", "name": "Faster Than Average", "description": "Growing 5-10% over decade", "color": "#22c55e" },
+    { "id": "much-faster", "name": "Much Faster", "description": "Growing 10%+ over decade", "color": "#10b981" }
+  ]
+}

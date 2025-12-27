@@ -1,0 +1,356 @@
+/* ==========================================================================
+   CHARTS - Jobs Data Analytics Platform
+   ========================================================================== */
+
+/* Chart container */
+.chart-container {
+    position: relative;
+    width: 100%;
+    padding: var(--space-4);
+    background: var(--color-surface-card);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-xl);
+}
+
+.chart-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--space-4);
+}
+
+.chart-title {
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-semibold);
+}
+
+.chart-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+    justify-content: center;
+    margin-top: var(--space-4);
+}
+
+.chart-legend-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+}
+
+.chart-legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: var(--radius-full);
+}
+
+/* Chart wrapper for aspect ratio */
+.chart-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.chart-wrapper-16-9 {
+    aspect-ratio: 16 / 9;
+}
+
+.chart-wrapper-4-3 {
+    aspect-ratio: 4 / 3;
+}
+
+.chart-wrapper-1-1 {
+    aspect-ratio: 1 / 1;
+}
+
+/* Chart canvas */
+.chart-wrapper canvas {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+/* Mini chart for inline stats */
+.chart-mini {
+    height: 60px;
+    width: 120px;
+}
+
+/* Sparkline */
+.sparkline {
+    display: inline-block;
+    height: 24px;
+    width: 80px;
+}
+
+/* ========================================
+   CUSTOM CHART STYLES
+   ======================================== */
+
+/* Salary distribution bars */
+.salary-bar {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    margin-bottom: var(--space-3);
+}
+
+.salary-bar-label {
+    flex-shrink: 0;
+    width: 80px;
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+}
+
+.salary-bar-track {
+    flex: 1;
+    height: 24px;
+    background: var(--color-bg-elevated);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    position: relative;
+}
+
+.salary-bar-fill {
+    height: 100%;
+    border-radius: var(--radius-md);
+    background: linear-gradient(90deg, var(--color-chart-1), var(--color-chart-2));
+    transition: width 500ms ease;
+}
+
+.salary-bar-value {
+    flex-shrink: 0;
+    width: 80px;
+    text-align: right;
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+}
+
+/* Timeline visualization */
+.timeline {
+    position: relative;
+    padding-left: var(--space-8);
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 12px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--color-border-default);
+}
+
+.timeline-item {
+    position: relative;
+    padding-bottom: var(--space-6);
+}
+
+.timeline-item:last-child {
+    padding-bottom: 0;
+}
+
+.timeline-dot {
+    position: absolute;
+    left: -32px;
+    top: 4px;
+    width: 12px;
+    height: 12px;
+    border-radius: var(--radius-full);
+    background: var(--color-accent-primary);
+    border: 3px solid var(--color-bg-primary);
+}
+
+.timeline-dot.completed {
+    background: var(--color-success);
+}
+
+.timeline-dot.pending {
+    background: var(--color-text-tertiary);
+}
+
+.timeline-content {
+    padding: var(--space-4);
+    background: var(--color-bg-elevated);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-border-subtle);
+}
+
+.timeline-date {
+    font-size: var(--font-size-xs);
+    color: var(--color-text-tertiary);
+    margin-bottom: var(--space-1);
+}
+
+.timeline-title {
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: var(--space-1);
+}
+
+.timeline-description {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+}
+
+/* Radar / Spider chart container */
+.radar-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 300px;
+}
+
+/* Gauge chart */
+.gauge {
+    position: relative;
+    width: 150px;
+    height: 75px;
+    overflow: hidden;
+}
+
+.gauge-bg {
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background: conic-gradient(var(--color-bg-elevated) 0deg,
+            var(--color-bg-elevated) 360deg);
+}
+
+.gauge-fill {
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background: conic-gradient(var(--color-success) 0deg,
+            var(--color-warning) 120deg,
+            var(--color-error) 180deg,
+            transparent 180deg);
+    clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 0 100%);
+}
+
+.gauge-center {
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    top: 15px;
+    left: 15px;
+    background: var(--color-bg-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 30px;
+}
+
+.gauge-value {
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-bold);
+}
+
+/* Comparison chart */
+.comparison-row {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: var(--space-4);
+    align-items: center;
+    padding: var(--space-3) 0;
+    border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.comparison-row:last-child {
+    border-bottom: none;
+}
+
+.comparison-label {
+    text-align: center;
+    font-size: var(--font-size-sm);
+    color: var(--color-text-tertiary);
+    min-width: 100px;
+}
+
+.comparison-bar-left,
+.comparison-bar-right {
+    height: 24px;
+    border-radius: var(--radius-md);
+    background: var(--color-bg-elevated);
+    position: relative;
+}
+
+.comparison-bar-left {
+    justify-self: end;
+}
+
+.comparison-bar-right {
+    justify-self: start;
+}
+
+.comparison-bar-fill-left {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    background: var(--color-chart-1);
+    border-radius: var(--radius-md);
+}
+
+.comparison-bar-fill-right {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    background: var(--color-chart-2);
+    border-radius: var(--radius-md);
+}
+
+.comparison-value {
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-semibold);
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 0 var(--space-2);
+}
+
+/* Heat map */
+.heatmap {
+    display: grid;
+    gap: 2px;
+}
+
+.heatmap-cell {
+    aspect-ratio: 1;
+    border-radius: var(--radius-sm);
+    transition: var(--transition-all);
+}
+
+.heatmap-cell:hover {
+    transform: scale(1.1);
+    z-index: 1;
+}
+
+/* Heat levels */
+.heat-0 {
+    background: var(--color-bg-elevated);
+}
+
+.heat-1 {
+    background: rgba(16, 185, 129, 0.2);
+}
+
+.heat-2 {
+    background: rgba(16, 185, 129, 0.4);
+}
+
+.heat-3 {
+    background: rgba(16, 185, 129, 0.6);
+}
+
+.heat-4 {
+    background: rgba(16, 185, 129, 0.8);
+}
+
+.heat-5 {
+    background: var(--color-success);
+}

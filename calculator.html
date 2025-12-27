@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Career ROI Calculator | CareerData</title>
+
+    <link rel="stylesheet" href="css/design-tokens.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/typography.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/charts.css">
+    <link rel="stylesheet" href="css/responsive.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+
+    <style>
+        .calculator-header {
+            padding: var(--space-8) 0;
+            background: var(--color-bg-secondary);
+            border-bottom: 1px solid var(--color-border-subtle);
+        }
+
+        .calculator-layout {
+            display: grid;
+            grid-template-columns: 400px 1fr;
+            gap: var(--space-8);
+            padding: var(--space-8) 0;
+        }
+
+        @media (max-width: 1024px) {
+            .calculator-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .input-panel {
+            background: var(--color-surface-card);
+            border: 1px solid var(--color-border-subtle);
+            border-radius: var(--radius-xl);
+            padding: var(--space-6);
+            height: fit-content;
+            position: sticky;
+            top: calc(var(--header-height) + var(--space-4));
+        }
+
+        .input-group {
+            margin-bottom: var(--space-5);
+        }
+
+        .input-label {
+            display: block;
+            font-size: var(--font-size-sm);
+            font-weight: var(--font-weight-medium);
+            margin-bottom: var(--space-2);
+            color: var(--color-text-secondary);
+        }
+
+        .input-help {
+            font-size: var(--font-size-xs);
+            color: var(--color-text-tertiary);
+            margin-top: var(--space-1);
+        }
+
+        .range-input-container {
+            display: flex;
+            align-items: center;
+            gap: var(--space-3);
+        }
+
+        .range-input {
+            flex: 1;
+        }
+
+        .range-value {
+            min-width: 80px;
+            text-align: right;
+            font-weight: var(--font-weight-semibold);
+            color: var(--color-accent-primary);
+        }
+
+        .results-panel {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-6);
+        }
+
+        .result-card {
+            background: var(--color-surface-card);
+            border: 1px solid var(--color-border-subtle);
+            border-radius: var(--radius-xl);
+            padding: var(--space-6);
+        }
+
+        .result-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: var(--space-4);
+        }
+
+        .result-title {
+            font-size: var(--font-size-lg);
+            font-weight: var(--font-weight-semibold);
+        }
+
+        .big-number {
+            font-size: var(--font-size-4xl);
+            font-weight: var(--font-weight-bold);
+            color: var(--color-accent-primary);
+        }
+
+        .big-number.success {
+            color: var(--color-success);
+        }
+
+        .metric-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: var(--space-4);
+        }
+
+        .metric-item {
+            padding: var(--space-4);
+            background: var(--color-bg-elevated);
+            border-radius: var(--radius-lg);
+            text-align: center;
+        }
+
+        .metric-value {
+            font-size: var(--font-size-xl);
+            font-weight: var(--font-weight-bold);
+            margin-bottom: var(--space-1);
+        }
+
+        .metric-label {
+            font-size: var(--font-size-xs);
+            color: var(--color-text-tertiary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .timeline-bar {
+            display: flex;
+            height: 40px;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            margin: var(--space-4) 0;
+        }
+
+        .timeline-segment {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: var(--font-size-xs);
+            font-weight: var(--font-weight-semibold);
+            color: white;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        .timeline-legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-4);
+            margin-top: var(--space-3);
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+            font-size: var(--font-size-sm);
+        }
+
+        .legend-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: var(--radius-sm);
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: var(--space-4);
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: var(--space-3);
+            text-align: left;
+            border-bottom: 1px solid var(--color-border-subtle);
+        }
+
+        .comparison-table th {
+            font-size: var(--font-size-xs);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--color-text-tertiary);
+            font-weight: var(--font-weight-medium);
+        }
+
+        .path-selector {
+            display: flex;
+            gap: var(--space-2);
+            margin-bottom: var(--space-4);
+        }
+
+        .path-btn {
+            flex: 1;
+            padding: var(--space-3);
+            background: var(--color-bg-elevated);
+            border: 2px solid var(--color-border-subtle);
+            border-radius: var(--radius-lg);
+            cursor: pointer;
+            text-align: center;
+            transition: var(--transition-all);
+        }
+
+        .path-btn:hover {
+            border-color: var(--color-accent-primary);
+        }
+
+        .path-btn.active {
+            border-color: var(--color-accent-primary);
+            background: rgba(106, 169, 255, 0.1);
+        }
+
+        .path-btn-title {
+            font-weight: var(--font-weight-semibold);
+            margin-bottom: var(--space-1);
+        }
+
+        .path-btn-desc {
+            font-size: var(--font-size-xs);
+            color: var(--color-text-tertiary);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="app">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="container flex items-center justify-between h-full">
+                <a href="index.html" class="flex items-center gap-2" style="text-decoration: none;">
+                    <span style="font-size: 1.5rem;">📊</span>
+                    <span class="font-bold text-lg">CareerData</span>
+                </a>
+
+                <nav class="flex items-center gap-6 md-show">
+                    <a href="explore.html" class="text-secondary font-medium" style="text-decoration: none;">Explore</a>
+                    <a href="compare.html" class="text-secondary font-medium" style="text-decoration: none;">Compare</a>
+                    <a href="analytics.html" class="text-secondary font-medium"
+                        style="text-decoration: none;">Analytics</a>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Calculator Header -->
+        <section class="calculator-header">
+            <div class="container">
+                <h1 class="h2 mb-2">Career ROI Calculator</h1>
+                <p class="text-secondary">Calculate your potential return on investment for different career paths</p>
+            </div>
+        </section>
+
+        <!-- Calculator Content -->
+        <main class="container">
+            <div class="calculator-layout">
+
+                <!-- Input Panel -->
+                <aside class="input-panel">
+                    <h3 class="font-semibold mb-4">📊 Calculate Your ROI</h3>
+
+                    <div class="input-group">
+                        <label class="input-label">Select Career</label>
+                        <select class="input" id="career-select">
+                            <option value="hvac">HVAC Technician (T2)</option>
+                            <option value="electrician">Electrician (T3)</option>
+                            <option value="roofing">Roofing Contractor (T0)</option>
+                            <option value="plumber">Plumber (T3)</option>
+                            <option value="security">Security Systems (T1)</option>
+                            <option value="flooring">Flooring Installer (T0)</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label class="input-label">Career Path</label>
+                        <div class="path-selector">
+                            <div class="path-btn active" data-path="employee">
+                                <div class="path-btn-title">Employee</div>
+                                <div class="path-btn-desc">Work for company</div>
+                            </div>
+                            <div class="path-btn" data-path="owner">
+                                <div class="path-btn-title">Owner</div>
+                                <div class="path-btn-desc">Start business</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label class="input-label">Current Age</label>
+                        <div class="range-input-container">
+                            <input type="range" class="range-input" id="age" min="18" max="55" value="25">
+                            <span class="range-value" id="age-value">25</span>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label class="input-label">Starting Capital</label>
+                        <div class="range-input-container">
+                            <input type="range" class="range-input" id="capital" min="0" max="100000" step="5000"
+                                value="15000">
+                            <span class="range-value" id="capital-value">$15,000</span>
+                        </div>
+                        <div class="input-help">For business ownership path</div>
+                    </div>
+
+                    <div class="input-group">
+                        <label class="input-label">Education/Training Cost</label>
+                        <div class="range-input-container">
+                            <input type="range" class="range-input" id="education" min="0" max="30000" step="1000"
+                                value="5000">
+                            <span class="range-value" id="education-value">$5,000</span>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label class="input-label">Current Annual Income</label>
+                        <div class="range-input-container">
+                            <input type="range" class="range-input" id="current-income" min="0" max="80000" step="5000"
+                                value="35000">
+                            <span class="range-value" id="current-income-value">$35,000</span>
+                        </div>
+                        <div class="input-help">Your income before career change</div>
+                    </div>
+
+                    <div class="input-group">
+                        <label class="input-label">Years to Calculate</label>
+                        <div class="range-input-container">
+                            <input type="range" class="range-input" id="years" min="5" max="30" value="10">
+                            <span class="range-value" id="years-value">10 years</span>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-primary w-full" onclick="calculateROI()">Calculate ROI</button>
+                </aside>
+
+                <!-- Results Panel -->
+                <section class="results-panel">
+
+                    <!-- Summary -->
+                    <div class="result-card">
+                        <div class="result-header">
+                            <h3 class="result-title">💰 ROI Summary</h3>
+                            <span class="tier-badge tier-badge-2" id="tier-badge">T2</span>
+                        </div>
+
+                        <div class="metric-grid">
+                            <div class="metric-item">
+                                <div class="metric-value big-number success" id="total-roi">324%</div>
+                                <div class="metric-label">Total ROI</div>
+                            </div>
+                            <div class="metric-item">
+                                <div class="metric-value" id="lifetime-earnings">$1.8M</div>
+                                <div class="metric-label">Lifetime Earnings</div>
+                            </div>
+                            <div class="metric-item">
+                                <div class="metric-value" id="payback-period">2.1 yrs</div>
+                                <div class="metric-label">Payback Period</div>
+                            </div>
+                            <div class="metric-item">
+                                <div class="metric-value" id="earnings-gain">+$485K</div>
+                                <div class="metric-label">vs Current Path</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Timeline -->
+                    <div class="result-card">
+                        <h3 class="result-title mb-4">📅 Career Timeline</h3>
+
+                        <div class="timeline-bar">
+                            <div class="timeline-segment" style="flex: 1; background: var(--color-warning);">Training
+                            </div>
+                            <div class="timeline-segment" style="flex: 3; background: var(--color-info);">Apprentice
+                            </div>
+                            <div class="timeline-segment" style="flex: 2; background: var(--color-accent-primary);">
+                                Journeyman</div>
+                            <div class="timeline-segment" style="flex: 4; background: var(--color-success);">
+                                Master/Owner</div>
+                        </div>
+
+                        <div class="timeline-legend">
+                            <div class="legend-item">
+                                <div class="legend-dot" style="background: var(--color-warning);"></div>
+                                <span>Training (0-6mo)</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-dot" style="background: var(--color-info);"></div>
+                                <span>Apprentice (6mo-4yr)</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-dot" style="background: var(--color-accent-primary);"></div>
+                                <span>Journeyman (4-6yr)</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-dot" style="background: var(--color-success);"></div>
+                                <span>Master/Owner (6yr+)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Earnings Chart -->
+                    <div class="result-card">
+                        <h3 class="result-title mb-4">📈 Projected Earnings Over Time</h3>
+                        <div class="chart-wrapper" style="height: 300px;">
+                            <canvas id="earnings-chart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Investment Breakdown -->
+                    <div class="result-card">
+                        <h3 class="result-title mb-4">💵 Investment Breakdown</h3>
+
+                        <table class="comparison-table">
+                            <thead>
+                                <tr>
+                                    <th>Category</th>
+                                    <th>Cost</th>
+                                    <th>Notes</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Education/Training</td>
+                                    <td>$5,000</td>
+                                    <td>Trade school certificate</td>
+                                </tr>
+                                <tr>
+                                    <td>Licensing & Exams</td>
+                                    <td>$500</td>
+                                    <td>EPA 608, Journeyman exam</td>
+                                </tr>
+                                <tr>
+                                    <td>Tools (Year 1)</td>
+                                    <td>$2,500</td>
+                                    <td>Basic tool kit</td>
+                                </tr>
+                                <tr>
+                                    <td>Opportunity Cost</td>
+                                    <td>$12,000</td>
+                                    <td>Reduced income during training</td>
+                                </tr>
+                                <tr
+                                    style="font-weight: var(--font-weight-semibold); background: var(--color-bg-elevated);">
+                                    <td>Total Investment</td>
+                                    <td>$20,000</td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Year by Year -->
+                    <div class="result-card">
+                        <h3 class="result-title mb-4">📊 Year-by-Year Projection</h3>
+
+                        <table class="comparison-table">
+                            <thead>
+                                <tr>
+                                    <th>Year</th>
+                                    <th>Role</th>
+                                    <th>Salary</th>
+                                    <th>Cumulative</th>
+                                    <th>Net Gain</th>
+                                </tr>
+                            </thead>
+                            <tbody id="yearly-table">
+                                <tr>
+                                    <td>1</td>
+                                    <td>Apprentice Year 1</td>
+                                    <td>$35,000</td>
+                                    <td>$35,000</td>
+                                    <td class="text-error">-$20,000</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>Apprentice Year 2</td>
+                                    <td>$40,000</td>
+                                    <td>$75,000</td>
+                                    <td class="text-error">-$15,000</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>Apprentice Year 3</td>
+                                    <td>$45,000</td>
+                                    <td>$120,000</td>
+                                    <td class="text-error">-$5,000</td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>Apprentice Year 4</td>
+                                    <td>$50,000</td>
+                                    <td>$170,000</td>
+                                    <td class="text-success">+$10,000</td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td>Journeyman</td>
+                                    <td>$60,000</td>
+                                    <td>$230,000</td>
+                                    <td class="text-success">+$35,000</td>
+                                </tr>
+                                <tr>
+                                    <td>6</td>
+                                    <td>Journeyman</td>
+                                    <td>$65,000</td>
+                                    <td>$295,000</td>
+                                    <td class="text-success">+$65,000</td>
+                                </tr>
+                                <tr>
+                                    <td>7</td>
+                                    <td>Senior Journeyman</td>
+                                    <td>$70,000</td>
+                                    <td>$365,000</td>
+                                    <td class="text-success">+$100,000</td>
+                                </tr>
+                                <tr>
+                                    <td>8</td>
+                                    <td>Master</td>
+                                    <td>$80,000</td>
+                                    <td>$445,000</td>
+                                    <td class="text-success">+$145,000</td>
+                                </tr>
+                                <tr>
+                                    <td>9</td>
+                                    <td>Master</td>
+                                    <td>$85,000</td>
+                                    <td>$530,000</td>
+                                    <td class="text-success">+$195,000</td>
+                                </tr>
+                                <tr>
+                                    <td>10</td>
+                                    <td>Master/Owner</td>
+                                    <td>$95,000</td>
+                                    <td>$625,000</td>
+                                    <td class="text-success">+$255,000</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Compare vs Alternatives -->
+                    <div class="result-card">
+                        <h3 class="result-title mb-4">⚖️ Compare Career Paths</h3>
+                        <div class="chart-wrapper" style="height: 250px;">
+                            <canvas id="compare-chart"></canvas>
+                        </div>
+                    </div>
+
+                </section>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container text-center">
+                <p class="text-sm text-tertiary">
+                    Projections are estimates based on market data. Individual results may vary.
+                </p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="js/charts.js"></script>
+    <script>
+        // Initialize sliders
+        const sliders = ['age', 'capital', 'education', 'current-income', 'years'];
+        sliders.forEach(id => {
+            const slider = document.getElementById(id);
+            const display = document.getElementById(id + '-value');
+            if (slider && display) {
+                slider.addEventListener('input', function () {
+                    let val = this.value;
+                    if (id === 'capital' || id === 'education' || id === 'current-income') {
+                        val = '$' + parseInt(val).toLocaleString();
+                    } else if (id === 'years') {
+                        val = val + ' years';
+                    }
+                    display.textContent = val;
+                });
+            }
+        });
+
+        // Path selector
+        document.querySelectorAll('.path-btn').forEach(btn => {
+            btn.addEventListener('click', function () {
+                document.querySelectorAll('.path-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        function calculateROI() {
+            // This would recalculate based on inputs
+            console.log('Calculating ROI...');
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            // Earnings over time chart
+            Charts.trendLine('earnings-chart', {
+                labels: ['Yr 1', 'Yr 2', 'Yr 3', 'Yr 4', 'Yr 5', 'Yr 6', 'Yr 7', 'Yr 8', 'Yr 9', 'Yr 10'],
+                datasets: [
+                    { label: 'New Career Path', values: [35000, 40000, 45000, 50000, 60000, 65000, 70000, 80000, 85000, 95000] },
+                    { label: 'Current Path (projected)', values: [35000, 36000, 37000, 38000, 39000, 40000, 41000, 42000, 43000, 44000] }
+                ]
+            });
+
+            // Compare paths chart
+            Charts.comparisonBar('compare-chart', {
+                labels: ['10-Year Earnings', 'Avg Annual', 'Peak Salary', 'Investment'],
+                datasets: [
+                    { label: 'HVAC Career', values: [625000, 62500, 95000, 20000] },
+                    { label: 'Stay Current', values: [395000, 39500, 44000, 0] }
+                ]
+            });
+        });
+    </script>
+</body>
+
+</html>

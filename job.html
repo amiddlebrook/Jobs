@@ -1,0 +1,1160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Career Profile | CareerData</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="css/design-tokens.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/typography.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/charts.css">
+    <link rel="stylesheet" href="css/responsive.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+
+    <style>
+        .profile-header {
+            padding: var(--space-8) 0;
+            background: linear-gradient(180deg, var(--color-bg-secondary) 0%, var(--color-bg-primary) 100%);
+            border-bottom: 1px solid var(--color-border-subtle);
+        }
+
+        .profile-header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: var(--space-6);
+            flex-wrap: wrap;
+        }
+
+        .profile-title {
+            font-size: var(--font-size-3xl);
+            font-weight: var(--font-weight-extrabold);
+            margin-bottom: var(--space-2);
+        }
+
+        .profile-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-3);
+            align-items: center;
+            margin-top: var(--space-3);
+        }
+
+        .quick-stats {
+            display: flex;
+            gap: var(--space-4);
+            flex-wrap: wrap;
+        }
+
+        .quick-stat {
+            text-align: right;
+            padding: var(--space-3) var(--space-4);
+            background: var(--color-bg-elevated);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--color-border-subtle);
+        }
+
+        .quick-stat-value {
+            font-size: var(--font-size-xl);
+            font-weight: var(--font-weight-bold);
+            color: var(--color-text-primary);
+        }
+
+        .quick-stat-label {
+            font-size: var(--font-size-xs);
+            color: var(--color-text-tertiary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .profile-nav {
+            display: flex;
+            gap: var(--space-1);
+            overflow-x: auto;
+            padding: var(--space-4) 0;
+            border-bottom: 1px solid var(--color-border-subtle);
+            background: var(--color-bg-primary);
+            position: sticky;
+            top: var(--header-height);
+            z-index: var(--z-sticky);
+        }
+
+        .profile-content {
+            display: grid;
+            gap: var(--space-6);
+            padding: var(--space-6) 0;
+        }
+
+        .profile-section {
+            scroll-margin-top: 140px;
+        }
+
+        .section-card {
+            background: var(--color-surface-card);
+            border: 1px solid var(--color-border-subtle);
+            border-radius: var(--radius-xl);
+            padding: var(--space-6);
+        }
+
+        .section-title {
+            font-size: var(--font-size-xl);
+            font-weight: var(--font-weight-bold);
+            margin-bottom: var(--space-5);
+            display: flex;
+            align-items: center;
+            gap: var(--space-3);
+        }
+
+        .section-title-icon {
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--color-accent-primary);
+            color: var(--color-text-inverse);
+            border-radius: var(--radius-md);
+            font-size: 16px;
+        }
+
+        .data-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: var(--space-4);
+        }
+
+        .data-item {
+            padding: var(--space-3);
+            background: var(--color-bg-elevated);
+            border-radius: var(--radius-md);
+        }
+
+        .data-label {
+            font-size: var(--font-size-xs);
+            color: var(--color-text-tertiary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: var(--space-1);
+        }
+
+        .data-value {
+            font-size: var(--font-size-md);
+            font-weight: var(--font-weight-semibold);
+            color: var(--color-text-primary);
+        }
+
+        .timeline-visual {
+            display: flex;
+            align-items: center;
+            gap: 2px;
+            margin: var(--space-6) 0;
+            flex-wrap: wrap;
+        }
+
+        .timeline-step {
+            flex: 1;
+            min-width: 120px;
+            padding: var(--space-4);
+            background: var(--color-bg-elevated);
+            border: 1px solid var(--color-border-subtle);
+            border-radius: var(--radius-lg);
+            text-align: center;
+            position: relative;
+        }
+
+        .timeline-step::after {
+            content: '→';
+            position: absolute;
+            right: -12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--color-text-tertiary);
+            font-size: 14px;
+        }
+
+        .timeline-step:last-child::after {
+            display: none;
+        }
+
+        .timeline-step-month {
+            font-size: var(--font-size-2xl);
+            font-weight: var(--font-weight-bold);
+            color: var(--color-accent-primary);
+        }
+
+        .timeline-step-title {
+            font-size: var(--font-size-sm);
+            font-weight: var(--font-weight-semibold);
+            margin-top: var(--space-2);
+        }
+
+        .pros-cons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--space-4);
+        }
+
+        .pros-list,
+        .cons-list {
+            padding: var(--space-4);
+            border-radius: var(--radius-lg);
+        }
+
+        .pros-list {
+            background: var(--color-success-bg);
+            border: 1px solid rgba(34, 197, 94, 0.2);
+        }
+
+        .cons-list {
+            background: var(--color-error-bg);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+        }
+
+        .pros-list h4,
+        .cons-list h4 {
+            margin-bottom: var(--space-3);
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+        }
+
+        .pros-list ul,
+        .cons-list ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .pros-list li,
+        .cons-list li {
+            padding: var(--space-2) 0;
+            padding-left: var(--space-5);
+            position: relative;
+            font-size: var(--font-size-sm);
+        }
+
+        .pros-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--color-success);
+        }
+
+        .cons-list li::before {
+            content: '✗';
+            position: absolute;
+            left: 0;
+            color: var(--color-error);
+        }
+
+        .license-card {
+            padding: var(--space-4);
+            background: var(--color-bg-elevated);
+            border: 1px solid var(--color-border-subtle);
+            border-radius: var(--radius-lg);
+            margin-bottom: var(--space-3);
+        }
+
+        .license-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: var(--space-3);
+        }
+
+        .license-name {
+            font-weight: var(--font-weight-semibold);
+        }
+
+        .license-required {
+            font-size: var(--font-size-xs);
+            padding: var(--space-1) var(--space-2);
+            border-radius: var(--radius-sm);
+        }
+
+        .license-required.yes {
+            background: var(--color-error-bg);
+            color: var(--color-error);
+        }
+
+        .license-required.no {
+            background: var(--color-bg-tertiary);
+            color: var(--color-text-tertiary);
+        }
+
+        .license-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: var(--space-3);
+            margin-top: var(--space-3);
+            padding-top: var(--space-3);
+            border-top: 1px solid var(--color-border-subtle);
+        }
+
+        .skills-radar-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 350px;
+        }
+
+        @media (max-width: 768px) {
+            .profile-header-content {
+                flex-direction: column;
+            }
+
+            .quick-stats {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .quick-stat {
+                text-align: center;
+                flex: 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="app">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="container flex items-center justify-between h-full">
+                <a href="index.html" class="flex items-center gap-2" style="text-decoration: none;">
+                    <span style="font-size: 1.5rem;">📊</span>
+                    <span class="font-bold text-lg">CareerData</span>
+                </a>
+
+                <nav class="flex items-center gap-6 md-show">
+                    <a href="explore.html" class="text-secondary font-medium" style="text-decoration: none;">Explore</a>
+                    <a href="compare.html" class="text-secondary font-medium" style="text-decoration: none;">Compare</a>
+                    <a href="analytics.html" class="text-secondary font-medium"
+                        style="text-decoration: none;">Analytics</a>
+                </nav>
+
+                <button class="btn btn-primary btn-sm" data-compare="hvac-technician">+ Compare</button>
+            </div>
+        </header>
+
+        <!-- Profile Header -->
+        <section class="profile-header">
+            <div class="container">
+                <a href="explore.html" class="text-sm text-secondary mb-3 inline-block">← Back to Explore</a>
+
+                <div class="profile-header-content">
+                    <div>
+                        <h1 class="profile-title" id="career-name">HVAC Technician</h1>
+                        <div class="profile-meta">
+                            <span class="tier-badge tier-badge-2" id="tier-badge">T2 - Journeyman Path</span>
+                            <span class="tag" id="category-tag">Mechanical Trades</span>
+                            <span class="text-sm text-tertiary" id="onet-code">O*NET: 49-9021.01</span>
+                        </div>
+                    </div>
+
+                    <div class="quick-stats">
+                        <div class="quick-stat">
+                            <div class="quick-stat-value" id="salary-stat">$59,800</div>
+                            <div class="quick-stat-label">Median Salary</div>
+                        </div>
+                        <div class="quick-stat">
+                            <div class="quick-stat-value" id="time-stat">4 yrs</div>
+                            <div class="quick-stat-label">To Journeyman</div>
+                        </div>
+                        <div class="quick-stat">
+                            <div class="quick-stat-value text-success" id="growth-stat">+6%</div>
+                            <div class="quick-stat-label">10yr Growth</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Profile Navigation -->
+        <nav class="profile-nav container">
+            <a href="#overview" class="tab active">Overview</a>
+            <a href="#education" class="tab">Education</a>
+            <a href="#licensing" class="tab">Licensing</a>
+            <a href="#timeline" class="tab">Timeline</a>
+            <a href="#compensation" class="tab">Compensation</a>
+            <a href="#skills" class="tab">Skills</a>
+            <a href="#business" class="tab">Business</a>
+            <a href="#employment" class="tab">Employment</a>
+        </nav>
+
+        <!-- Profile Content -->
+        <main class="container profile-content">
+
+            <!-- Overview Section -->
+            <section id="overview" class="profile-section section-card">
+                <h2 class="section-title">
+                    <span class="section-title-icon">📋</span>
+                    Overview
+                </h2>
+
+                <p class="lead mb-6" id="career-description">
+                    Install, maintain, and repair heating, ventilation, air conditioning, and refrigeration systems in
+                    residential, commercial, and industrial settings.
+                </p>
+
+                <div class="pros-cons">
+                    <div class="pros-list">
+                        <h4><span class="text-success">✓</span> Advantages</h4>
+                        <ul id="pros-list">
+                            <li>Strong job security - essential service in all climate zones</li>
+                            <li>Good salary progression with experience</li>
+                            <li>Clear path to business ownership</li>
+                            <li>Variety in daily work and locations</li>
+                            <li>Increasing demand due to energy efficiency focus</li>
+                        </ul>
+                    </div>
+                    <div class="cons-list">
+                        <h4><span class="text-error">✗</span> Considerations</h4>
+                        <ul id="cons-list">
+                            <li>Physically demanding work</li>
+                            <li>Exposure to extreme temperatures</li>
+                            <li>On-call and emergency work common</li>
+                            <li>4-year apprenticeship required for full licensing</li>
+                            <li>Seasonal workload fluctuations</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="mt-6 p-4" style="background: var(--color-bg-elevated); border-radius: var(--radius-lg);">
+                    <h4 class="font-semibold mb-2">A Day in the Life</h4>
+                    <p class="text-secondary text-sm" id="day-in-life">
+                        A typical day involves traveling to customer sites, diagnosing system issues using specialized
+                        tools, performing repairs or installations, and documenting work. Peak seasons (summer AC,
+                        winter heating) bring higher call volumes and longer hours.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Education Section -->
+            <section id="education" class="profile-section section-card">
+                <h2 class="section-title">
+                    <span class="section-title-icon">🎓</span>
+                    Education & Training
+                </h2>
+
+                <div class="data-grid mb-6">
+                    <div class="data-item">
+                        <div class="data-label">Minimum Education</div>
+                        <div class="data-value" id="edu-min">High School / GED</div>
+                    </div>
+                    <div class="data-item">
+                        <div class="data-label">Preferred</div>
+                        <div class="data-value" id="edu-pref">Trade School + Apprenticeship</div>
+                    </div>
+                    <div class="data-item">
+                        <div class="data-label">Apprenticeship</div>
+                        <div class="data-value" id="edu-apprentice">4 years / 8000 hours</div>
+                    </div>
+                    <div class="data-item">
+                        <div class="data-label">Continuing Ed</div>
+                        <div class="data-value" id="edu-ce">16 hours/year</div>
+                    </div>
+                </div>
+
+                <h4 class="font-semibold mb-3">Training Programs</h4>
+                <div class="grid gap-3" id="training-programs">
+                    <div class="data-item">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <div class="font-semibold">HVAC Certificate Program</div>
+                                <div class="text-sm text-secondary">Trade School • 6-12 months</div>
+                            </div>
+                            <div class="text-right">
+                                <div class="font-semibold">$5,000 - $15,000</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="data-item">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <div class="font-semibold">Registered Apprenticeship</div>
+                                <div class="text-sm text-secondary">Apprenticeship • 4 years</div>
+                            </div>
+                            <div class="text-right">
+                                <div class="font-semibold text-success">Paid Training</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Licensing Section -->
+            <section id="licensing" class="profile-section section-card">
+                <h2 class="section-title">
+                    <span class="section-title-icon">📜</span>
+                    Licensing & Certification
+                </h2>
+
+                <div class="data-grid mb-6">
+                    <div class="data-item">
+                        <div class="data-label">Licensing Body</div>
+                        <div class="data-value" id="license-body">Colorado DORA</div>
+                    </div>
+                    <div class="data-item">
+                        <div class="data-label">Background Check</div>
+                        <div class="data-value">Required</div>
+                    </div>
+                    <div class="data-item">
+                        <div class="data-label">Bonding</div>
+                        <div class="data-value" id="bonding">$25,000</div>
+                    </div>
+                    <div class="data-item">
+                        <div class="data-label">Insurance Min</div>
+                        <div class="data-value" id="insurance">$1M GL</div>
+                    </div>
+                </div>
+
+                <h4 class="font-semibold mb-3">Required Licenses</h4>
+                <div id="licenses-list">
+                    <div class="license-card">
+                        <div class="license-header">
+                            <div>
+                                <div class="license-name">EPA Section 608 Certification</div>
+                                <div class="text-sm text-tertiary">Federal Level</div>
+                            </div>
+                            <span class="license-required yes">Required</span>
+                        </div>
+                        <div class="license-details">
+                            <div>
+                                <div class="data-label">Exam Cost</div>
+                                <div class="data-value">$150</div>
+                            </div>
+                            <div>
+                                <div class="data-label">Pass Rate</div>
+                                <div class="data-value">85%</div>
+                            </div>
+                            <div>
+                                <div class="data-label">Time to Obtain</div>
+                                <div class="data-value">1-2 weeks</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="license-card">
+                        <div class="license-header">
+                            <div>
+                                <div class="license-name">Journeyman HVAC License</div>
+                                <div class="text-sm text-tertiary">State Level</div>
+                            </div>
+                            <span class="license-required yes">Required</span>
+                        </div>
+                        <div class="license-details">
+                            <div>
+                                <div class="data-label">Exam Cost</div>
+                                <div class="data-value">$100</div>
+                            </div>
+                            <div>
+                                <div class="data-label">Pass Rate</div>
+                                <div class="data-value">72%</div>
+                            </div>
+                            <div>
+                                <div class="data-label">Time to Obtain</div>
+                                <div class="data-value">4 years</div>
+                            </div>
+                            <div>
+                                <div class="data-label">Renewal</div>
+                                <div class="data-value">3 years / $75</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Timeline Section -->
+            <section id="timeline" class="profile-section section-card">
+                <h2 class="section-title">
+                    <span class="section-title-icon">📅</span>
+                    Career Timeline
+                </h2>
+
+                <div class="timeline-visual" id="timeline-visual">
+                    <div class="timeline-step">
+                        <div class="timeline-step-month">0</div>
+                        <div class="timeline-step-title">Begin Training</div>
+                    </div>
+                    <div class="timeline-step">
+                        <div class="timeline-step-month">6</div>
+                        <div class="timeline-step-title">EPA 608 Cert</div>
+                    </div>
+                    <div class="timeline-step">
+                        <div class="timeline-step-month">48</div>
+                        <div class="timeline-step-title">Journeyman</div>
+                    </div>
+                    <div class="timeline-step">
+                        <div class="timeline-step-month">72</div>
+                        <div class="timeline-step-title">Master/Owner</div>
+                    </div>
+                </div>
+
+                <div class="timeline mt-8" id="timeline-detailed">
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-date">Month 0</div>
+                            <div class="timeline-title">Begin Apprenticeship/Training</div>
+                            <div class="timeline-description">Start formal training program or apprenticeship</div>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-date">Month 6</div>
+                            <div class="timeline-title">EPA 608 Certification</div>
+                            <div class="timeline-description">Required to handle refrigerants</div>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-date">Month 48</div>
+                            <div class="timeline-title">Journeyman License</div>
+                            <div class="timeline-description">Pass exam, work independently</div>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot completed"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-date">Month 72</div>
+                            <div class="timeline-title">Master License Eligible</div>
+                            <div class="timeline-description">Can own qualifying business</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Compensation Section -->
+            <section id="compensation" class="profile-section section-card">
+                <h2 class="section-title">
+                    <span class="section-title-icon">💰</span>
+                    Compensation
+                </h2>
+
+                <div class="data-grid mb-6">
+                    <div class="data-item">
+                        <div class="data-label">Entry Level</div>
+                        <div class="data-value">$38,480</div>
+                    </div>
+                    <div class="data-item">
+                        <div class="data-label">Median</div>
+                        <div class="data-value" style="color: var(--color-accent-primary);">$59,800</div>
+                    </div>
+                    <div class="data-item">
+                        <div class="data-label">75th Percentile</div>
+                        <div class="data-value">$79,040</div>
+                    </div>
+                    <div class="data-item">
+                        <div class="data-label">Top 10%</div>
+                        <div class="data-value">$100,880</div>
+                    </div>
+                </div>
+
+                <div class="chart-container mb-6">
+                    <div class="chart-header">
+                        <h4 class="chart-title">Salary by Experience</h4>
+                    </div>
+                    <div class="chart-wrapper" style="height: 250px;">
+                        <canvas id="salary-experience-chart"></canvas>
+                    </div>
+                </div>
+
+                <div class="data-grid">
+                    <div class="data-item">
+                        <div class="data-label">Overtime Common</div>
+                        <div class="data-value">Yes (~8 hrs/week)</div>
+                    </div>
+                    <div class="data-item">
+                        <div class="data-label">Union Premium</div>
+                        <div class="data-value">+15%</div>
+                    </div>
+                    <div class="data-item">
+                        <div class="data-label">Benefits</div>
+                        <div class="data-value">Health, 401k, PTO</div>
+                    </div>
+                    <div class="data-item">
+                        <div class="data-label">Bonus Range</div>
+                        <div class="data-value">$2k - $10k</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Skills Section -->
+            <section id="skills" class="profile-section section-card">
+                <h2 class="section-title">
+                    <span class="section-title-icon">🛠️</span>
+                    Skills & Requirements
+                </h2>
+
+                <div class="grid gap-6" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
+                    <div>
+                        <h4 class="font-semibold mb-3">Technical Skills</h4>
+                        <div class="skills-radar-container">
+                            <canvas id="skills-radar" style="max-width: 300px; max-height: 300px;"></canvas>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h4 class="font-semibold mb-3">Physical Requirements</h4>
+                        <ul class="list-none" id="physical-reqs">
+                            <li class="p-2 mb-2"
+                                style="background: var(--color-bg-elevated); border-radius: var(--radius-md);">Lifting
+                                50+ lbs regularly</li>
+                            <li class="p-2 mb-2"
+                                style="background: var(--color-bg-elevated); border-radius: var(--radius-md);">Climbing
+                                ladders and scaffolding</li>
+                            <li class="p-2 mb-2"
+                                style="background: var(--color-bg-elevated); border-radius: var(--radius-md);">Working
+                                in confined spaces</li>
+                            <li class="p-2 mb-2"
+                                style="background: var(--color-bg-elevated); border-radius: var(--radius-md);">Working
+                                in extreme temperatures</li>
+                        </ul>
+
+                        <h4 class="font-semibold mb-3 mt-5">Certification Bonuses</h4>
+                        <div id="cert-bonuses">
+                            <div class="flex justify-between p-2 mb-2"
+                                style="background: var(--color-bg-elevated); border-radius: var(--radius-md);">
+                                <span>NATE Certification</span>
+                                <span class="text-success font-semibold">+8% wage</span>
+                            </div>
+                            <div class="flex justify-between p-2 mb-2"
+                                style="background: var(--color-bg-elevated); border-radius: var(--radius-md);">
+                                <span>Commercial Refrigeration</span>
+                                <span class="text-success font-semibold">+10% wage</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Business Section -->
+            <section id="business" class="profile-section section-card">
+                <h2 class="section-title">
+                    <span class="section-title-icon">🏢</span>
+                    Business Ownership
+                </h2>
+
+                <div class="data-grid mb-6">
+                    <div class="data-item">
+                        <div class="data-label">Startup Cost (Min)</div>
+                        <div class="data-value">$15,000</div>
+                    </div>
+                    <div class="data-item">
+                        <div class="data-label">Startup Cost (Typical)</div>
+                        <div class="data-value">$45,000</div>
+                    </div>
+                    <div class="data-item">
+                        <div class="data-label">Year 1 Revenue</div>
+                        <div class="data-value">$150,000</div>
+                    </div>
+                    <div class="data-item">
+                        <div class="data-label">Break Even</div>
+                        <div class="data-value">6 months</div>
+                    </div>
+                </div>
+
+                <div class="chart-container mb-6">
+                    <div class="chart-header">
+                        <h4 class="chart-title">Revenue Projection</h4>
+                    </div>
+                    <div class="chart-wrapper" style="height: 200px;">
+                        <canvas id="revenue-chart"></canvas>
+                    </div>
+                </div>
+
+                <h4 class="font-semibold mb-3">Startup Cost Breakdown</h4>
+                <div id="startup-costs">
+                    <div class="salary-bar">
+                        <span class="salary-bar-label">Vehicle</span>
+                        <div class="salary-bar-track">
+                            <div class="salary-bar-fill" style="width: 60%;"></div>
+                        </div>
+                        <span class="salary-bar-value">$8k - $45k</span>
+                    </div>
+                    <div class="salary-bar">
+                        <span class="salary-bar-label">Tools</span>
+                        <div class="salary-bar-track">
+                            <div class="salary-bar-fill" style="width: 35%;"></div>
+                        </div>
+                        <span class="salary-bar-value">$5k - $25k</span>
+                    </div>
+                    <div class="salary-bar">
+                        <span class="salary-bar-label">Insurance</span>
+                        <div class="salary-bar-track">
+                            <div class="salary-bar-fill" style="width: 25%;"></div>
+                        </div>
+                        <span class="salary-bar-value">$3k - $15k</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Employment Section -->
+            <section id="employment" class="profile-section section-card">
+                <h2 class="section-title">
+                    <span class="section-title-icon">📈</span>
+                    Employment & Outlook
+                </h2>
+
+                <div class="data-grid mb-6">
+                    <div class="data-item">
+                        <div class="data-label">US Employment</div>
+                        <div class="data-value">394,200</div>
+                    </div>
+                    <div class="data-item">
+                        <div class="data-label">10-Year Growth</div>
+                        <div class="data-value text-success">+6% (Faster than avg)</div>
+                    </div>
+                    <div class="data-item">
+                        <div class="data-label">Annual Openings</div>
+                        <div class="data-value">34,800</div>
+                    </div>
+                    <div class="data-item">
+                        <div class="data-label">Automation Risk</div>
+                        <div class="data-value text-success">Low (15%)</div>
+                    </div>
+                </div>
+
+                <div class="chart-container">
+                    <div class="chart-header">
+                        <h4 class="chart-title">Employment by Industry</h4>
+                    </div>
+                    <div class="chart-wrapper" style="height: 250px;">
+                        <canvas id="industry-chart"></canvas>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container text-center">
+                <p class="text-sm text-tertiary">
+                    Data sourced from BLS, O*NET, and state licensing boards. Last updated: December 2024.
+                </p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="js/app.js"></script>
+    <script src="js/charts.js"></script>
+    <script src="js/careers-data.js"></script>
+    <script src="js/careers-data-t0-part1.js"></script>
+    <script src="js/careers-data-t0-part2.js"></script>
+    <script src="js/careers-data-t0-part3.js"></script>
+    <script src="js/careers-data-t1-part1.js"></script>
+    <script src="js/careers-data-t1-part2.js"></script>
+    <script src="js/careers-data-t1-part3.js"></script>
+    <script src="js/careers-data-t2.js"></script>
+    <script src="js/careers-data-t3.js"></script>
+    <script src="js/careers-data-t4.js"></script>
+    <script src="js/careers-data-t5.js"></script>
+    <script>
+        // Career data for lookup
+        const allCareers = [
+            { name: "Roofing (retail)", tier: 0, cat: "Construction" },
+            { name: "Storm & Insurance Restoration Roofing", tier: 0, cat: "Construction" },
+            { name: "Gutters & Leaf-guard Systems", tier: 0, cat: "Exterior" },
+            { name: "Siding Installation", tier: 0, cat: "Exterior" },
+            { name: "Stucco & EIFS Work", tier: 0, cat: "Exterior" },
+            { name: "Window Replacement", tier: 0, cat: "Construction" },
+            { name: "Exterior Door Replacement", tier: 0, cat: "Construction" },
+            { name: "Garage Door Installation & Service", tier: 0, cat: "Construction" },
+            { name: "Skylight Installation", tier: 0, cat: "Construction" },
+            { name: "Insulation Installation", tier: 0, cat: "Construction" },
+            { name: "Attic Restoration", tier: 0, cat: "Specialty" },
+            { name: "Crawlspace Encapsulation", tier: 0, cat: "Specialty" },
+            { name: "Basement Waterproofing", tier: 0, cat: "Specialty" },
+            { name: "Foundation Repair", tier: 0, cat: "Construction" },
+            { name: "Water Treatment Systems", tier: 0, cat: "Specialty" },
+            { name: "Drain Cleaning & Jetting", tier: 0, cat: "Mechanical" },
+            { name: "Kitchen Remodeling Sales", tier: 0, cat: "Interior" },
+            { name: "Bathroom Remodeling Sales", tier: 0, cat: "Interior" },
+            { name: "Flooring Installation", tier: 0, cat: "Interior" },
+            { name: "Tile & Stone Installation", tier: 0, cat: "Interior" },
+            { name: "Countertop Fabrication & Install", tier: 0, cat: "Interior" },
+            { name: "Cabinet Refacing & Cabinetry", tier: 0, cat: "Interior" },
+            { name: "Painting Services", tier: 0, cat: "Interior" },
+            { name: "Drywall & Texture Services", tier: 0, cat: "Interior" },
+            { name: "Finish Carpentry & Built-ins", tier: 0, cat: "Interior" },
+            { name: "Closet Systems", tier: 0, cat: "Interior" },
+            { name: "Window Coverings", tier: 0, cat: "Interior" },
+            { name: "Home Organization Systems", tier: 0, cat: "Interior" },
+            { name: "Epoxy Garage Floor Coatings", tier: 0, cat: "Interior" },
+            { name: "Landscaping Construction", tier: 0, cat: "Exterior" },
+            { name: "Hardscape Installation", tier: 0, cat: "Exterior" },
+            { name: "Deck & Pergola Construction", tier: 0, cat: "Exterior" },
+            { name: "Fencing & Gates", tier: 0, cat: "Exterior" },
+            { name: "Concrete Flatwork", tier: 0, cat: "Construction" },
+            { name: "Asphalt Paving & Sealcoating", tier: 0, cat: "Exterior" },
+            { name: "Snow Removal Services", tier: 0, cat: "Exterior" },
+            { name: "Shade Systems & Awnings", tier: 0, cat: "Exterior" },
+            { name: "Patio Enclosures", tier: 0, cat: "Exterior" },
+            { name: "Commercial Roofing", tier: 0, cat: "Construction" },
+            { name: "Janitorial Services", tier: 0, cat: "Commercial" },
+            { name: "Facility Maintenance", tier: 0, cat: "Commercial" },
+            { name: "Specialty Coatings & Industrial Epoxy", tier: 0, cat: "Specialty" },
+            { name: "Welding & Fabrication Shops", tier: 0, cat: "Specialty" },
+            { name: "Utility Locating & Hydro-excavation", tier: 0, cat: "Specialty" },
+            { name: "Trenching & Directional Boring", tier: 0, cat: "Specialty" },
+            { name: "Traffic Control & Striping", tier: 0, cat: "Specialty" },
+            { name: "Contents Pack-out & Storage", tier: 0, cat: "Restoration" },
+            { name: "Emergency Board-up & Tarping", tier: 0, cat: "Restoration" },
+            { name: "Commercial Drying Equipment Rental", tier: 0, cat: "Restoration" },
+            { name: "Spray Foam Insulation", tier: 1, cat: "Specialty" },
+            { name: "Air Sealing & Energy Retrofit", tier: 1, cat: "Specialty" },
+            { name: "Mold Remediation", tier: 1, cat: "Restoration" },
+            { name: "Radon Mitigation", tier: 1, cat: "Specialty" },
+            { name: "Chimney Services", tier: 1, cat: "Specialty" },
+            { name: "Home Theater & Residential AV", tier: 1, cat: "Technology" },
+            { name: "Smart Home Automation", tier: 1, cat: "Technology" },
+            { name: "Irrigation Systems", tier: 1, cat: "Exterior" },
+            { name: "Tree Service Operations", tier: 1, cat: "Exterior" },
+            { name: "Pest Control Services", tier: 1, cat: "Specialty" },
+            { name: "Building Automation & Controls", tier: 1, cat: "Technology" },
+            { name: "Testing, Adjusting & Balancing", tier: 1, cat: "Mechanical" },
+            { name: "Backflow Testing", tier: 1, cat: "Mechanical" },
+            { name: "Fire Alarm Installation", tier: 1, cat: "Technology" },
+            { name: "Security Systems & Access Control", tier: 1, cat: "Technology" },
+            { name: "Commercial Audiovisual Systems", tier: 1, cat: "Technology" },
+            { name: "Structured Cabling & Fiber", tier: 1, cat: "Technology" },
+            { name: "IT Closet Buildouts", tier: 1, cat: "Technology" },
+            { name: "Overhead Doors & Dock Equipment", tier: 1, cat: "Commercial" },
+            { name: "Commercial Kitchen Equipment Service", tier: 1, cat: "Commercial" },
+            { name: "Instrumentation & Controls", tier: 1, cat: "Technology" },
+            { name: "SCADA Integration", tier: 1, cat: "Technology" },
+            { name: "Automation & Robotics Integration", tier: 1, cat: "Technology" },
+            { name: "Conveyor & Material Handling", tier: 1, cat: "Commercial" },
+            { name: "Environmental Remediation", tier: 1, cat: "Specialty" },
+            { name: "Tank Installation & Repair", tier: 1, cat: "Specialty" },
+            { name: "Commercial Signage Installation", tier: 1, cat: "Commercial" },
+            { name: "Water Damage Mitigation", tier: 1, cat: "Restoration" },
+            { name: "Fire & Smoke Restoration", tier: 1, cat: "Restoration" },
+            { name: "Biohazard Cleanup", tier: 1, cat: "Restoration" },
+            { name: "Leak Detection Services", tier: 1, cat: "Specialty" },
+            { name: "Asbestos & Lead Abatement", tier: 1, cat: "Specialty" },
+            { name: "Residential HVAC Replacement", tier: 2, cat: "Mechanical" },
+            { name: "Residential HVAC Service", tier: 2, cat: "Mechanical" },
+            { name: "Ductwork, Zoning & Air Balancing", tier: 2, cat: "Mechanical" },
+            { name: "Radiant Floor Heating", tier: 2, cat: "Mechanical" },
+            { name: "Mini-split & Multi-zone HVAC", tier: 2, cat: "Mechanical" },
+            { name: "Whole-home Dehumidification", tier: 2, cat: "Mechanical" },
+            { name: "Water Heater & Tankless Install", tier: 2, cat: "Mechanical" },
+            { name: "Electrical Panel Upgrades", tier: 2, cat: "Electrical" },
+            { name: "Whole-home Electrical Rewiring", tier: 2, cat: "Electrical" },
+            { name: "EV Charger Installation", tier: 2, cat: "Electrical" },
+            { name: "Commercial HVAC Service Sales", tier: 2, cat: "Mechanical" },
+            { name: "Commercial Plumbing Service", tier: 2, cat: "Mechanical" },
+            { name: "Lighting Retrofit Projects", tier: 2, cat: "Electrical" },
+            { name: "Compressed Air Systems", tier: 2, cat: "Mechanical" },
+            { name: "Water & Wastewater Systems", tier: 2, cat: "Mechanical" },
+            { name: "Pump Systems & Lift Stations", tier: 2, cat: "Mechanical" },
+            { name: "Power Quality & UPS Systems", tier: 2, cat: "Electrical" },
+            { name: "Critical Power Distribution", tier: 2, cat: "Electrical" },
+            { name: "Data Center Mechanical", tier: 2, cat: "Mechanical" },
+            { name: "Data Center Electrical", tier: 2, cat: "Electrical" },
+            { name: "Generator Plants", tier: 2, cat: "Electrical" },
+            { name: "Industrial Ventilation & Dust Collection", tier: 2, cat: "Mechanical" },
+            { name: "Whole-home Plumbing Repipes", tier: 3, cat: "Mechanical" },
+            { name: "Sewer Line Replacement", tier: 3, cat: "Mechanical" },
+            { name: "Water Main Replacement", tier: 3, cat: "Mechanical" },
+            { name: "Electrical Panel Business Owner", tier: 3, cat: "Electrical" },
+            { name: "Electrical Rewiring Business Owner", tier: 3, cat: "Electrical" },
+            { name: "EV Charger Business Owner", tier: 3, cat: "Electrical" },
+            { name: "Lighting Retrofit Contractor", tier: 3, cat: "Electrical" },
+            { name: "Switchgear & Critical Electrical", tier: 3, cat: "Electrical" },
+            { name: "Data Center Electrical Contractor", tier: 3, cat: "Electrical" },
+            { name: "Residential & Commercial Refrigeration", tier: 4, cat: "Mechanical" },
+            { name: "Boilers & Hydronics Systems", tier: 4, cat: "Mechanical" },
+            { name: "Steam Systems & Steamfitting", tier: 4, cat: "Mechanical" },
+            { name: "Gas Service Installation", tier: 4, cat: "Mechanical" },
+            { name: "Commercial Refrigeration Service", tier: 4, cat: "Mechanical" },
+            { name: "Industrial Refrigeration Systems", tier: 4, cat: "Mechanical" },
+            { name: "Industrial Boiler Plants", tier: 4, cat: "Mechanical" },
+            { name: "Steam System Retrofits", tier: 4, cat: "Mechanical" },
+            { name: "Standby Generator Sales & Install", tier: 5, cat: "Electrical" },
+            { name: "Fireplace Inserts & Fuel Appliances", tier: 5, cat: "Mechanical" },
+            { name: "Outdoor Kitchens", tier: 5, cat: "Exterior" },
+            { name: "Swimming Pools & Spas", tier: 5, cat: "Exterior" },
+            { name: "Hot Tubs & Swim Spas", tier: 5, cat: "Exterior" },
+            { name: "Building Automation Projects", tier: 5, cat: "Technology" },
+            { name: "Fire Sprinkler Installation", tier: 5, cat: "Specialty" },
+            { name: "Elevator Modernization Sales", tier: 5, cat: "Commercial" },
+            { name: "Facility Maintenance (Permits)", tier: 5, cat: "Commercial" },
+            { name: "Process Piping Projects", tier: 5, cat: "Mechanical" },
+            { name: "Compressed Air Contracting", tier: 5, cat: "Mechanical" },
+            { name: "Water/Wastewater Contracting", tier: 5, cat: "Mechanical" },
+            { name: "Pump Station Contracting", tier: 5, cat: "Mechanical" },
+            { name: "Power Quality Contracting", tier: 5, cat: "Electrical" },
+            { name: "Data Center Mechanical Contracting", tier: 5, cat: "Mechanical" },
+            { name: "Data Center Electrical Contracting", tier: 5, cat: "Electrical" },
+            { name: "Generator Plants & Large Standby", tier: 5, cat: "Electrical" },
+            { name: "Industrial Ventilation Contracting", tier: 5, cat: "Mechanical" },
+            { name: "Insurance Reconstruction Contracting", tier: 5, cat: "Construction" },
+            // HVAC Technician as fallback
+            { name: "HVAC Technician", tier: 2, cat: "Mechanical Trades" }
+        ];
+
+        const tierNames = ['Owner Now', 'Cert-Based', 'Journeyman', 'Master', 'Supervisor', 'Via Subs'];
+        const tierClasses = ['tier-badge-0', 'tier-badge-1', 'tier-badge-2', 'tier-badge-3', 'tier-badge-4', 'tier-badge-5'];
+
+        // Get career ID from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const careerId = urlParams.get('id') || 'hvac-technician';
+
+        // Find career by matching the slugified name
+        // Find basic career info
+        const careerBasic = allCareers.find(c => {
+            const slug = c.name.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+            return slug === careerId || slug.includes(careerId) || careerId.includes(slug.substring(0, 10));
+        }) || allCareers[allCareers.length - 1];
+
+        // Get full career data from careers-data.js
+        window.allCareers = allCareers;
+        const career = (typeof getCareerData === 'function') ? getCareerData(careerId) : careerBasic;
+        const cat = career.category || career.cat || careerBasic.cat;
+
+        // Update page header
+        document.getElementById('career-name').textContent = career.name;
+        document.title = career.name + ' | CareerData';
+
+        const tierBadge = document.getElementById('tier-badge');
+        tierBadge.textContent = 'T' + career.tier + ' - ' + tierNames[career.tier];
+        tierBadge.className = 'tier-badge ' + tierClasses[career.tier];
+        document.getElementById('category-tag').textContent = cat;
+
+        // Format helper
+        const fmt = n => '$' + n.toLocaleString();
+
+        // Update quick stats
+        if (career.salary) {
+            document.getElementById('salary-stat').textContent = fmt(career.salary.median);
+        }
+        if (career.timeToOwn) {
+            document.getElementById('time-stat').textContent = career.timeToOwn;
+        }
+        if (career.growth !== undefined) {
+            const gs = document.getElementById('growth-stat');
+            gs.textContent = '+' + career.growth + '%';
+            gs.className = career.growth >= 5 ? 'quick-stat-value text-success' : 'quick-stat-value';
+        }
+
+        // Update overview section
+        if (career.description) {
+            document.getElementById('career-description').textContent = career.description;
+        }
+        if (career.dayInLife) {
+            document.getElementById('day-in-life').textContent = career.dayInLife;
+        }
+        if (career.pros) {
+            document.getElementById('pros-list').innerHTML = career.pros.map(p => `<li>${p}</li>`).join('');
+        }
+        if (career.cons) {
+            document.getElementById('cons-list').innerHTML = career.cons.map(c => `<li>${c}</li>`).join('');
+        }
+
+        // Update education section
+        if (career.education) {
+            const edu = career.education;
+            if (edu.min) document.getElementById('edu-min').textContent = edu.min;
+            if (edu.preferred) document.getElementById('edu-pref').textContent = edu.preferred;
+            if (edu.apprenticeship) document.getElementById('edu-apprentice').textContent = edu.apprenticeship;
+            if (edu.ce) document.getElementById('edu-ce').textContent = edu.ce;
+        }
+
+        // Update licensing section
+        if (career.licensing) {
+            const lic = career.licensing;
+            if (lic.body) document.getElementById('license-body').textContent = lic.body;
+            if (lic.bonding) document.getElementById('bonding').textContent = lic.bonding;
+            if (lic.insurance) document.getElementById('insurance').textContent = lic.insurance;
+        }
+
+        // Update physical requirements
+        if (career.physical) {
+            document.getElementById('physical-reqs').innerHTML = career.physical.map(p =>
+                `<li class="p-2 mb-2" style="background: var(--color-bg-elevated); border-radius: var(--radius-md);">${p}</li>`
+            ).join('');
+        }
+
+        // Update certification bonuses
+        if (career.certifications) {
+            document.getElementById('cert-bonuses').innerHTML = career.certifications.map(c =>
+                `<div class="flex justify-between p-2 mb-2" style="background: var(--color-bg-elevated); border-radius: var(--radius-md);">
+                    <span>${c.name}</span>
+                    <span class="text-success font-semibold">${c.bonus}</span>
+                </div>`
+            ).join('');
+        }
+
+        // Update business section
+        if (career.business) {
+            const biz = career.business;
+            const bizGrid = document.querySelector('#business .data-grid');
+            if (bizGrid) {
+                bizGrid.innerHTML = `
+                    <div class="data-item"><div class="data-label">Startup Cost (Min)</div><div class="data-value">${fmt(biz.startupMin)}</div></div>
+                    <div class="data-item"><div class="data-label">Startup Cost (Typical)</div><div class="data-value">${fmt(biz.startupTypical)}</div></div>
+                    <div class="data-item"><div class="data-label">Year 1 Revenue</div><div class="data-value">${fmt(biz.year1Revenue)}</div></div>
+                    <div class="data-item"><div class="data-label">Break Even</div><div class="data-value">${biz.breakeven}</div></div>
+                `;
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            // Generate salary values from career data
+            const sal = career.salary || { entry: 35000, median: 55000, p75: 72000, top10: 95000 };
+            Charts.trendLine('salary-experience-chart', {
+                labels: ['Year 1', 'Year 2', 'Year 3', 'Year 4', 'Year 6', 'Year 8', 'Year 10'],
+                datasets: [{
+                    label: 'Annual Salary',
+                    values: [sal.entry, Math.round(sal.entry * 1.15), Math.round(sal.entry * 1.3), sal.median, sal.p75, Math.round(sal.p75 * 1.1), sal.top10]
+                }]
+            });
+
+            // Skills Radar based on category
+            const skillLabels = {
+                'Mechanical': ['Diagnostics', 'Repair Skills', 'System Design', 'Safety', 'Customer Service', 'Problem Solving'],
+                'Electrical': ['Circuit Analysis', 'Code Knowledge', 'Safety', 'Troubleshooting', 'Customer Service', 'Problem Solving'],
+                'Construction': ['Material Knowledge', 'Tool Skills', 'Safety', 'Measurement', 'Customer Service', 'Problem Solving'],
+                'Interior': ['Finish Work', 'Precision', 'Material Knowledge', 'Design Sense', 'Customer Service', 'Problem Solving'],
+                'Exterior': ['Weather Knowledge', 'Material Skills', 'Equipment Operation', 'Safety', 'Customer Service', 'Problem Solving']
+            };
+            Charts.radar('skills-radar', {
+                labels: skillLabels[cat] || ['Technical', 'Trade Skills', 'Safety', 'Efficiency', 'Customer Service', 'Problem Solving'],
+                datasets: [{ label: 'Skill Importance', values: [90, 85, 88, 80, 85, 92] }]
+            });
+
+            // Revenue chart from business data
+            const biz = career.business || { year1Revenue: 150000 };
+            Charts.salaryBar('revenue-chart', {
+                labels: ['Year 1', 'Year 3', 'Year 5'],
+                values: [biz.year1Revenue, Math.round(biz.year1Revenue * 2.3), Math.round(biz.year1Revenue * 4)]
+            }, { formatCurrency: true });
+
+            Charts.doughnut('industry-chart', {
+                labels: ['Contractors', 'Self-Employed', 'Facilities', 'Commercial', 'Other'],
+                values: [45, 25, 15, 10, 5]
+            });
+
+            // Tab navigation
+            document.querySelectorAll('.profile-nav .tab').forEach(tab => {
+                tab.addEventListener('click', function (e) {
+                    document.querySelectorAll('.profile-nav .tab').forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

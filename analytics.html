@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics Dashboard | CareerData</title>
+
+    <link rel="stylesheet" href="css/design-tokens.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/typography.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/charts.css">
+    <link rel="stylesheet" href="css/responsive.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+
+    <style>
+        .analytics-header {
+            padding: var(--space-8) 0;
+            background: var(--color-bg-secondary);
+            border-bottom: 1px solid var(--color-border-subtle);
+        }
+
+        .dashboard-tabs {
+            display: flex;
+            gap: var(--space-2);
+            margin-top: var(--space-6);
+            overflow-x: auto;
+            padding-bottom: var(--space-2);
+        }
+
+        .dashboard-content {
+            padding: var(--space-6) 0;
+        }
+
+        .kpi-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: var(--space-4);
+            margin-bottom: var(--space-6);
+        }
+
+        .kpi-card {
+            padding: var(--space-5);
+            background: var(--color-surface-card);
+            border: 1px solid var(--color-border-subtle);
+            border-radius: var(--radius-xl);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .kpi-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--color-accent-primary);
+        }
+
+        .kpi-card.success::before {
+            background: var(--color-success);
+        }
+
+        .kpi-card.warning::before {
+            background: var(--color-warning);
+        }
+
+        .kpi-card.info::before {
+            background: var(--color-info);
+        }
+
+        .kpi-label {
+            font-size: var(--font-size-sm);
+            color: var(--color-text-tertiary);
+            margin-bottom: var(--space-2);
+        }
+
+        .kpi-value {
+            font-size: var(--font-size-3xl);
+            font-weight: var(--font-weight-bold);
+            margin-bottom: var(--space-1);
+        }
+
+        .kpi-change {
+            font-size: var(--font-size-sm);
+            display: flex;
+            align-items: center;
+            gap: var(--space-1);
+        }
+
+        .kpi-change.positive {
+            color: var(--color-success);
+        }
+
+        .kpi-change.negative {
+            color: var(--color-error);
+        }
+
+        .charts-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: var(--space-6);
+            margin-bottom: var(--space-6);
+        }
+
+        @media (max-width: 768px) {
+            .charts-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .insight-card {
+            padding: var(--space-5);
+            background: linear-gradient(135deg, rgba(106, 169, 255, 0.1) 0%, rgba(16, 185, 129, 0.05) 100%);
+            border: 1px solid rgba(106, 169, 255, 0.2);
+            border-radius: var(--radius-xl);
+            margin-bottom: var(--space-4);
+        }
+
+        .insight-title {
+            font-weight: var(--font-weight-semibold);
+            margin-bottom: var(--space-2);
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+        }
+
+        .insight-text {
+            color: var(--color-text-secondary);
+            font-size: var(--font-size-sm);
+        }
+
+        .trend-list {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-3);
+        }
+
+        .trend-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: var(--space-3) var(--space-4);
+            background: var(--color-bg-elevated);
+            border-radius: var(--radius-lg);
+        }
+
+        .trend-name {
+            font-weight: var(--font-weight-medium);
+        }
+
+        .trend-value {
+            font-weight: var(--font-weight-semibold);
+        }
+
+        .trend-value.up {
+            color: var(--color-success);
+        }
+
+        .trend-value.down {
+            color: var(--color-error);
+        }
+
+        .leaderboard {
+            counter-reset: rank;
+        }
+
+        .leaderboard-item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-4);
+            padding: var(--space-4);
+            background: var(--color-bg-elevated);
+            border-radius: var(--radius-lg);
+            margin-bottom: var(--space-2);
+        }
+
+        .leaderboard-item::before {
+            counter-increment: rank;
+            content: counter(rank);
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--color-accent-primary);
+            color: var(--color-text-inverse);
+            border-radius: var(--radius-full);
+            font-weight: var(--font-weight-bold);
+            font-size: var(--font-size-sm);
+        }
+
+        .leaderboard-item:nth-child(1)::before {
+            background: #fbbf24;
+        }
+
+        .leaderboard-item:nth-child(2)::before {
+            background: #9ca3af;
+        }
+
+        .leaderboard-item:nth-child(3)::before {
+            background: #cd7f32;
+        }
+
+        .leaderboard-content {
+            flex: 1;
+        }
+
+        .leaderboard-name {
+            font-weight: var(--font-weight-semibold);
+        }
+
+        .leaderboard-meta {
+            font-size: var(--font-size-sm);
+            color: var(--color-text-tertiary);
+        }
+
+        .leaderboard-value {
+            font-weight: var(--font-weight-bold);
+            font-size: var(--font-size-lg);
+        }
+
+        .heatmap-container {
+            overflow-x: auto;
+        }
+
+        .tier-matrix {
+            display: grid;
+            grid-template-columns: 120px repeat(5, 1fr);
+            gap: 2px;
+            min-width: 600px;
+        }
+
+        .matrix-header {
+            padding: var(--space-3);
+            background: var(--color-bg-elevated);
+            font-weight: var(--font-weight-semibold);
+            font-size: var(--font-size-sm);
+            text-align: center;
+        }
+
+        .matrix-row-label {
+            padding: var(--space-3);
+            background: var(--color-bg-elevated);
+            font-weight: var(--font-weight-medium);
+            font-size: var(--font-size-sm);
+            display: flex;
+            align-items: center;
+        }
+
+        .matrix-cell {
+            padding: var(--space-3);
+            text-align: center;
+            font-weight: var(--font-weight-semibold);
+            border-radius: var(--radius-sm);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="app">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="container flex items-center justify-between h-full">
+                <a href="index.html" class="flex items-center gap-2" style="text-decoration: none;">
+                    <span style="font-size: 1.5rem;">📊</span>
+                    <span class="font-bold text-lg">CareerData</span>
+                </a>
+
+                <nav class="flex items-center gap-6 md-show">
+                    <a href="explore.html" class="text-secondary font-medium" style="text-decoration: none;">Explore</a>
+                    <a href="compare.html" class="text-secondary font-medium" style="text-decoration: none;">Compare</a>
+                    <a href="analytics.html" class="text-accent font-medium"
+                        style="text-decoration: none;">Analytics</a>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Analytics Header -->
+        <section class="analytics-header">
+            <div class="container">
+                <h1 class="h2 mb-2">Analytics Dashboard</h1>
+                <p class="text-secondary">Market trends, salary insights, and career data analysis</p>
+
+                <div class="dashboard-tabs">
+                    <button class="tab active">Overview</button>
+                    <button class="tab">Salary Analysis</button>
+                    <button class="tab">Market Trends</button>
+                    <button class="tab">Tier Analysis</button>
+                    <button class="tab">Regional Data</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dashboard Content -->
+        <main class="container dashboard-content">
+
+            <!-- KPI Row -->
+            <section class="kpi-row">
+                <div class="kpi-card">
+                    <div class="kpi-label">Total Careers Tracked</div>
+                    <div class="kpi-value">524</div>
+                    <div class="kpi-change positive">↑ 12 new this quarter</div>
+                </div>
+
+                <div class="kpi-card success">
+                    <div class="kpi-label">Avg Median Salary</div>
+                    <div class="kpi-value">$54,200</div>
+                    <div class="kpi-change positive">↑ 4.2% YoY</div>
+                </div>
+
+                <div class="kpi-card info">
+                    <div class="kpi-label">Fastest Growing Field</div>
+                    <div class="kpi-value">+12%</div>
+                    <div class="kpi-change">Generator Installation</div>
+                </div>
+
+                <div class="kpi-card warning">
+                    <div class="kpi-label">Avg Time to Ownership</div>
+                    <div class="kpi-value">2.4 yrs</div>
+                    <div class="kpi-change">Across T0-T1-T5 paths</div>
+                </div>
+            </section>
+
+            <!-- AI Insights -->
+            <section class="insight-card">
+                <div class="insight-title">
+                    <span>💡</span>
+                    Key Market Insight
+                </div>
+                <div class="insight-text">
+                    Careers in T0 (Owner Now) and T5 (Owner via Subs) tiers show 23% faster time-to-profitability
+                    compared to traditional licensed trades. However, T2-T3 careers demonstrate 15% higher long-term
+                    earnings stability and 42% higher lifetime earnings potential due to licensing barriers creating
+                    market protection.
+                </div>
+            </section>
+
+            <!-- Charts Row 1 -->
+            <section class="charts-row">
+                <div class="chart-container">
+                    <div class="chart-header">
+                        <h3 class="chart-title">Salary Distribution by Tier</h3>
+                    </div>
+                    <div class="chart-wrapper" style="height: 280px;">
+                        <canvas id="salary-tier-chart"></canvas>
+                    </div>
+                </div>
+
+                <div class="chart-container">
+                    <div class="chart-header">
+                        <h3 class="chart-title">Career Count by Category</h3>
+                    </div>
+                    <div class="chart-wrapper" style="height: 280px;">
+                        <canvas id="category-count-chart"></canvas>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Charts Row 2 -->
+            <section class="charts-row">
+                <div class="chart-container">
+                    <div class="chart-header">
+                        <h3 class="chart-title">10-Year Employment Growth Projection</h3>
+                    </div>
+                    <div class="chart-wrapper" style="height: 280px;">
+                        <canvas id="growth-projection-chart"></canvas>
+                    </div>
+                </div>
+
+                <div class="chart-container">
+                    <div class="chart-header">
+                        <h3 class="chart-title">Time to Ownership vs Median Salary</h3>
+                    </div>
+                    <div class="chart-wrapper" style="height: 280px;">
+                        <canvas id="time-salary-scatter-chart"></canvas>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Leaderboards -->
+            <section class="charts-row">
+                <div class="chart-container">
+                    <div class="chart-header">
+                        <h3 class="chart-title">🏆 Highest Paying Careers</h3>
+                    </div>
+                    <div class="leaderboard">
+                        <div class="leaderboard-item">
+                            <div class="leaderboard-content">
+                                <div class="leaderboard-name">Master Electrician</div>
+                                <div class="leaderboard-meta">T3 • Electrical Trades</div>
+                            </div>
+                            <div class="leaderboard-value">$85,000</div>
+                        </div>
+                        <div class="leaderboard-item">
+                            <div class="leaderboard-content">
+                                <div class="leaderboard-name">Boiler Technician</div>
+                                <div class="leaderboard-meta">T4 • Mechanical Trades</div>
+                            </div>
+                            <div class="leaderboard-value">$78,000</div>
+                        </div>
+                        <div class="leaderboard-item">
+                            <div class="leaderboard-content">
+                                <div class="leaderboard-name">Plumbing Contractor</div>
+                                <div class="leaderboard-meta">T3 • Mechanical Trades</div>
+                            </div>
+                            <div class="leaderboard-value">$72,500</div>
+                        </div>
+                        <div class="leaderboard-item">
+                            <div class="leaderboard-content">
+                                <div class="leaderboard-name">HVAC Master</div>
+                                <div class="leaderboard-meta">T2 • Mechanical Trades</div>
+                            </div>
+                            <div class="leaderboard-value">$70,000</div>
+                        </div>
+                        <div class="leaderboard-item">
+                            <div class="leaderboard-content">
+                                <div class="leaderboard-name">Refrigeration Supervisor</div>
+                                <div class="leaderboard-meta">T4 • Mechanical Trades</div>
+                            </div>
+                            <div class="leaderboard-value">$68,500</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chart-container">
+                    <div class="chart-header">
+                        <h3 class="chart-title">⚡ Fastest Growing Careers</h3>
+                    </div>
+                    <div class="leaderboard">
+                        <div class="leaderboard-item">
+                            <div class="leaderboard-content">
+                                <div class="leaderboard-name">Generator Installation</div>
+                                <div class="leaderboard-meta">T5 • Electrical Trades</div>
+                            </div>
+                            <div class="leaderboard-value trend-value up">+12%</div>
+                        </div>
+                        <div class="leaderboard-item">
+                            <div class="leaderboard-content">
+                                <div class="leaderboard-name">Radon Mitigation</div>
+                                <div class="leaderboard-meta">T1 • Specialty Trades</div>
+                            </div>
+                            <div class="leaderboard-value trend-value up">+10%</div>
+                        </div>
+                        <div class="leaderboard-item">
+                            <div class="leaderboard-content">
+                                <div class="leaderboard-name">Security Systems</div>
+                                <div class="leaderboard-meta">T1 • Technology</div>
+                            </div>
+                            <div class="leaderboard-value trend-value up">+9%</div>
+                        </div>
+                        <div class="leaderboard-item">
+                            <div class="leaderboard-content">
+                                <div class="leaderboard-name">Mold Remediation</div>
+                                <div class="leaderboard-meta">T1 • Specialty Trades</div>
+                            </div>
+                            <div class="leaderboard-value trend-value up">+8%</div>
+                        </div>
+                        <div class="leaderboard-item">
+                            <div class="leaderboard-content">
+                                <div class="leaderboard-name">Electrician</div>
+                                <div class="leaderboard-meta">T3 • Electrical Trades</div>
+                            </div>
+                            <div class="leaderboard-value trend-value up">+7%</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tier Analysis Matrix -->
+            <section class="chart-container">
+                <div class="chart-header">
+                    <h3 class="chart-title">📊 Tier Analysis Matrix</h3>
+                </div>
+
+                <div class="heatmap-container">
+                    <div class="tier-matrix">
+                        <div class="matrix-header"></div>
+                        <div class="matrix-header">Avg Salary</div>
+                        <div class="matrix-header">Time to Start</div>
+                        <div class="matrix-header">Barrier Score</div>
+                        <div class="matrix-header">Growth Rate</div>
+                        <div class="matrix-header"># Careers</div>
+
+                        <div class="matrix-row-label">T0 Owner Now</div>
+                        <div class="matrix-cell" style="background: rgba(16, 185, 129, 0.3);">$45,200</div>
+                        <div class="matrix-cell" style="background: rgba(16, 185, 129, 0.8);">1-2 mo</div>
+                        <div class="matrix-cell" style="background: rgba(16, 185, 129, 0.8);">15/100</div>
+                        <div class="matrix-cell" style="background: rgba(16, 185, 129, 0.4);">+4.2%</div>
+                        <div class="matrix-cell" style="background: rgba(16, 185, 129, 0.5);">54</div>
+
+                        <div class="matrix-row-label">T1 Cert-Based</div>
+                        <div class="matrix-cell" style="background: rgba(59, 130, 246, 0.3);">$49,800</div>
+                        <div class="matrix-cell" style="background: rgba(59, 130, 246, 0.6);">2-6 mo</div>
+                        <div class="matrix-cell" style="background: rgba(59, 130, 246, 0.5);">32/100</div>
+                        <div class="matrix-cell" style="background: rgba(59, 130, 246, 0.6);">+7.1%</div>
+                        <div class="matrix-cell" style="background: rgba(59, 130, 246, 0.4);">38</div>
+
+                        <div class="matrix-row-label">T2 Journeyman</div>
+                        <div class="matrix-cell" style="background: rgba(245, 158, 11, 0.5);">$58,500</div>
+                        <div class="matrix-cell" style="background: rgba(245, 158, 11, 0.4);">4 yrs</div>
+                        <div class="matrix-cell" style="background: rgba(245, 158, 11, 0.5);">55/100</div>
+                        <div class="matrix-cell" style="background: rgba(245, 158, 11, 0.5);">+5.8%</div>
+                        <div class="matrix-cell" style="background: rgba(245, 158, 11, 0.3);">22</div>
+
+                        <div class="matrix-row-label">T3 Master</div>
+                        <div class="matrix-cell" style="background: rgba(239, 68, 68, 0.6);">$68,200</div>
+                        <div class="matrix-cell" style="background: rgba(239, 68, 68, 0.3);">6-8 yrs</div>
+                        <div class="matrix-cell" style="background: rgba(239, 68, 68, 0.4);">72/100</div>
+                        <div class="matrix-cell" style="background: rgba(239, 68, 68, 0.5);">+6.2%</div>
+                        <div class="matrix-cell" style="background: rgba(239, 68, 68, 0.2);">9</div>
+
+                        <div class="matrix-row-label">T4 Supervisor</div>
+                        <div class="matrix-cell" style="background: rgba(168, 85, 247, 0.7);">$72,000</div>
+                        <div class="matrix-cell" style="background: rgba(168, 85, 247, 0.2);">8-10 yrs</div>
+                        <div class="matrix-cell" style="background: rgba(168, 85, 247, 0.3);">85/100</div>
+                        <div class="matrix-cell" style="background: rgba(168, 85, 247, 0.4);">+4.5%</div>
+                        <div class="matrix-cell" style="background: rgba(168, 85, 247, 0.2);">8</div>
+
+                        <div class="matrix-row-label">T5 Via Subs</div>
+                        <div class="matrix-cell" style="background: rgba(107, 114, 128, 0.4);">$52,000</div>
+                        <div class="matrix-cell" style="background: rgba(107, 114, 128, 0.7);">1-3 mo</div>
+                        <div class="matrix-cell" style="background: rgba(107, 114, 128, 0.6);">25/100</div>
+                        <div class="matrix-cell" style="background: rgba(107, 114, 128, 0.5);">+5.5%</div>
+                        <div class="matrix-cell" style="background: rgba(107, 114, 128, 0.3);">19</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Trends Section -->
+            <section class="charts-row" style="margin-top: var(--space-6);">
+                <div class="chart-container">
+                    <div class="chart-header">
+                        <h3 class="chart-title">📈 Emerging Trends</h3>
+                    </div>
+                    <div class="trend-list">
+                        <div class="trend-item">
+                            <div>
+                                <div class="trend-name">EV Charging Installation</div>
+                                <div class="text-sm text-tertiary">New specialty in Electrical</div>
+                            </div>
+                            <div class="trend-value up">🔥 Hot</div>
+                        </div>
+                        <div class="trend-item">
+                            <div>
+                                <div class="trend-name">Home Automation</div>
+                                <div class="text-sm text-tertiary">Smart home integration</div>
+                            </div>
+                            <div class="trend-value up">🔥 Hot</div>
+                        </div>
+                        <div class="trend-item">
+                            <div>
+                                <div class="trend-name">Solar Installation</div>
+                                <div class="text-sm text-tertiary">Renewable energy</div>
+                            </div>
+                            <div class="trend-value up">📈 Growing</div>
+                        </div>
+                        <div class="trend-item">
+                            <div>
+                                <div class="trend-name">Heat Pump Specialists</div>
+                                <div class="text-sm text-tertiary">HVAC evolution</div>
+                            </div>
+                            <div class="trend-value up">📈 Growing</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chart-container">
+                    <div class="chart-header">
+                        <h3 class="chart-title">🎯 Quick Start Opportunities</h3>
+                    </div>
+                    <div class="trend-list">
+                        <div class="trend-item">
+                            <div>
+                                <div class="trend-name">Pressure Washing</div>
+                                <div class="text-sm text-tertiary">T0 • $500-5k startup</div>
+                            </div>
+                            <div class="tier-badge tier-badge-0">T0</div>
+                        </div>
+                        <div class="trend-item">
+                            <div>
+                                <div class="trend-name">Gutter Cleaning</div>
+                                <div class="text-sm text-tertiary">T0 • $300-2k startup</div>
+                            </div>
+                            <div class="tier-badge tier-badge-0">T0</div>
+                        </div>
+                        <div class="trend-item">
+                            <div>
+                                <div class="trend-name">Junk Removal</div>
+                                <div class="text-sm text-tertiary">T0 • $5-15k startup</div>
+                            </div>
+                            <div class="tier-badge tier-badge-0">T0</div>
+                        </div>
+                        <div class="trend-item">
+                            <div>
+                                <div class="trend-name">Christmas Lights</div>
+                                <div class="text-sm text-tertiary">T0 • $2-8k startup</div>
+                            </div>
+                            <div class="tier-badge tier-badge-0">T0</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container text-center">
+                <p class="text-sm text-tertiary">
+                    Analytics based on BLS, O*NET, and industry data. Updated quarterly.
+                </p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="js/charts.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Salary by Tier Chart
+            Charts.salaryBar('salary-tier-chart', {
+                labels: ['T0 Owner', 'T1 Cert', 'T2 Journey', 'T3 Master', 'T4 Super', 'T5 Subs'],
+                values: [45200, 49800, 58500, 68200, 72000, 52000]
+            }, { formatCurrency: true });
+
+            // Category Count Chart
+            Charts.doughnut('category-count-chart', {
+                labels: ['Mechanical', 'Electrical', 'Construction', 'Technology', 'Interior', 'Exterior', 'Specialty'],
+                values: [18, 12, 24, 15, 10, 14, 8]
+            });
+
+            // Growth Projection Chart
+            Charts.trendLine('growth-projection-chart', {
+                labels: ['2024', '2026', '2028', '2030', '2034'],
+                datasets: [
+                    { label: 'Technology Systems', values: [100, 109, 118, 128, 145] },
+                    { label: 'Electrical Trades', values: [100, 107, 114, 121, 135] },
+                    { label: 'Mechanical Trades', values: [100, 106, 112, 118, 130] },
+                    { label: 'Construction', values: [100, 104, 108, 112, 120] }
+                ]
+            }, { startAtZero: false });
+
+            // Time vs Salary Scatter
+            Charts.scatter('time-salary-scatter-chart', {
+                datasets: [
+                    {
+                        label: 'Owner Path (T0/T1/T5)',
+                        points: [
+                            { x: 1, y: 45000 },
+                            { x: 3, y: 48000 },
+                            { x: 2, y: 52000 },
+                            { x: 4, y: 50000 },
+                            { x: 6, y: 55000 }
+                        ]
+                    },
+                    {
+                        label: 'Tech Path (T2/T3/T4)',
+                        points: [
+                            { x: 48, y: 58500 },
+                            { x: 72, y: 68000 },
+                            { x: 84, y: 72000 },
+                            { x: 96, y: 78000 }
+                        ]
+                    }
+                ]
+            }, {
+                xLabel: 'Months to Full Path',
+                yLabel: 'Median Salary ($)'
+            });
+
+            // Tab switching
+            document.querySelectorAll('.dashboard-tabs .tab').forEach(tab => {
+                tab.addEventListener('click', function () {
+                    document.querySelectorAll('.dashboard-tabs .tab').forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

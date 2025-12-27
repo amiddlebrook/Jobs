@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compare Careers | CareerData</title>
+
+    <link rel="stylesheet" href="css/design-tokens.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/typography.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/charts.css">
+    <link rel="stylesheet" href="css/responsive.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+
+    <style>
+        .compare-header {
+            padding: var(--space-8) 0;
+            background: var(--color-bg-secondary);
+            border-bottom: 1px solid var(--color-border-subtle);
+        }
+
+        .career-selector {
+            display: flex;
+            gap: var(--space-4);
+            margin-top: var(--space-6);
+            flex-wrap: wrap;
+        }
+
+        .career-selector-slot {
+            flex: 1;
+            min-width: 250px;
+            padding: var(--space-4);
+            background: var(--color-surface-card);
+            border: 2px dashed var(--color-border-default);
+            border-radius: var(--radius-xl);
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition-all);
+        }
+
+        .career-selector-slot:hover {
+            border-color: var(--color-accent-primary);
+            background: var(--color-bg-elevated);
+        }
+
+        .career-selector-slot.filled {
+            border-style: solid;
+            text-align: left;
+        }
+
+        .career-selector-slot.filled-0 {
+            border-color: var(--color-chart-1);
+        }
+
+        .career-selector-slot.filled-1 {
+            border-color: var(--color-chart-2);
+        }
+
+        .career-selector-slot.filled-2 {
+            border-color: var(--color-chart-3);
+        }
+
+        .career-selector-slot.filled-3 {
+            border-color: var(--color-chart-4);
+        }
+
+        .slot-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .slot-remove {
+            background: transparent;
+            border: none;
+            color: var(--color-text-tertiary);
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .slot-remove:hover {
+            color: var(--color-error);
+        }
+
+        .comparison-content {
+            padding: var(--space-8) 0;
+        }
+
+        .comparison-section {
+            margin-bottom: var(--space-8);
+        }
+
+        .comparison-section-title {
+            font-size: var(--font-size-xl);
+            font-weight: var(--font-weight-bold);
+            margin-bottom: var(--space-4);
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: var(--space-3) var(--space-4);
+            text-align: left;
+            border-bottom: 1px solid var(--color-border-subtle);
+        }
+
+        .comparison-table th {
+            background: var(--color-bg-elevated);
+            font-weight: var(--font-weight-semibold);
+            font-size: var(--font-size-sm);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--color-text-tertiary);
+        }
+
+        .comparison-table th:first-child {
+            border-radius: var(--radius-lg) 0 0 0;
+        }
+
+        .comparison-table th:last-child {
+            border-radius: 0 var(--radius-lg) 0 0;
+        }
+
+        .comparison-table td:first-child {
+            font-weight: var(--font-weight-medium);
+            color: var(--color-text-secondary);
+            width: 180px;
+        }
+
+        .comparison-table tr:hover td {
+            background: var(--color-bg-elevated);
+        }
+
+        .comparison-table .highlight {
+            color: var(--color-success);
+            font-weight: var(--font-weight-semibold);
+        }
+
+        .comparison-table .highlight::after {
+            content: ' ✓';
+            font-size: 12px;
+        }
+
+        .color-indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: var(--space-2);
+        }
+
+        .comparison-chart-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: var(--space-6);
+            margin-top: var(--space-6);
+        }
+
+        .quick-verdict {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--space-4);
+            margin-top: var(--space-6);
+        }
+
+        .verdict-card {
+            padding: var(--space-4);
+            background: var(--color-surface-card);
+            border: 1px solid var(--color-border-subtle);
+            border-radius: var(--radius-lg);
+            text-align: center;
+        }
+
+        .verdict-card h4 {
+            font-size: var(--font-size-sm);
+            color: var(--color-text-tertiary);
+            margin-bottom: var(--space-2);
+        }
+
+        .verdict-winner {
+            font-weight: var(--font-weight-bold);
+            font-size: var(--font-size-lg);
+        }
+
+        .search-dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: var(--color-surface-card);
+            border: 1px solid var(--color-border-default);
+            border-radius: var(--radius-lg);
+            max-height: 300px;
+            overflow-y: auto;
+            z-index: 100;
+            box-shadow: var(--shadow-lg);
+            display: none;
+        }
+
+        .search-dropdown.open {
+            display: block;
+        }
+
+        .search-dropdown-item {
+            padding: var(--space-3) var(--space-4);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--color-border-subtle);
+        }
+
+        .search-dropdown-item:hover {
+            background: var(--color-bg-elevated);
+        }
+
+        .search-dropdown-item:last-child {
+            border-bottom: none;
+        }
+
+        @media (max-width: 768px) {
+            .comparison-table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="app">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="container flex items-center justify-between h-full">
+                <a href="index.html" class="flex items-center gap-2" style="text-decoration: none;">
+                    <span style="font-size: 1.5rem;">📊</span>
+                    <span class="font-bold text-lg">CareerData</span>
+                </a>
+
+                <nav class="flex items-center gap-6 md-show">
+                    <a href="explore.html" class="text-secondary font-medium" style="text-decoration: none;">Explore</a>
+                    <a href="compare.html" class="text-accent font-medium" style="text-decoration: none;">Compare</a>
+                    <a href="analytics.html" class="text-secondary font-medium"
+                        style="text-decoration: none;">Analytics</a>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Compare Header -->
+        <section class="compare-header">
+            <div class="container">
+                <h1 class="h2 mb-2">Compare Careers</h1>
+                <p class="text-secondary">Select up to 4 careers to compare side-by-side across all metrics</p>
+
+                <div class="career-selector" id="career-selector">
+                    <div class="career-selector-slot filled filled-0" data-slot="0">
+                        <div class="slot-header">
+                            <div>
+                                <span class="tier-badge tier-badge-2 mb-2">T2</span>
+                                <h3 class="font-semibold">HVAC Technician</h3>
+                                <span class="text-sm text-secondary">Mechanical Trades</span>
+                            </div>
+                            <button class="slot-remove" onclick="removeCareer(0)">×</button>
+                        </div>
+                    </div>
+
+                    <div class="career-selector-slot filled filled-1" data-slot="1">
+                        <div class="slot-header">
+                            <div>
+                                <span class="tier-badge tier-badge-0 mb-2">T0</span>
+                                <h3 class="font-semibold">Roofing Contractor</h3>
+                                <span class="text-sm text-secondary">Construction Trades</span>
+                            </div>
+                            <button class="slot-remove" onclick="removeCareer(1)">×</button>
+                        </div>
+                    </div>
+
+                    <div class="career-selector-slot" data-slot="2" onclick="openCareerSearch(2)">
+                        <div class="text-tertiary">
+                            <div style="font-size: 2rem; margin-bottom: 0.5rem;">+</div>
+                            <div>Add Career</div>
+                        </div>
+                    </div>
+
+                    <div class="career-selector-slot" data-slot="3" onclick="openCareerSearch(3)">
+                        <div class="text-tertiary">
+                            <div style="font-size: 2rem; margin-bottom: 0.5rem;">+</div>
+                            <div>Add Career</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Comparison Content -->
+        <main class="container comparison-content">
+
+            <!-- Quick Verdict -->
+            <section class="comparison-section">
+                <h2 class="comparison-section-title">🏆 Quick Verdict</h2>
+
+                <div class="quick-verdict">
+                    <div class="verdict-card">
+                        <h4>Highest Salary</h4>
+                        <div class="verdict-winner" style="color: var(--color-chart-1);">HVAC Technician</div>
+                        <div class="text-sm text-secondary">$59,800 median</div>
+                    </div>
+                    <div class="verdict-card">
+                        <h4>Fastest to Start</h4>
+                        <div class="verdict-winner" style="color: var(--color-chart-2);">Roofing Contractor</div>
+                        <div class="text-sm text-secondary">1-2 months</div>
+                    </div>
+                    <div class="verdict-card">
+                        <h4>Highest Growth</h4>
+                        <div class="verdict-winner" style="color: var(--color-chart-1);">HVAC Technician</div>
+                        <div class="text-sm text-secondary">+6% 10-year</div>
+                    </div>
+                    <div class="verdict-card">
+                        <h4>Lowest Barrier</h4>
+                        <div class="verdict-winner" style="color: var(--color-chart-2);">Roofing Contractor</div>
+                        <div class="text-sm text-secondary">T0 - Owner Now</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Basic Info Comparison -->
+            <section class="comparison-section">
+                <h2 class="comparison-section-title">📋 Basic Information</h2>
+
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Metric</th>
+                            <th><span class="color-indicator" style="background: var(--color-chart-1);"></span>HVAC
+                                Technician</th>
+                            <th><span class="color-indicator" style="background: var(--color-chart-2);"></span>Roofing
+                                Contractor</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Tier</td>
+                            <td>T2 - Journeyman Path</td>
+                            <td class="highlight">T0 - Owner Now</td>
+                        </tr>
+                        <tr>
+                            <td>Category</td>
+                            <td>Mechanical Trades</td>
+                            <td>Construction Trades</td>
+                        </tr>
+                        <tr>
+                            <td>Time to Ownership</td>
+                            <td>6 years (with Master)</td>
+                            <td class="highlight">1-2 months</td>
+                        </tr>
+                        <tr>
+                            <td>Education Required</td>
+                            <td>Trade School + Apprenticeship</td>
+                            <td class="highlight">None required</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- Compensation Comparison -->
+            <section class="comparison-section">
+                <h2 class="comparison-section-title">💰 Compensation</h2>
+
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Metric</th>
+                            <th><span class="color-indicator" style="background: var(--color-chart-1);"></span>HVAC
+                                Technician</th>
+                            <th><span class="color-indicator" style="background: var(--color-chart-2);"></span>Roofing
+                                Contractor</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Entry Salary</td>
+                            <td class="highlight">$38,480</td>
+                            <td>$33,280</td>
+                        </tr>
+                        <tr>
+                            <td>Median Salary</td>
+                            <td class="highlight">$59,800</td>
+                            <td>$50,000</td>
+                        </tr>
+                        <tr>
+                            <td>Top 10% Salary</td>
+                            <td class="highlight">$100,880</td>
+                            <td>$87,670</td>
+                        </tr>
+                        <tr>
+                            <td>Owner Y1 Revenue</td>
+                            <td>$150,000</td>
+                            <td class="highlight">$250,000</td>
+                        </tr>
+                        <tr>
+                            <td>Profit Margin</td>
+                            <td>28%</td>
+                            <td class="highlight">30%</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="comparison-chart-row">
+                    <div class="chart-container">
+                        <div class="chart-header">
+                            <h4 class="chart-title">Salary Comparison</h4>
+                        </div>
+                        <div class="chart-wrapper" style="height: 250px;">
+                            <canvas id="salary-comparison-chart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="chart-container">
+                        <div class="chart-header">
+                            <h4 class="chart-title">Salary by Experience</h4>
+                        </div>
+                        <div class="chart-wrapper" style="height: 250px;">
+                            <canvas id="experience-comparison-chart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Timeline Comparison -->
+            <section class="comparison-section">
+                <h2 class="comparison-section-title">📅 Timeline</h2>
+
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Milestone</th>
+                            <th><span class="color-indicator" style="background: var(--color-chart-1);"></span>HVAC
+                                Technician</th>
+                            <th><span class="color-indicator" style="background: var(--color-chart-2);"></span>Roofing
+                                Contractor</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Time to Entry Level</td>
+                            <td>Immediate</td>
+                            <td>Immediate</td>
+                        </tr>
+                        <tr>
+                            <td>Time to Full Certification</td>
+                            <td>4 years (Journeyman)</td>
+                            <td class="highlight">1-2 weeks (Mfr cert)</td>
+                        </tr>
+                        <tr>
+                            <td>Time to Business Ownership</td>
+                            <td>6 years</td>
+                            <td class="highlight">1-2 months</td>
+                        </tr>
+                        <tr>
+                            <td>Apprenticeship Required</td>
+                            <td>Yes (4 years)</td>
+                            <td class="highlight">No</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- Licensing Comparison -->
+            <section class="comparison-section">
+                <h2 class="comparison-section-title">📜 Licensing & Requirements</h2>
+
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Requirement</th>
+                            <th><span class="color-indicator" style="background: var(--color-chart-1);"></span>HVAC
+                                Technician</th>
+                            <th><span class="color-indicator" style="background: var(--color-chart-2);"></span>Roofing
+                                Contractor</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>State License Required</td>
+                            <td>Yes (Journeyman/Master)</td>
+                            <td class="highlight">No trade license</td>
+                        </tr>
+                        <tr>
+                            <td># of Licenses Needed</td>
+                            <td>2-3</td>
+                            <td class="highlight">1-2 (business only)</td>
+                        </tr>
+                        <tr>
+                            <td>Exam Pass Rate</td>
+                            <td>72%</td>
+                            <td class="highlight">100% (no trade exam)</td>
+                        </tr>
+                        <tr>
+                            <td>Bonding Required</td>
+                            <td>$25,000</td>
+                            <td>$15,000</td>
+                        </tr>
+                        <tr>
+                            <td>Insurance Minimum</td>
+                            <td>$1M GL</td>
+                            <td>$1M GL</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- Business Comparison -->
+            <section class="comparison-section">
+                <h2 class="comparison-section-title">🏢 Business Ownership</h2>
+
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Metric</th>
+                            <th><span class="color-indicator" style="background: var(--color-chart-1);"></span>HVAC
+                                Technician</th>
+                            <th><span class="color-indicator" style="background: var(--color-chart-2);"></span>Roofing
+                                Contractor</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Startup Cost (Min)</td>
+                            <td>$15,000</td>
+                            <td class="highlight">$8,000</td>
+                        </tr>
+                        <tr>
+                            <td>Startup Cost (Typical)</td>
+                            <td>$45,000</td>
+                            <td class="highlight">$35,000</td>
+                        </tr>
+                        <tr>
+                            <td>Year 1 Revenue</td>
+                            <td>$150,000</td>
+                            <td class="highlight">$250,000</td>
+                        </tr>
+                        <tr>
+                            <td>Year 5 Revenue</td>
+                            <td>$600,000</td>
+                            <td class="highlight">$1,500,000</td>
+                        </tr>
+                        <tr>
+                            <td>Break Even</td>
+                            <td>6 months</td>
+                            <td class="highlight">3 months</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- Work Environment Comparison -->
+            <section class="comparison-section">
+                <h2 class="comparison-section-title">🛠️ Work Environment</h2>
+
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Factor</th>
+                            <th><span class="color-indicator" style="background: var(--color-chart-1);"></span>HVAC
+                                Technician</th>
+                            <th><span class="color-indicator" style="background: var(--color-chart-2);"></span>Roofing
+                                Contractor</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Physical Demand Level</td>
+                            <td class="highlight">4/5 (Heavy)</td>
+                            <td>5/5 (Very Heavy)</td>
+                        </tr>
+                        <tr>
+                            <td>Injury Rate (per 1000)</td>
+                            <td class="highlight">4.2</td>
+                            <td>29.9</td>
+                        </tr>
+                        <tr>
+                            <td>On-Call Required</td>
+                            <td>Yes (rotating)</td>
+                            <td class="highlight">No</td>
+                        </tr>
+                        <tr>
+                            <td>Weather Dependency</td>
+                            <td class="highlight">Low</td>
+                            <td>High</td>
+                        </tr>
+                        <tr>
+                            <td>Job Satisfaction</td>
+                            <td class="highlight">72/100</td>
+                            <td>68/100</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="comparison-chart-row">
+                    <div class="chart-container">
+                        <div class="chart-header">
+                            <h4 class="chart-title">Skills Comparison</h4>
+                        </div>
+                        <div style="display: flex; justify-content: center; align-items: center; height: 300px;">
+                            <canvas id="skills-radar-chart" style="max-width: 350px; max-height: 350px;"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Market Outlook Comparison -->
+            <section class="comparison-section">
+                <h2 class="comparison-section-title">📈 Market Outlook</h2>
+
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Metric</th>
+                            <th><span class="color-indicator" style="background: var(--color-chart-1);"></span>HVAC
+                                Technician</th>
+                            <th><span class="color-indicator" style="background: var(--color-chart-2);"></span>Roofing
+                                Contractor</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>US Employment</td>
+                            <td class="highlight">394,200</td>
+                            <td>156,800</td>
+                        </tr>
+                        <tr>
+                            <td>10-Year Growth</td>
+                            <td class="highlight">+6%</td>
+                            <td>+4%</td>
+                        </tr>
+                        <tr>
+                            <td>Annual Openings</td>
+                            <td class="highlight">34,800</td>
+                            <td>15,100</td>
+                        </tr>
+                        <tr>
+                            <td>Automation Risk</td>
+                            <td>Low (15%)</td>
+                            <td class="highlight">Very Low (5%)</td>
+                        </tr>
+                        <tr>
+                            <td>Self-Employment Rate</td>
+                            <td>12%</td>
+                            <td class="highlight">14%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- Download/Export -->
+            <section class="comparison-section text-center">
+                <button class="btn btn-primary btn-lg">📥 Export Comparison (PDF)</button>
+                <button class="btn btn-secondary btn-lg ml-3">🔗 Share Comparison</button>
+            </section>
+
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container text-center">
+                <p class="text-sm text-tertiary">
+                    Data sourced from BLS, O*NET, and state licensing boards. Last updated: December 2024.
+                </p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="js/charts.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Salary Comparison Bar Chart
+            Charts.comparisonBar('salary-comparison-chart', {
+                labels: ['Entry', 'Median', '75th %', 'Top 10%'],
+                datasets: [
+                    { label: 'HVAC Technician', values: [38480, 59800, 79040, 100880] },
+                    { label: 'Roofing Contractor', values: [33280, 50000, 67560, 87670] }
+                ]
+            });
+
+            // Experience Progression Chart
+            Charts.trendLine('experience-comparison-chart', {
+                labels: ['Yr 1', 'Yr 2', 'Yr 4', 'Yr 6', 'Yr 10'],
+                datasets: [
+                    { label: 'HVAC Technician', values: [35000, 40000, 50000, 70000, 95000] },
+                    { label: 'Roofing Contractor', values: [35000, 45000, 55000, 75000, 120000] }
+                ]
+            });
+
+            // Skills Radar
+            Charts.radar('skills-radar-chart', {
+                labels: ['Technical', 'Customer Svc', 'Physical', 'Problem Solving', 'Sales', 'Leadership'],
+                datasets: [
+                    { label: 'HVAC Technician', values: [95, 90, 80, 95, 70, 75] },
+                    { label: 'Roofing Contractor', values: [75, 85, 95, 80, 90, 85] }
+                ]
+            });
+        });
+
+        function removeCareer(slot) {
+            // Would remove career from comparison
+            console.log('Removing career from slot', slot);
+        }
+
+        function openCareerSearch(slot) {
+            // Would open career search modal
+            console.log('Opening search for slot', slot);
+        }
+    </script>
+</body>
+
+</html>

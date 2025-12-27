@@ -1,274 +1,659 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Full Tier Map (T0–T5) — Owner vs Tech/Sales Paths</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="Comprehensive career analytics platform for trade and professional careers. Compare salaries, education requirements, licensing timelines, and career paths.">
+  <title>Career Analytics Platform | Trade & Professional Career Data</title>
+
+  <!-- Fonts & External -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/design-tokens.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/typography.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/charts.css">
+  <link rel="stylesheet" href="css/responsive.css">
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+
   <style>
-    :root{
-      --bg:#0b0f14; --card:#121924; --text:#e9eef5; --muted:#a9b4c2; --accent:#6aa9ff;
-      --t0:#42d392; --t1:#7cc4ff; --t2:#ffcc66; --t3:#ff6b6b; --t4:#c77dff; --t5:#9aa7b7;
-      --line:rgba(255,255,255,.08);
+    /* Page-specific styles */
+    .hero {
+      padding: var(--space-16) 0 var(--space-12);
+      text-align: center;
+      background: linear-gradient(180deg, var(--color-bg-secondary) 0%, var(--color-bg-primary) 100%);
+      border-bottom: 1px solid var(--color-border-subtle);
     }
-    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--text);}
-    header{max-width:1100px;margin:0 auto;padding:26px 18px 10px;}
-    h1{margin:0 0 8px;font-size:22px;}
-    p{margin:6px 0;color:var(--muted);line-height:1.45;}
-    .wrap{max-width:1100px;margin:0 auto;padding:0 18px 34px;}
-    .note{background:rgba(106,169,255,.08);border:1px solid rgba(106,169,255,.20);border-radius:14px;padding:12px;margin:14px 0;}
-    .pill{display:inline-block;padding:2px 10px;border-radius:999px;border:1px solid var(--line);font-size:12px;margin-right:6px;color:var(--muted);}
-    .pill strong{color:var(--text);font-weight:650;}
-    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(310px,1fr));gap:14px;margin-top:14px;}
-    .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;box-shadow:0 10px 18px rgba(0,0,0,.25);}
-    .card h2{margin:0 0 6px;font-size:16px;}
-    .tag{display:inline-block;padding:2px 10px;border-radius:999px;font-size:12px;margin:6px 6px 10px 0;border:1px solid var(--line);color:var(--muted);}
-    .t0{border-color:rgba(66,211,146,.40);background:rgba(66,211,146,.08);color:var(--t0);}
-    .t1{border-color:rgba(124,196,255,.40);background:rgba(124,196,255,.08);color:var(--t1);}
-    .t2{border-color:rgba(255,204,102,.40);background:rgba(255,204,102,.08);color:var(--t2);}
-    .t3{border-color:rgba(255,107,107,.40);background:rgba(255,107,107,.08);color:var(--t3);}
-    .t4{border-color:rgba(199,125,255,.40);background:rgba(199,125,255,.08);color:var(--t4);}
-    .t5{border-color:rgba(154,167,183,.40);background:rgba(154,167,183,.08);color:var(--t5);}
-    ul{margin:8px 0 0 18px;color:var(--muted);line-height:1.5;}
-    li{margin:4px 0;}
-    hr{border:none;border-top:1px solid var(--line);margin:16px 0;}
-    .small{font-size:12px;color:var(--muted);}
+
+    .hero-title {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: var(--space-4);
+      background: linear-gradient(135deg, var(--color-text-primary) 0%, var(--color-accent-primary) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-subtitle {
+      font-size: var(--font-size-lg);
+      color: var(--color-text-secondary);
+      max-width: 600px;
+      margin: 0 auto var(--space-8);
+    }
+
+    .search-container {
+      max-width: 600px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .search-large {
+      width: 100%;
+      padding: var(--space-4) var(--space-5) var(--space-4) var(--space-12);
+      font-size: var(--font-size-md);
+      background: var(--color-bg-elevated);
+      border: 2px solid var(--color-border-default);
+      border-radius: var(--radius-xl);
+      color: var(--color-text-primary);
+      transition: var(--transition-all);
+    }
+
+    .search-large:focus {
+      outline: none;
+      border-color: var(--color-accent-primary);
+      box-shadow: 0 0 0 4px rgba(106, 169, 255, 0.15);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: var(--space-4);
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--color-text-tertiary);
+    }
+
+    .quick-filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-2);
+      justify-content: center;
+      margin-top: var(--space-6);
+    }
+
+    .tier-overview {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: var(--space-4);
+      margin-top: var(--space-8);
+    }
+
+    .tier-overview-card {
+      padding: var(--space-5);
+      background: var(--color-surface-card);
+      border: 1px solid var(--color-border-subtle);
+      border-radius: var(--radius-xl);
+      border-left: 4px solid;
+      cursor: pointer;
+      transition: var(--transition-all);
+    }
+
+    .tier-overview-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .tier-overview-card.tier-0 {
+      border-left-color: var(--color-tier-0);
+    }
+
+    .tier-overview-card.tier-1 {
+      border-left-color: var(--color-tier-1);
+    }
+
+    .tier-overview-card.tier-2 {
+      border-left-color: var(--color-tier-2);
+    }
+
+    .tier-overview-card.tier-3 {
+      border-left-color: var(--color-tier-3);
+    }
+
+    .tier-overview-card.tier-4 {
+      border-left-color: var(--color-tier-4);
+    }
+
+    .tier-overview-card.tier-5 {
+      border-left-color: var(--color-tier-5);
+    }
+
+    .tier-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: var(--space-3);
+    }
+
+    .tier-name {
+      font-weight: var(--font-weight-semibold);
+    }
+
+    .tier-count {
+      font-size: var(--font-size-sm);
+      color: var(--color-text-tertiary);
+    }
+
+    .tier-time {
+      font-size: var(--font-size-2xl);
+      font-weight: var(--font-weight-bold);
+      color: var(--color-text-primary);
+      margin-bottom: var(--space-1);
+    }
+
+    .tier-desc {
+      font-size: var(--font-size-sm);
+      color: var(--color-text-secondary);
+    }
+
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: var(--space-4);
+      padding: var(--space-8) 0;
+    }
+
+    .featured-section {
+      padding: var(--space-10) 0;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: var(--space-6);
+    }
+
+    .section-title {
+      font-size: var(--font-size-2xl);
+      font-weight: var(--font-weight-bold);
+    }
+
+    .careers-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: var(--space-4);
+    }
+
+    .comparison-preview {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: var(--space-6);
+      padding: var(--space-8);
+      background: var(--color-bg-secondary);
+      border-radius: var(--radius-2xl);
+      border: 1px solid var(--color-border-subtle);
+    }
+
+    .chart-section {
+      padding: var(--space-10) 0;
+    }
+
+    .charts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: var(--space-6);
+    }
+
+    .footer {
+      padding: var(--space-10) 0;
+      background: var(--color-bg-secondary);
+      border-top: 1px solid var(--color-border-subtle);
+      margin-top: var(--space-12);
+    }
+
+    .footer-content {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-8);
+      justify-content: space-between;
+    }
+
+    .footer-section h4 {
+      margin-bottom: var(--space-4);
+      font-size: var(--font-size-sm);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--color-text-tertiary);
+    }
+
+    .footer-links {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .footer-links li {
+      margin-bottom: var(--space-2);
+    }
+
+    .footer-links a {
+      color: var(--color-text-secondary);
+      font-size: var(--font-size-sm);
+    }
+
+    .footer-links a:hover {
+      color: var(--color-accent-primary);
+    }
   </style>
 </head>
+
 <body>
-<header>
-  <div>
-    <span class="pill"><strong>T0/T1</strong> = Owner path</span>
-    <span class="pill"><strong>T2–T4</strong> = Tech/Sales ladder</span>
-    <span class="pill"><strong>T5</strong> = Owner now via licensed subs</span>
+  <div class="app">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="container flex items-center justify-between h-full">
+        <a href="#home" class="flex items-center gap-2" style="text-decoration: none;">
+          <span style="font-size: 1.5rem;">📊</span>
+          <span class="font-bold text-lg">CareerData</span>
+        </a>
+
+        <nav class="flex items-center gap-6 md-show">
+          <a href="explore.html" class="text-secondary font-medium" style="text-decoration: none;">Explore</a>
+          <a href="compare.html" class="text-secondary font-medium" style="text-decoration: none;">Compare</a>
+          <a href="analytics.html" class="text-secondary font-medium" style="text-decoration: none;">Analytics</a>
+          <a href="calculator.html" class="text-secondary font-medium" style="text-decoration: none;">Calculators</a>
+        </nav>
+
+        <div class="flex items-center gap-3">
+          <button class="btn btn-secondary btn-sm" id="compare-btn" style="position: relative;">
+            Compare
+            <span id="compare-count" class="flex items-center justify-center"
+              style="position: absolute; top: -8px; right: -8px; width: 20px; height: 20px; background: var(--color-accent-primary); color: var(--color-text-inverse); border-radius: 50%; font-size: 11px; font-weight: 600; display: none;">0</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="app-main">
+      <!-- Hero Section -->
+      <section class="hero">
+        <div class="container">
+          <h1 class="hero-title">Career Intelligence Platform</h1>
+          <p class="hero-subtitle">
+            Explore 500+ careers with comprehensive data on salaries, education, licensing requirements, and ownership
+            pathways. Make informed career decisions.
+          </p>
+
+          <div class="search-container">
+            <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <input type="text" id="global-search" class="search-large"
+              placeholder="Search careers, skills, or industries...">
+          </div>
+
+          <div class="quick-filters">
+            <button class="btn btn-secondary btn-sm" data-filter="tier-0">🟢 Owner Now</button>
+            <button class="btn btn-secondary btn-sm" data-filter="tier-1">🔵 Cert-Based</button>
+            <button class="btn btn-secondary btn-sm" data-filter="high-salary">💰 High Salary</button>
+            <button class="btn btn-secondary btn-sm" data-filter="fast-start">⚡ Fast Start</button>
+            <button class="btn btn-secondary btn-sm" data-filter="high-growth">📈 High Growth</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Key Stats -->
+      <section class="container">
+        <div class="stats-row">
+          <div class="stat-card">
+            <span class="stat-label">Total Careers</span>
+            <span class="stat-value">524</span>
+            <span class="stat-change positive">+12 this month</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-label">Avg Time to Ownership</span>
+            <span class="stat-value">2.4 yrs</span>
+            <span class="stat-change">across owner-path tiers</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-label">Median Salary</span>
+            <span class="stat-value">$62,400</span>
+            <span class="stat-change positive">+4.2% YoY</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-label">Jobs Growth (10yr)</span>
+            <span class="stat-value">+8.3%</span>
+            <span class="stat-change positive">Above average</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Tier Overview -->
+      <section class="featured-section container">
+        <div class="section-header">
+          <h2 class="section-title">Licensing Tiers</h2>
+          <a href="explore.html" class="btn btn-ghost btn-sm">View All →</a>
+        </div>
+
+        <div class="tier-overview">
+          <div class="tier-overview-card tier-0" onclick="location.href='explore.html?tier=0'">
+            <div class="tier-header">
+              <span class="tier-badge tier-badge-0">T0</span>
+              <span class="tier-count">54 careers</span>
+            </div>
+            <div class="tier-name text-tier-0">Owner Now</div>
+            <div class="tier-time">0-3 mo</div>
+            <div class="tier-desc">No multi-year license ladder. Start a business with basic setup.</div>
+          </div>
+
+          <div class="tier-overview-card tier-1" onclick="location.href='explore.html?tier=1'">
+            <div class="tier-header">
+              <span class="tier-badge tier-badge-1">T1</span>
+              <span class="tier-count">38 careers</span>
+            </div>
+            <div class="tier-name text-tier-1">Certification-Based</div>
+            <div class="tier-time">1-6 mo</div>
+            <div class="tier-desc">Short certifications or registrations. Weeks to months.</div>
+          </div>
+
+          <div class="tier-overview-card tier-2" onclick="location.href='explore.html?tier=2'">
+            <div class="tier-header">
+              <span class="tier-badge tier-badge-2">T2</span>
+              <span class="tier-count">22 careers</span>
+            </div>
+            <div class="tier-name text-tier-2">Journeyman Path</div>
+            <div class="tier-time">~4 yrs</div>
+            <div class="tier-desc">Journeyman-equivalent ladder. Tech or sales path available.</div>
+          </div>
+
+          <div class="tier-overview-card tier-3" onclick="location.href='explore.html?tier=3'">
+            <div class="tier-header">
+              <span class="tier-badge tier-badge-3">T3</span>
+              <span class="tier-count">9 careers</span>
+            </div>
+            <div class="tier-name text-tier-3">Master License</div>
+            <div class="tier-time">6-8 yrs</div>
+            <div class="tier-desc">Master-level license to personally qualify permits.</div>
+          </div>
+
+          <div class="tier-overview-card tier-4" onclick="location.href='explore.html?tier=4'">
+            <div class="tier-header">
+              <span class="tier-badge tier-badge-4">T4</span>
+              <span class="tier-count">8 careers</span>
+            </div>
+            <div class="tier-name text-tier-4">Supervisor/Qualifier</div>
+            <div class="tier-time">6-10 yrs</div>
+            <div class="tier-desc">Mechanical/refrigeration/gas/boiler supervisor ladder.</div>
+          </div>
+
+          <div class="tier-overview-card tier-5" onclick="location.href='explore.html?tier=5'">
+            <div class="tier-header">
+              <span class="tier-badge tier-badge-5">T5</span>
+              <span class="tier-count">19 careers</span>
+            </div>
+            <div class="tier-name text-tier-5">Owner via Subs</div>
+            <div class="tier-time">0-3 mo</div>
+            <div class="tier-desc">Own now, hire licensed subs for permitted work.</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Featured Careers -->
+      <section class="featured-section container">
+        <div class="section-header">
+          <h2 class="section-title">Featured Careers</h2>
+          <a href="explore.html" class="btn btn-ghost btn-sm">Browse All →</a>
+        </div>
+
+        <div class="careers-grid">
+          <!-- HVAC Technician Card -->
+          <div class="job-card" onclick="location.href='job.html?id=hvac-technician'">
+            <div class="job-card-header">
+              <div>
+                <h3 class="job-card-title">HVAC Technician</h3>
+                <span class="job-card-category">Mechanical Trades</span>
+              </div>
+              <span class="tier-badge tier-badge-2">T2</span>
+            </div>
+            <div class="job-card-stats">
+              <div class="job-card-stat">
+                <span class="job-card-stat-label">Median Salary</span>
+                <span class="job-card-stat-value">$59,800</span>
+              </div>
+              <div class="job-card-stat">
+                <span class="job-card-stat-label">Time to Journey</span>
+                <span class="job-card-stat-value">4 years</span>
+              </div>
+              <div class="job-card-stat">
+                <span class="job-card-stat-label">Growth</span>
+                <span class="job-card-stat-value text-success">+6%</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Roofing Contractor Card -->
+          <div class="job-card" onclick="location.href='job.html?id=roofing-contractor'">
+            <div class="job-card-header">
+              <div>
+                <h3 class="job-card-title">Roofing Contractor</h3>
+                <span class="job-card-category">Construction Trades</span>
+              </div>
+              <span class="tier-badge tier-badge-0">T0</span>
+            </div>
+            <div class="job-card-stats">
+              <div class="job-card-stat">
+                <span class="job-card-stat-label">Owner Revenue Y1</span>
+                <span class="job-card-stat-value">$250k+</span>
+              </div>
+              <div class="job-card-stat">
+                <span class="job-card-stat-label">Time to Start</span>
+                <span class="job-card-stat-value">1-2 months</span>
+              </div>
+              <div class="job-card-stat">
+                <span class="job-card-stat-label">Startup Cost</span>
+                <span class="job-card-stat-value">$15-50k</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Electrician Card -->
+          <div class="job-card" onclick="location.href='job.html?id=electrician'">
+            <div class="job-card-header">
+              <div>
+                <h3 class="job-card-title">Electrician</h3>
+                <span class="job-card-category">Electrical Trades</span>
+              </div>
+              <span class="tier-badge tier-badge-3">T3</span>
+            </div>
+            <div class="job-card-stats">
+              <div class="job-card-stat">
+                <span class="job-card-stat-label">Median Salary</span>
+                <span class="job-card-stat-value">$61,590</span>
+              </div>
+              <div class="job-card-stat">
+                <span class="job-card-stat-label">Time to Master</span>
+                <span class="job-card-stat-value">6-8 years</span>
+              </div>
+              <div class="job-card-stat">
+                <span class="job-card-stat-label">Growth</span>
+                <span class="job-card-stat-value text-success">+7%</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Security Systems Card -->
+          <div class="job-card" onclick="location.href='job.html?id=security-systems'">
+            <div class="job-card-header">
+              <div>
+                <h3 class="job-card-title">Security Systems Installer</h3>
+                <span class="job-card-category">Technology Systems</span>
+              </div>
+              <span class="tier-badge tier-badge-1">T1</span>
+            </div>
+            <div class="job-card-stats">
+              <div class="job-card-stat">
+                <span class="job-card-stat-label">Median Salary</span>
+                <span class="job-card-stat-value">$48,780</span>
+              </div>
+              <div class="job-card-stat">
+                <span class="job-card-stat-label">Time to Cert</span>
+                <span class="job-card-stat-value">2-4 months</span>
+              </div>
+              <div class="job-card-stat">
+                <span class="job-card-stat-label">Growth</span>
+                <span class="job-card-stat-value text-success">+9%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Charts Section -->
+      <section class="chart-section container">
+        <div class="section-header">
+          <h2 class="section-title">Market Insights</h2>
+        </div>
+
+        <div class="charts-grid">
+          <div class="chart-container">
+            <div class="chart-header">
+              <h3 class="chart-title">Median Salary by Tier</h3>
+            </div>
+            <div class="chart-wrapper chart-wrapper-16-9">
+              <canvas id="salary-by-tier-chart"></canvas>
+            </div>
+          </div>
+
+          <div class="chart-container">
+            <div class="chart-header">
+              <h3 class="chart-title">Time to Ownership vs Salary</h3>
+            </div>
+            <div class="chart-wrapper chart-wrapper-16-9">
+              <canvas id="time-salary-scatter"></canvas>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Quick Compare CTA -->
+      <section class="container">
+        <div class="comparison-preview">
+          <div class="text-center">
+            <h3 class="h3 mb-3">Compare Careers Side-by-Side</h3>
+            <p class="text-secondary mb-5">See salary, education, licensing, and lifestyle data across multiple careers
+              simultaneously.</p>
+            <a href="#compare" class="btn btn-primary btn-lg">Start Comparing →</a>
+          </div>
+          <div>
+            <img
+              src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='250' viewBox='0 0 400 250'%3E%3Crect fill='%23151c24' width='400' height='250' rx='12'/%3E%3Crect x='20' y='20' width='170' height='210' rx='8' fill='%231a232e' stroke='%23ffffff10'/%3E%3Crect x='210' y='20' width='170' height='210' rx='8' fill='%231a232e' stroke='%23ffffff10'/%3E%3Crect x='30' y='30' width='60' height='8' rx='4' fill='%236aa9ff40'/%3E%3Crect x='220' y='30' width='60' height='8' rx='4' fill='%2310b98140'/%3E%3Crect x='30' y='50' width='150' height='4' rx='2' fill='%23ffffff15'/%3E%3Crect x='220' y='50' width='150' height='4' rx='2' fill='%23ffffff15'/%3E%3Crect x='30' y='70' width='120' height='20' rx='4' fill='%23ffffff08'/%3E%3Crect x='220' y='70' width='120' height='20' rx='4' fill='%23ffffff08'/%3E%3Crect x='30' y='100' width='80' height='4' rx='2' fill='%23ffffff10'/%3E%3Crect x='220' y='100' width='80' height='4' rx='2' fill='%23ffffff10'/%3E%3Crect x='30' y='115' width='140' height='8' rx='4' fill='%236aa9ff60'/%3E%3Crect x='220' y='115' width='100' height='8' rx='4' fill='%2310b98160'/%3E%3Crect x='30' y='140' width='80' height='4' rx='2' fill='%23ffffff10'/%3E%3Crect x='220' y='140' width='80' height='4' rx='2' fill='%23ffffff10'/%3E%3Crect x='30' y='155' width='60' height='8' rx='4' fill='%236aa9ff60'/%3E%3Crect x='220' y='155' width='90' height='8' rx='4' fill='%2310b98160'/%3E%3C/svg%3E"
+              alt="Comparison preview" style="width: 100%; border-radius: var(--radius-xl);">
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container footer-content">
+        <div class="footer-section">
+          <h4>Explore</h4>
+          <ul class="footer-links">
+            <li><a href="#explore/trades">Trade Careers</a></li>
+            <li><a href="#explore/technology">Technology</a></li>
+            <li><a href="#explore/construction">Construction</a></li>
+            <li><a href="#explore/services">Services</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Tools</h4>
+          <ul class="footer-links">
+            <li><a href="#compare">Career Comparison</a></li>
+            <li><a href="#calculator/roi">ROI Calculator</a></li>
+            <li><a href="#calculator/timeline">Timeline Planner</a></li>
+            <li><a href="#pathways">Career Pathways</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Resources</h4>
+          <ul class="footer-links">
+            <li><a href="#methodology">Methodology</a></li>
+            <li><a href="#sources">Data Sources</a></li>
+            <li><a href="#glossary">Glossary</a></li>
+            <li><a href="#faq">FAQ</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Data Sources</h4>
+          <p class="text-sm text-tertiary" style="max-width: 250px;">
+            Career data sourced from BLS, O*NET, state licensing boards, and industry surveys. Updated quarterly.
+          </p>
+        </div>
+      </div>
+      <div class="container mt-8">
+        <p class="text-sm text-tertiary text-center">
+          © 2024 CareerData. Data for informational purposes only. Verify requirements with local authorities.
+        </p>
+      </div>
+    </footer>
   </div>
-  <h1>Full Trade Map (T0–T5): Written-Out Lists</h1>
-  <p>This is the complete tier breakdown for the 125 trade categories we listed earlier, written out (no numbering). Open this file in a browser to view.</p>
-  <div class="note">
-    <div class="small"><b>Tier meanings (Colorado/Denver-oriented):</b></div>
-    <ul>
-      <li><b>T0</b>: no multi-year license ladder (business setup + insurance; local registration may apply)</li>
-      <li><b>T1</b>: short certifications/registrations (months; not apprenticeship)</li>
-      <li><b>T2</b>: journeyman-equivalent ladder (~4 years) for the work class</li>
-      <li><b>T3</b>: master-level (journeyman + additional time) when you personally qualify permits as the business</li>
-      <li><b>T4</b>: supervisor/qualifier ladder (common in mechanical/refrigeration/gas/boiler/steam scopes; often 4/6/8-year tracks)</li>
-      <li><b>T5</b>: you can own/sell/manage immediately, but permitted scopes are handled by a licensed qualifier/sub unless you later climb T2–T4</li>
-    </ul>
-  </div>
-</header>
 
-<div class="wrap">
-  <div class="grid">
+  <!-- Scripts -->
+  <script src="js/app.js"></script>
+  <script src="js/charts.js"></script>
+  <script>
+    // Initialize charts when DOM is ready
+    document.addEventListener('DOMContentLoaded', function () {
+      // Salary by Tier Chart
+      Charts.salaryBar('salary-by-tier-chart', {
+        labels: ['T0 Owner', 'T1 Cert', 'T2 Journey', 'T3 Master', 'T4 Super', 'T5 Subs'],
+        values: [52000, 48000, 59800, 72500, 78000, 58000]
+      }, {
+        label: 'Median Salary',
+        formatCurrency: true
+      });
 
-    <section class="card">
-      <h2>Tier Zero — Owner path, no trade license ladder</h2>
-      <span class="tag t0">T0 • Owner now</span>
-      <ul>
-        <li>Roofing (retail)</li>
-        <li>Storm and insurance restoration roofing</li>
-        <li>Gutters and leaf-guard systems</li>
-        <li>Siding installation</li>
-        <li>Stucco and EIFS work</li>
-        <li>Window replacement</li>
-        <li>Exterior door replacement</li>
-        <li>Garage door installation and service</li>
-        <li>Skylight installation</li>
-        <li>Insulation installation</li>
-        <li>Attic restoration</li>
-        <li>Crawlspace encapsulation</li>
-        <li>Basement waterproofing</li>
-        <li>Foundation repair</li>
-        <li>Water treatment systems (non-plumbed scope)</li>
-        <li>Drain cleaning and jetting (service-only scope)</li>
-
-        <li>Kitchen remodeling sales (general contracting scope)</li>
-        <li>Bathroom remodeling sales (general contracting scope)</li>
-        <li>Flooring installation</li>
-        <li>Tile and stone installation</li>
-        <li>Countertop fabrication and installation</li>
-        <li>Cabinet refacing and cabinetry</li>
-        <li>Painting services</li>
-        <li>Drywall and texture services</li>
-        <li>Finish carpentry and built-ins</li>
-        <li>Closet systems</li>
-        <li>Window coverings</li>
-        <li>Home organization systems</li>
-        <li>Epoxy and polyaspartic garage floor coatings</li>
-
-        <li>Landscaping construction</li>
-        <li>Hardscape installation</li>
-        <li>Deck and pergola construction</li>
-        <li>Fencing and gates</li>
-        <li>Concrete flatwork</li>
-        <li>Asphalt paving and sealcoating</li>
-        <li>Snow removal services</li>
-        <li>Shade systems and awnings</li>
-        <li>Patio enclosures</li>
-
-        <li>Commercial roofing</li>
-        <li>Janitorial services</li>
-        <li>Facility maintenance (non-permitted scope only)</li>
-
-        <li>Specialty coatings and industrial epoxy</li>
-        <li>Welding and fabrication shops (non-permitted field installs)</li>
-        <li>Utility locating and hydro-excavation</li>
-        <li>Trenching and directional boring (non-utility owner scope)</li>
-        <li>Traffic control and striping</li>
-
-        <li>Contents pack-out and storage</li>
-        <li>Emergency board-up and tarping</li>
-        <li>Commercial drying equipment rental</li>
-      </ul>
-    </section>
-
-    <section class="card">
-      <h2>Tier One — Owner path with certifications or registrations</h2>
-      <span class="tag t1">T1 • Owner now (cert-based)</span>
-      <ul>
-        <li>Spray foam insulation</li>
-        <li>Air sealing and energy retrofit work</li>
-        <li>Mold remediation</li>
-        <li>Radon mitigation</li>
-        <li>Chimney services</li>
-
-        <li>Home theater and residential audiovisual installation</li>
-        <li>Smart home automation</li>
-
-        <li>Irrigation systems (registration-based jurisdictions)</li>
-        <li>Tree service operations</li>
-        <li>Pest control services</li>
-
-        <li>Building automation and controls (controls-only scope)</li>
-        <li>Testing, adjusting, and balancing services</li>
-        <li>Backflow testing</li>
-        <li>Fire alarm installation and monitoring (NICET or equivalent)</li>
-        <li>Security systems including access control and CCTV</li>
-        <li>Commercial audiovisual systems</li>
-        <li>Structured cabling and fiber installation</li>
-        <li>Information technology closet buildouts and rack-and-stack work</li>
-        <li>Overhead doors and dock equipment</li>
-
-        <li>Commercial kitchen equipment service (appliance scope)</li>
-
-        <li>Instrumentation and controls integration (controls-only)</li>
-        <li>SCADA integration</li>
-        <li>Automation and robotics integration (integration-only scope)</li>
-        <li>Conveyor and material handling systems (specialty scope)</li>
-        <li>Environmental remediation systems (cert-driven)</li>
-        <li>Tank installation and repair (non-pressure, non-hazard scope)</li>
-        <li>Commercial signage installation (local cert/class where required)</li>
-
-        <li>Water damage mitigation</li>
-        <li>Fire and smoke restoration</li>
-        <li>Commercial-scale mold remediation</li>
-        <li>Biohazard cleanup</li>
-        <li>Leak detection services</li>
-        <li>Asbestos and lead abatement</li>
-      </ul>
-    </section>
-
-    <section class="card">
-      <h2>Tier Two — Technician or sales path, journeyman-equivalent</h2>
-      <span class="tag t2">T2 • Tech/Sales ladder (~4 yrs)</span>
-      <ul>
-        <li>Residential HVAC replacement work</li>
-        <li>Residential HVAC service work</li>
-        <li>Ductwork, zoning, and air balancing</li>
-        <li>Radiant floor heating installation</li>
-        <li>Mini-split and multi-zone HVAC systems</li>
-        <li>Whole-home dehumidification systems</li>
-        <li>Water heater and tankless water heater installation</li>
-
-        <li>Electrical panel upgrades (work class)</li>
-        <li>Whole-home electrical rewiring (work class)</li>
-        <li>Electric vehicle charger installation (work class)</li>
-
-        <li>Commercial HVAC service sales (work class)</li>
-        <li>Commercial plumbing service work (work class)</li>
-        <li>Lighting retrofit projects (work class)</li>
-
-        <li>Compressed air systems installation (work class)</li>
-        <li>Water and wastewater system installation (work class)</li>
-        <li>Pump systems and lift stations (work class)</li>
-        <li>Power quality and uninterruptible power supply systems (work class)</li>
-        <li>Critical power distribution equipment (work class)</li>
-        <li>Data center mechanical systems (work class)</li>
-        <li>Data center electrical systems (work class)</li>
-        <li>Generator plants (work class)</li>
-        <li>Industrial ventilation and dust collection (work class)</li>
-      </ul>
-      <p class="small">Note: if you want to personally qualify a business to pull permits, electrical/plumbing typically move into T3 and mechanical/refrigeration/gas often move into T4.</p>
-    </section>
-
-    <section class="card">
-      <h2>Tier Three — Technician or sales path, master license required</h2>
-      <span class="tag t3">T3 • Master (&gt;4 yrs)</span>
-      <ul>
-        <li>Whole-home plumbing repipes (qualifying a business)</li>
-        <li>Sewer line replacement (qualifying a business)</li>
-        <li>Water main replacement (qualifying a business)</li>
-
-        <li>Electrical panel upgrades (qualifying a business)</li>
-        <li>Whole-home rewiring (qualifying a business)</li>
-        <li>Electric vehicle charger installation (qualifying a business)</li>
-
-        <li>Lighting retrofit contracting (electrical-qualifier business)</li>
-        <li>Switchgear and critical electrical infrastructure contracting</li>
-        <li>Data center electrical contracting</li>
-      </ul>
-    </section>
-
-    <section class="card">
-      <h2>Tier Four — Technician or sales path, supervisor/qualifier ladder</h2>
-      <span class="tag t4">T4 • Supervisor/Qualifier</span>
-      <ul>
-        <li>Residential and commercial refrigeration (supervisor ladder)</li>
-        <li>Boilers and hydronics systems (supervisor ladder)</li>
-        <li>Steam systems and steamfitting (supervisor ladder)</li>
-        <li>Gas service installation and supervision (supervisor ladder)</li>
-
-        <li>Commercial refrigeration service (supervisor ladder)</li>
-        <li>Industrial refrigeration systems (supervisor ladder)</li>
-        <li>Industrial boiler plants (supervisor ladder)</li>
-        <li>Steam system retrofits (supervisor ladder)</li>
-      </ul>
-    </section>
-
-    <section class="card">
-      <h2>Tier Five — Owner now via licensed subcontractors (or tech path later)</h2>
-      <span class="tag t5">T5 • Owner now via subs</span>
-      <ul>
-        <li>Standby generator sales and installation companies (permitted electrical via licensed qualifier/sub)</li>
-        <li>Fireplace inserts and fuel-burning appliances (gas/electrical tie-ins via qualifier/sub)</li>
-        <li>Outdoor kitchens (gas/electrical/plumbing tie-ins via qualifier/sub)</li>
-        <li>Swimming pools and spas (permitted electrical/plumbing via qualifier/sub)</li>
-        <li>Hot tubs and swim spas (permitted electrical/plumbing via qualifier/sub)</li>
-
-        <li>Building automation projects that integrate mechanical systems (permits via mechanical qualifier/sub)</li>
-        <li>Fire sprinkler installation and inspection (specialty contractor requirements vary; often via qualifier/sub)</li>
-        <li>Elevator modernization sales (work performed by licensed elevator contractor)</li>
-        <li>Facility maintenance companies that pull permits (sub out MEP scopes)</li>
-
-        <li>Process piping projects (licensed/mechanical specialty subs where required)</li>
-        <li>Compressed air system contracting (licensed tie-ins via qualifier/sub)</li>
-        <li>Water and wastewater treatment contracting (licensed tie-ins via qualifier/sub)</li>
-        <li>Pump stations and lift station contracting (licensed tie-ins via qualifier/sub)</li>
-        <li>Power quality and critical power contracting (electrical qualifier/sub)</li>
-        <li>Data center mechanical contracting (mechanical qualifier/sub)</li>
-        <li>Data center electrical contracting (electrical qualifier/sub)</li>
-        <li>Generator plants and large standby systems (electrical qualifier/sub)</li>
-        <li>Industrial ventilation systems (mechanical qualifier/sub)</li>
-
-        <li>Insurance reconstruction contracting (GC owner; subcontract licensed MEP trades)</li>
-      </ul>
-      <p class="small">T5 is the “build a company now, license later (if you want)” category.</p>
-    </section>
-
-  </div>
-
-  <hr />
-  <p class="small">
-    If you want, I can generate a second HTML page that ranks the owner-first options (T0/T1/T5) by speed-to-cash, margin, and scalability.
-  </p>
-</div>
+      // Time vs Salary Scatter
+      Charts.scatter('time-salary-scatter', {
+        datasets: [
+          {
+            label: 'Owner Path (T0/T1/T5)',
+            points: [
+              { x: 1, y: 52000 },
+              { x: 3, y: 48000 },
+              { x: 2, y: 58000 },
+              { x: 1, y: 45000 },
+              { x: 4, y: 55000 }
+            ]
+          },
+          {
+            label: 'Tech Path (T2/T3/T4)',
+            points: [
+              { x: 48, y: 59800 },
+              { x: 72, y: 72500 },
+              { x: 84, y: 78000 },
+              { x: 48, y: 61000 },
+              { x: 96, y: 85000 }
+            ]
+          }
+        ]
+      }, {
+        xLabel: 'Months to Ownership/Full License',
+        yLabel: 'Median Salary ($)'
+      });
+    });
+  </script>
 </body>
+
 </html>

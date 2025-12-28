@@ -263,41 +263,7 @@
                 <p class="text-secondary">Select up to 4 careers to compare side-by-side across all metrics</p>
 
                 <div class="career-selector" id="career-selector">
-                    <div class="career-selector-slot filled filled-0" data-slot="0">
-                        <div class="slot-header">
-                            <div>
-                                <span class="tier-badge tier-badge-2 mb-2">T2</span>
-                                <h3 class="font-semibold">HVAC Technician</h3>
-                                <span class="text-sm text-secondary">Mechanical Trades</span>
-                            </div>
-                            <button class="slot-remove" onclick="removeCareer(0)">×</button>
-                        </div>
-                    </div>
-
-                    <div class="career-selector-slot filled filled-1" data-slot="1">
-                        <div class="slot-header">
-                            <div>
-                                <span class="tier-badge tier-badge-0 mb-2">T0</span>
-                                <h3 class="font-semibold">Roofing Contractor</h3>
-                                <span class="text-sm text-secondary">Construction Trades</span>
-                            </div>
-                            <button class="slot-remove" onclick="removeCareer(1)">×</button>
-                        </div>
-                    </div>
-
-                    <div class="career-selector-slot" data-slot="2" onclick="openCareerSearch(2)">
-                        <div class="text-tertiary">
-                            <div style="font-size: 2rem; margin-bottom: 0.5rem;">+</div>
-                            <div>Add Career</div>
-                        </div>
-                    </div>
-
-                    <div class="career-selector-slot" data-slot="3" onclick="openCareerSearch(3)">
-                        <div class="text-tertiary">
-                            <div style="font-size: 2rem; margin-bottom: 0.5rem;">+</div>
-                            <div>Add Career</div>
-                        </div>
-                    </div>
+                    <!-- Dynamic Slots -->
                 </div>
             </div>
         </section>
@@ -337,37 +303,15 @@
             <section class="comparison-section">
                 <h2 class="comparison-section-title">📋 Basic Information</h2>
 
-                <table class="comparison-table">
+                <table class="comparison-table basics-table">
                     <thead>
                         <tr>
                             <th>Metric</th>
-                            <th><span class="color-indicator" style="background: var(--color-chart-1);"></span>HVAC
-                                Technician</th>
-                            <th><span class="color-indicator" style="background: var(--color-chart-2);"></span>Roofing
-                                Contractor</th>
+                            <!-- Dynamic Headers -->
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Tier</td>
-                            <td>T2 - Journeyman Path</td>
-                            <td class="highlight">T0 - Owner Now</td>
-                        </tr>
-                        <tr>
-                            <td>Category</td>
-                            <td>Mechanical Trades</td>
-                            <td>Construction Trades</td>
-                        </tr>
-                        <tr>
-                            <td>Time to Ownership</td>
-                            <td>6 years (with Master)</td>
-                            <td class="highlight">1-2 months</td>
-                        </tr>
-                        <tr>
-                            <td>Education Required</td>
-                            <td>Trade School + Apprenticeship</td>
-                            <td class="highlight">None required</td>
-                        </tr>
+                        <!-- Dynamic Body -->
                     </tbody>
                 </table>
             </section>
@@ -376,42 +320,15 @@
             <section class="comparison-section">
                 <h2 class="comparison-section-title">💰 Compensation</h2>
 
-                <table class="comparison-table">
+                <table class="comparison-table comp-table">
                     <thead>
                         <tr>
                             <th>Metric</th>
-                            <th><span class="color-indicator" style="background: var(--color-chart-1);"></span>HVAC
-                                Technician</th>
-                            <th><span class="color-indicator" style="background: var(--color-chart-2);"></span>Roofing
-                                Contractor</th>
+                            <!-- Dynamic Headers -->
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Entry Salary</td>
-                            <td class="highlight">$38,480</td>
-                            <td>$33,280</td>
-                        </tr>
-                        <tr>
-                            <td>Median Salary</td>
-                            <td class="highlight">$59,800</td>
-                            <td>$50,000</td>
-                        </tr>
-                        <tr>
-                            <td>Top 10% Salary</td>
-                            <td class="highlight">$100,880</td>
-                            <td>$87,670</td>
-                        </tr>
-                        <tr>
-                            <td>Owner Y1 Revenue</td>
-                            <td>$150,000</td>
-                            <td class="highlight">$250,000</td>
-                        </tr>
-                        <tr>
-                            <td>Profit Margin</td>
-                            <td>28%</td>
-                            <td class="highlight">30%</td>
-                        </tr>
+                        <!-- Dynamic Body -->
                     </tbody>
                 </table>
 
@@ -436,129 +353,25 @@
                 </div>
             </section>
 
-            <!-- Timeline Comparison -->
-            <section class="comparison-section">
-                <h2 class="comparison-section-title">📅 Timeline</h2>
-
-                <table class="comparison-table">
-                    <thead>
-                        <tr>
-                            <th>Milestone</th>
-                            <th><span class="color-indicator" style="background: var(--color-chart-1);"></span>HVAC
-                                Technician</th>
-                            <th><span class="color-indicator" style="background: var(--color-chart-2);"></span>Roofing
-                                Contractor</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Time to Entry Level</td>
-                            <td>Immediate</td>
-                            <td>Immediate</td>
-                        </tr>
-                        <tr>
-                            <td>Time to Full Certification</td>
-                            <td>4 years (Journeyman)</td>
-                            <td class="highlight">1-2 weeks (Mfr cert)</td>
-                        </tr>
-                        <tr>
-                            <td>Time to Business Ownership</td>
-                            <td>6 years</td>
-                            <td class="highlight">1-2 months</td>
-                        </tr>
-                        <tr>
-                            <td>Apprenticeship Required</td>
-                            <td>Yes (4 years)</td>
-                            <td class="highlight">No</td>
-                        </tr>
-                    </tbody>
-                </table>
+            </table>
             </section>
 
-            <!-- Licensing Comparison -->
-            <section class="comparison-section">
-                <h2 class="comparison-section-title">📜 Licensing & Requirements</h2>
-
-                <table class="comparison-table">
-                    <thead>
-                        <tr>
-                            <th>Requirement</th>
-                            <th><span class="color-indicator" style="background: var(--color-chart-1);"></span>HVAC
-                                Technician</th>
-                            <th><span class="color-indicator" style="background: var(--color-chart-2);"></span>Roofing
-                                Contractor</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>State License Required</td>
-                            <td>Yes (Journeyman/Master)</td>
-                            <td class="highlight">No trade license</td>
-                        </tr>
-                        <tr>
-                            <td># of Licenses Needed</td>
-                            <td>2-3</td>
-                            <td class="highlight">1-2 (business only)</td>
-                        </tr>
-                        <tr>
-                            <td>Exam Pass Rate</td>
-                            <td>72%</td>
-                            <td class="highlight">100% (no trade exam)</td>
-                        </tr>
-                        <tr>
-                            <td>Bonding Required</td>
-                            <td>$25,000</td>
-                            <td>$15,000</td>
-                        </tr>
-                        <tr>
-                            <td>Insurance Minimum</td>
-                            <td>$1M GL</td>
-                            <td>$1M GL</td>
-                        </tr>
-                    </tbody>
-                </table>
+            </table>
             </section>
 
             <!-- Business Comparison -->
             <section class="comparison-section">
                 <h2 class="comparison-section-title">🏢 Business Ownership</h2>
 
-                <table class="comparison-table">
+                <table class="comparison-table biz-table">
                     <thead>
                         <tr>
                             <th>Metric</th>
-                            <th><span class="color-indicator" style="background: var(--color-chart-1);"></span>HVAC
-                                Technician</th>
-                            <th><span class="color-indicator" style="background: var(--color-chart-2);"></span>Roofing
-                                Contractor</th>
+                            <!-- Dynamic Headers -->
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Startup Cost (Min)</td>
-                            <td>$15,000</td>
-                            <td class="highlight">$8,000</td>
-                        </tr>
-                        <tr>
-                            <td>Startup Cost (Typical)</td>
-                            <td>$45,000</td>
-                            <td class="highlight">$35,000</td>
-                        </tr>
-                        <tr>
-                            <td>Year 1 Revenue</td>
-                            <td>$150,000</td>
-                            <td class="highlight">$250,000</td>
-                        </tr>
-                        <tr>
-                            <td>Year 5 Revenue</td>
-                            <td>$600,000</td>
-                            <td class="highlight">$1,500,000</td>
-                        </tr>
-                        <tr>
-                            <td>Break Even</td>
-                            <td>6 months</td>
-                            <td class="highlight">3 months</td>
-                        </tr>
+                        <!-- Dynamic Body -->
                     </tbody>
                 </table>
             </section>
@@ -606,7 +419,8 @@
                     </tbody>
                 </table>
 
-                <div class="comparison-chart-row">
+                <!-- Hidden for now until we have dynamic skills data -->
+                <div class="comparison-chart-row" style="display: none;">
                     <div class="chart-container">
                         <div class="chart-header">
                             <h4 class="chart-title">Skills Comparison</h4>
@@ -662,13 +476,28 @@
                 </table>
             </section>
 
-            <!-- Download/Export -->
-            <section class="comparison-section text-center">
-                <button class="btn btn-primary btn-lg">📥 Export Comparison (PDF)</button>
-                <button class="btn btn-secondary btn-lg ml-3">🔗 Share Comparison</button>
-            </section>
-
         </main>
+
+        <!-- Search Modal -->
+        <div id="compare-search-modal"
+            style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.8); z-index: 1000; align-items: center; justify-content: center;">
+            <div
+                style="background: var(--color-surface-card); width: 90%; max-width: 600px; max-height: 80vh; border-radius: var(--radius-xl); display: flex; flex-direction: column; overflow: hidden;">
+                <div
+                    style="padding: var(--space-4); border-bottom: 1px solid var(--color-border-subtle); display: flex; justify-content: space-between; align-items: center;">
+                    <h3 class="h4 m-0">Select Career to Compare</h3>
+                    <button onclick="closeSearch()"
+                        style="background: none; border: none; font-size: 1.5rem; cursor: pointer;">×</button>
+                </div>
+                <div style="padding: var(--space-4);">
+                    <input type="text" id="career-search-input" placeholder="Search careers..."
+                        style="width: 100%; padding: var(--space-3); border-radius: var(--radius-lg); border: 1px solid var(--color-border-default); background: var(--color-bg-elevated); color: var(--color-text-primary);">
+                </div>
+                <div id="search-results" style="flex: 1; overflow-y: auto; padding: 0 var(--space-4) var(--space-4);">
+                    <!-- Results -->
+                </div>
+            </div>
+        </div>
 
         <!-- Footer -->
         <footer class="footer">
@@ -680,46 +509,286 @@
         </footer>
     </div>
 
+    <!-- Data Scripts -->
+    <script src="js/careers-data.js"></script>
+    <script src="js/careers-data-t1-part1.js"></script>
+    <script src="js/careers-data-t1-part2.js"></script>
+    <script src="js/careers-data-t1-part3.js"></script>
+    <script src="js/careers-data-t2.js"></script>
+    <script src="js/careers-data-t3.js"></script>
+    <script src="js/careers-data-t4.js"></script>
+    <script src="js/careers-data-t5.js"></script>
+
     <script src="js/charts.js"></script>
     <script>
+        let allCareers = [];
+        let compareIds = [];
+        let activeSlot = -1;
+
         document.addEventListener('DOMContentLoaded', function () {
-            // Salary Comparison Bar Chart
-            Charts.comparisonBar('salary-comparison-chart', {
-                labels: ['Entry', 'Median', '75th %', 'Top 10%'],
-                datasets: [
-                    { label: 'HVAC Technician', values: [38480, 59800, 79040, 100880] },
-                    { label: 'Roofing Contractor', values: [33280, 50000, 67560, 87670] }
-                ]
-            });
+            // Load Data
+            if (window.CAREERS_DATA) {
+                allCareers = Object.entries(window.CAREERS_DATA).map(([id, c]) => {
+                    c.id = id;
+                    c.salaryMedian = c.salary ? c.salary.median : 0;
+                    c.salaryTop10 = c.salary ? c.salary.top10 : 0;
+                    c.timeVal = parseTimeVal(c.timeToOwn);
+                    return c;
+                });
+            }
 
-            // Experience Progression Chart
-            Charts.trendLine('experience-comparison-chart', {
-                labels: ['Yr 1', 'Yr 2', 'Yr 4', 'Yr 6', 'Yr 10'],
-                datasets: [
-                    { label: 'HVAC Technician', values: [35000, 40000, 50000, 70000, 95000] },
-                    { label: 'Roofing Contractor', values: [35000, 45000, 55000, 75000, 120000] }
-                ]
-            });
+            // Parse URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const compareParam = urlParams.get('compare');
+            if (compareParam) {
+                compareIds = compareParam.split(',').filter(id => window.CAREERS_DATA && window.CAREERS_DATA[id]).slice(0, 4);
+            } else {
+                // Default to a sample comparison if empty
+                compareIds = ['residential-hvac-replacement', 'roofing-retail-'];
+            }
 
-            // Skills Radar
-            Charts.radar('skills-radar-chart', {
-                labels: ['Technical', 'Customer Svc', 'Physical', 'Problem Solving', 'Sales', 'Leadership'],
-                datasets: [
-                    { label: 'HVAC Technician', values: [95, 90, 80, 95, 70, 75] },
-                    { label: 'Roofing Contractor', values: [75, 85, 95, 80, 90, 85] }
-                ]
+            renderAll();
+
+            // Search Input
+            document.getElementById('career-search-input').addEventListener('input', function (e) {
+                renderSearchResults(e.target.value);
             });
         });
 
-        function removeCareer(slot) {
-            // Would remove career from comparison
-            console.log('Removing career from slot', slot);
+        function renderAll() {
+            renderSelector();
+            renderComparisonTable();
+            renderCharts();
+            updateUrl();
         }
 
-        function openCareerSearch(slot) {
-            // Would open career search modal
-            console.log('Opening search for slot', slot);
+        function updateUrl() {
+            const url = new URL(window.location);
+            if (compareIds.length > 0) {
+                url.searchParams.set('compare', compareIds.join(','));
+            } else {
+                url.searchParams.delete('compare');
+            }
+            window.history.replaceState({}, '', url);
         }
+
+        // --- Selector ---
+        function renderSelector() {
+            const container = document.getElementById('career-selector');
+            container.innerHTML = '';
+
+            // Render 4 slots (filled or empty)
+            for (let i = 0; i < 4; i++) {
+                const id = compareIds[i];
+                if (id) {
+                    const c = window.CAREERS_DATA[id];
+                    container.innerHTML += `
+                    <div class="career-selector-slot filled filled-${i}" data-slot="${i}">
+                        <div class="slot-header">
+                            <div>
+                                <span class="tier-badge tier-badge-${c.tier} mb-2">T${c.tier}</span>
+                                <h3 class="font-semibold">${c.name}</h3>
+                                <span class="text-sm text-secondary">${c.category}</span>
+                            </div>
+                            <button class="slot-remove" onclick="removeCareer(${i})">×</button>
+                        </div>
+                    </div>`;
+                } else {
+                    container.innerHTML += `
+                    <div class="career-selector-slot" data-slot="${i}" onclick="openCareerSearch(${i})">
+                        <div class="text-tertiary">
+                            <div style="font-size: 2rem; margin-bottom: 0.5rem;">+</div>
+                            <div>Add Career</div>
+                        </div>
+                    </div>`;
+                }
+            }
+        }
+
+        function removeCareer(index) {
+            compareIds.splice(index, 1);
+            renderAll();
+        }
+
+        // --- Comparison Tables ---
+        function renderComparisonTable() {
+            const careers = compareIds.map(id => window.CAREERS_DATA[id]);
+
+            // Helper to build headers
+            const buildHeaders = () => {
+                let html = '<th>Metric</th>';
+                careers.forEach((c, i) => {
+                    html += `<th><span class="color-indicator" style="background: var(--color-chart-${i + 1});"></span>${c.name}</th>`;
+                });
+                return html;
+            };
+
+            // Basic Info Header
+            document.querySelector('.basics-table thead tr').innerHTML = buildHeaders();
+
+            // Basic Info Body
+            document.querySelector('.basics-table tbody').innerHTML = `
+                <tr><td>Tier</td>${careers.map(c => `<td>T${c.tier}</td>`).join('')}</tr>
+                <tr><td>Category</td>${careers.map(c => `<td>${c.category}</td>`).join('')}</tr>
+                <tr><td>Time to Own</td>${careers.map(c => `<td>${c.timeToOwn}</td>`).join('')}</tr>
+                <tr><td>Education</td>${careers.map(c => `<td>${c.education ? c.education.min : 'N/A'}</td>`).join('')}</tr>
+            `;
+
+            // Compensation Header
+            document.querySelector('.comp-table thead tr').innerHTML = buildHeaders();
+
+            // Compensation Body
+            document.querySelector('.comp-table tbody').innerHTML = `
+                <tr><td>Entry Salary</td>${careers.map(c => `<td>$${(c.salary ? c.salary.entry : 0).toLocaleString()}</td>`).join('')}</tr>
+                <tr><td>Median Salary</td>${careers.map(c => `<td><strong style="color: var(--color-success)">$${(c.salary ? c.salary.median : 0).toLocaleString()}</strong></td>`).join('')}</tr>
+                <tr><td>Top 10% Salary</td>${careers.map(c => `<td>$${(c.salaryTop10 || 0).toLocaleString()}</td>`).join('')}</tr>
+                <tr><td>Growth Outlook</td>${careers.map(c => `<td>${c.growthVal}%</td>`).join('')}</tr>
+            `;
+
+            // Timeline/Biz Header
+            document.querySelector('.biz-table thead tr').innerHTML = buildHeaders();
+            document.querySelector('.biz-table tbody').innerHTML = `
+                <tr><td>Startup Cost</td>${careers.map(c => `<td>$${(c.business ? c.business.startupTypical : 0).toLocaleString()}</td>`).join('')}</tr>
+                <tr><td>Year 1 Revenue</td>${careers.map(c => `<td>$${(c.business ? c.business.year1Revenue : 0).toLocaleString()}</td>`).join('')}</tr>
+                <tr><td>Break Even</td>${careers.map(c => `<td>${c.business ? c.business.breakeven : 'N/A'}</td>`).join('')}</tr>
+            `;
+
+            // Verdict
+            renderVerdict(careers);
+        }
+
+        function renderVerdict(careers) {
+            if (careers.length < 2) {
+                document.querySelector('.quick-verdict').innerHTML = '<div class="text-center w-100 text-secondary">Select at least 2 careers to see verdict.</div>';
+                return;
+            }
+
+            // Find winners
+            const highestSalary = [...careers].sort((a, b) => b.salaryMedian - a.salaryMedian)[0];
+            const fastest = [...careers].sort((a, b) => parseTimeVal(a.timeToOwn) - parseTimeVal(b.timeToOwn))[0];
+            const highestGrowth = [...careers].sort((a, b) => b.growthVal - a.growthVal)[0];
+
+            document.querySelector('.quick-verdict').innerHTML = `
+                <div class="verdict-card">
+                    <h4>Highest Salary</h4>
+                    <div class="verdict-winner" style="color: var(--color-chart-1);">${highestSalary.name}</div>
+                    <div class="text-sm text-secondary">$${(highestSalary.salaryMedian / 1000).toFixed(1)}k median</div>
+                </div>
+                <div class="verdict-card">
+                    <h4>Fastest to Start</h4>
+                    <div class="verdict-winner" style="color: var(--color-chart-2);">${fastest.name}</div>
+                    <div class="text-sm text-secondary">${fastest.timeToOwn}</div>
+                </div>
+                <div class="verdict-card">
+                    <h4>Highest Growth</h4>
+                    <div class="verdict-winner" style="color: var(--color-chart-3);">${highestGrowth.name}</div>
+                    <div class="text-sm text-secondary">+${highestGrowth.growthVal}%</div>
+                </div>`;
+        }
+
+
+        // --- Charts ---
+        function renderCharts() {
+            const careers = compareIds.map(id => window.CAREERS_DATA[id]);
+            if (careers.length === 0) return;
+
+            // Salary Column Chart
+            Charts.comparisonBar('salary-comparison-chart', {
+                labels: ['Entry', 'Median', 'Top 10%'],
+                datasets: careers.map((c, i) => ({
+                    label: c.name,
+                    values: [c.salary.entry, c.salary.median, c.salaryTop10]
+                }))
+            });
+
+            // Growth Projection (Hypothetical)
+            Charts.trendLine('experience-comparison-chart', {
+                labels: ['Yr 1', 'Yr 3', 'Yr 5', 'Yr 10'],
+                datasets: careers.map((c, i) => {
+                    const start = c.salary.entry;
+                    const mid = c.salary.median;
+                    const peak = c.salaryTop10;
+                    return {
+                        label: c.name,
+                        values: [start, (start + mid) / 2, mid, peak] // Rough curve
+                    };
+                })
+            });
+        }
+
+
+        // --- Search Modal ---
+        function openCareerSearch(slot) {
+            if (activeSlot !== -1) return; // Already open?
+            activeSlot = slot;
+
+            document.getElementById('compare-search-modal').style.display = 'flex';
+            document.getElementById('career-search-input').value = '';
+            document.getElementById('career-search-input').focus();
+            renderSearchResults('');
+        }
+
+        function closeSearch() {
+            document.getElementById('compare-search-modal').style.display = 'none';
+            activeSlot = -1;
+        }
+
+        function renderSearchResults(query) {
+            const container = document.getElementById('search-results');
+            container.innerHTML = '';
+
+            const q = query.toLowerCase();
+            const results = allCareers.filter(c =>
+                (c.name.toLowerCase().includes(q) || c.category.toLowerCase().includes(q) || c.tier.toString().includes(q))
+                && !compareIds.includes(c.id) // Exclude already selected
+            ).slice(0, 20); // Limit results
+
+            results.forEach(c => {
+                container.innerHTML += `
+                 <div class="search-dropdown-item" onclick="selectCareer('${c.id}')">
+                    <div>
+                        <div class="font-semibold">${c.name}</div>
+                        <div class="text-sm text-tertiary">T${c.tier} • ${c.category}</div>
+                    </div>
+                    <div class="text-accent">+</div>
+                 </div>`;
+            });
+        }
+
+        function selectCareer(id) {
+            if (activeSlot !== -1) {
+                compareIds[activeSlot] = id; // Replace if slot was specific (though our UI pushes to list logic, let's just push if pure add)
+                // Actually my toggle logic passed index. 
+                // If I clicked an empty slot, `activeSlot` is the index 0-3.
+                // If I clicked "Add", I should likely just fill the first available or the index I clicked.
+                // My render loop sends 0,1,2,3. So `activeSlot` is the target index.
+
+                // If I am replacing a filled one? The UI doesn't allow clicking filled ones to search, only remove.
+                // So activeSlot is always an empty index.
+
+                // wait, array splice? No, `compareIds` is a list. 
+                // If I have [A, B] and I click slot 2 (index 2), I am adding C.
+                // compareIds[2] = id works.
+                compareIds[activeSlot] = id;
+
+                // If I skipped a slot (e.g. have [A] and click slot 3), array becomes [A, empty, empty, D]. 
+                // Filter undefined?
+                compareIds = compareIds.filter(x => x);
+
+                closeSearch();
+                renderAll();
+            }
+        }
+
+        // --- Helper ---
+        function parseTimeVal(timeStr) {
+            if (!timeStr) return 0;
+            const str = timeStr.toLowerCase();
+            if (str.includes('month')) return parseInt(str) || 1;
+            if (str.includes('year')) return (parseInt(str) || 1) * 12;
+            return 0;
+        }
+
     </script>
 </body>
 

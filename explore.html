@@ -496,6 +496,7 @@
                                 <option value="salary-desc">Median Salary (High-Low)</option>
                                 <option value="salary-asc">Median Salary (Low-High)</option>
                                 <option value="top10-desc">Top 10% Salary (Potential)</option>
+                                <option value="roi-desc">Efficiency (High Pay / Low Time)</option>
                                 <option value="time-asc">Time to Start (Fastest)</option>
                                 <option value="growth-desc">Growth Rate (Highest)</option>
                                 <option value="name-asc">Name (A-Z)</option>
@@ -548,6 +549,11 @@
 
                     // Parse Time to Own for sorting (heuristic)
                     c.timeVal = parseTimeVal(c.timeToOwn);
+
+                    // ROI Ratio: Annual Top 10% Salary / Months to Own
+                    // We clamp timeVal to min 1 month to avoid infinity/skew
+                    const effectiveTime = Math.max(c.timeVal, 1);
+                    c.roi = c.salaryTop10 / effectiveTime;
 
                     // Normalize Category
                     c.catNormalized = c.category || "Specialty";
@@ -709,6 +715,7 @@
                     case 'salary-desc': return b.salaryMedian - a.salaryMedian;
                     case 'salary-asc': return a.salaryMedian - b.salaryMedian;
                     case 'top10-desc': return b.salaryTop10 - a.salaryTop10;
+                    case 'roi-desc': return b.roi - a.roi;
                     case 'time-asc': return a.timeVal - b.timeVal;
                     case 'growth-desc': return b.growthVal - a.growthVal;
                     case 'name-asc': return a.name.localeCompare(b.name);

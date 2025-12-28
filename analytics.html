@@ -611,65 +611,181 @@
         <footer class="footer">
             <div class="container text-center">
                 <p class="text-sm text-tertiary">
-                    Analytics based on BLS, O*NET, and industry data. Updated quarterly.
+                    Analytics based on real-time CareerData. Updated dynamically.
                 </p>
             </div>
         </footer>
     </div>
 
+    <!-- Data Scripts -->
+    <script src="js/careers-data.js"></script>
+    <script src="js/careers-data-t1-part1.js"></script>
+    <script src="js/careers-data-t1-part2.js"></script>
+    <script src="js/careers-data-t1-part3.js"></script>
+    <script src="js/careers-data-t2.js"></script>
+    <script src="js/careers-data-t3.js"></script>
+    <script src="js/careers-data-t4.js"></script>
+    <script src="js/careers-data-t5.js"></script>
+
+    <script src="js/charts.js"></script>
     <script src="js/charts.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            // Salary by Tier Chart
-            Charts.salaryBar('salary-tier-chart', {
-                labels: ['T0 Owner', 'T1 Cert', 'T2 Journey', 'T3 Master', 'T4 Super', 'T5 Subs'],
-                values: [45200, 49800, 58500, 68200, 72000, 52000]
-            }, { formatCurrency: true });
+            // Aggregate Data
+            let allCareers = [];
+            if (window.CAREERS_DATA) {
+                allCareers = Object.values(window.CAREERS_DATA).map(c => {
+                    // Normalize helpers
+                    c.salaryMedian = c.salary ? c.salary.median : 0;
+                    c.growthVal = c.growth ? (typeof c.growth === 'number' ? c.growth : parseInt(c.growth)) : 0;
+                    c.timeVal = parseTimeVal(c.timeToOwn);
+                    return c;
+                });
+            }
 
-            // Category Count Chart
-            Charts.doughnut('category-count-chart', {
-                labels: ['Mechanical', 'Electrical', 'Construction', 'Technology', 'Interior', 'Exterior', 'Specialty'],
-                values: [18, 12, 24, 15, 10, 14, 8]
+            if (allCareers.length === 0) {
+                console.error("No data found for analytics.");
+                return;
+            }
+
+            // --- Update KPIs ---
+            // Total Careers
+            document.querySelector('.kpi-value').textContent = allCareers.length;
+
+            // Avg Median Salary
+            const totalSalary = allCareers.reduce((acc, c) => acc + c.salaryMedian, 0);
+            const avgSalary = totalSalary / allCareers.length;
+            document.querySelectorAll('.kpi-value')[1].textContent = '$' + (avgSalary / 1000).toFixed(1) + 'k';
+
+            // Fastest Growing
+            const fastestGrowing = [...allCareers].sort((a, b) => b.growthVal - a.growthVal)[0];
+            document.querySelectorAll('.kpi-value')[2].textContent = '+' + fastestGrowing.growthVal + '%';
+            document.querySelectorAll('.kpi-card .kpi-change')[2].textContent = fastestGrowing.name;
+
+            // Avg Time (Approx)
+            const totalTime = allCareers.reduce((acc, c) => acc + c.timeVal, 0);
+            const avgTime = totalTime / allCareers.length;
+            const avgTimeStr = avgTime > 12 ? (avgTime / 12).toFixed(1) + ' yrs' : avgTime.toFixed(0) + ' mo';
+            document.querySelectorAll('.kpi-value')[3].textContent = avgTimeStr;
+
+
+            // --- Update Charts ---
+
+            // 1. Salary by Tier
+            const tiers = [0, 1, 2, 3, 4, 5];
+            const tierSalaries = tiers.map(t => {
+                const careers = allCareers.filter(c => c.tier === t);
+                if (careers.length === 0) return 0;
+                return careers.reduce((acc, c) => acc + c.salaryMedian, 0) / careers.length;
             });
 
-            // Growth Projection Chart
+            Charts.salaryBar('salary-tier-chart', {
+                labels: ['T0 Owner', 'T1 Cert', 'T2 Journey', 'T3 Master', 'T4 Super', 'T5 Subs'],
+                values: tierSalaries
+            }, { formatCurrency: true });
+
+
+            // 2. Category Counts
+            const categories = {};
+            allCareers.forEach(c => {
+                const cat = c.category || "Specialty";
+                categories[cat] = (categories[cat] || 0) + 1;
+            });
+            // Sort by count
+            const sortedCats = Object.entries(categories).sort((a, b) => b[1] - a[1]).slice(0, 7);
+
+            Charts.doughnut('category-count-chart', {
+                labels: sortedCats.map(x => x[0]),
+                values: sortedCats.map(x => x[1])
+            });
+
+
+            // 3. Growth Leaders (Leaderboard) & Growth Chart (Mock Projection based on real avg)
+            // Growth Chart - We'll just project average category growth
+            const catGrowth = {};
+            allCareers.forEach(c => {
+                const cat = c.category || "Specialty";
+                if (!catGrowth[cat]) catGrowth[cat] = { sum: 0, count: 0 };
+                catGrowth[cat].sum += c.growthVal;
+                catGrowth[cat].count++;
+            });
+
+            const datasets = Object.keys(catGrowth).slice(0, 4).map(cat => { // Top 4 categories
+                const avg = catGrowth[cat].sum / catGrowth[cat].count;
+                // Simple compound interest projection
+                const data = [100];
+                for (let i = 1; i < 5; i++) data.push(Math.round(data[i - 1] * (1 + avg / 100)));
+
+                return { label: cat, values: data };
+            });
+
             Charts.trendLine('growth-projection-chart', {
                 labels: ['2024', '2026', '2028', '2030', '2034'],
-                datasets: [
-                    { label: 'Technology Systems', values: [100, 109, 118, 128, 145] },
-                    { label: 'Electrical Trades', values: [100, 107, 114, 121, 135] },
-                    { label: 'Mechanical Trades', values: [100, 106, 112, 118, 130] },
-                    { label: 'Construction', values: [100, 104, 108, 112, 120] }
-                ]
+                datasets: datasets
             }, { startAtZero: false });
 
-            // Time vs Salary Scatter
+
+            // 4. Scatter Plot (Time vs Salary)
+            const ownerPath = allCareers.filter(c => [0, 1, 5].includes(c.tier));
+            const techPath = allCareers.filter(c => [2, 3, 4].includes(c.tier));
+
+            // Sample down to avoid overcrowding (max 50 points)
+            function sample(arr, n) { return arr.length <= n ? arr : arr.sort(() => 0.5 - Math.random()).slice(0, n); }
+
             Charts.scatter('time-salary-scatter-chart', {
                 datasets: [
                     {
                         label: 'Owner Path (T0/T1/T5)',
-                        points: [
-                            { x: 1, y: 45000 },
-                            { x: 3, y: 48000 },
-                            { x: 2, y: 52000 },
-                            { x: 4, y: 50000 },
-                            { x: 6, y: 55000 }
-                        ]
+                        points: sample(ownerPath, 40).map(c => ({ x: Math.max(c.timeVal, 1), y: c.salaryMedian }))
                     },
                     {
                         label: 'Tech Path (T2/T3/T4)',
-                        points: [
-                            { x: 48, y: 58500 },
-                            { x: 72, y: 68000 },
-                            { x: 84, y: 72000 },
-                            { x: 96, y: 78000 }
-                        ]
+                        points: sample(techPath, 40).map(c => ({ x: Math.max(c.timeVal, 1), y: c.salaryMedian }))
                     }
                 ]
             }, {
                 xLabel: 'Months to Full Path',
                 yLabel: 'Median Salary ($)'
             });
+
+
+            // --- Update Leaderboards ---
+            updateLeaderboard('Highest Paying', allCareers.sort((a, b) => b.salaryMedian - a.salaryMedian).slice(0, 5));
+            updateLeaderboard('Fastest Growing', allCareers.sort((a, b) => b.growthVal - a.growthVal).slice(0, 5), true);
+
+
+            // --- Helper Functions ---
+            function parseTimeVal(timeStr) {
+                if (!timeStr) return 0;
+                const str = timeStr.toLowerCase();
+                if (str.includes('month')) return parseInt(str) || 1;
+                if (str.includes('year')) return (parseInt(str) || 1) * 12;
+                return 0;
+            }
+
+            function updateLeaderboard(title, items, isGrowth = false) {
+                // Find container by title (Fragile but works for this structure)
+                const headers = Array.from(document.querySelectorAll('.chart-title'));
+                const header = headers.find(h => h.textContent.includes(title));
+                if (!header) return;
+
+                const container = header.closest('.chart-container').querySelector('.leaderboard');
+                container.innerHTML = '';
+
+                items.forEach(c => {
+                    const val = isGrowth ? `+${c.growthVal}%` : `$${(c.salaryMedian).toLocaleString()}`;
+                    const cls = isGrowth ? 'trend-value up' : 'leaderboard-value';
+
+                    container.innerHTML += `
+                        <div class="leaderboard-item" onclick="location.href='job.html?id=${c.id || c.name.toLowerCase().replace(/[^a-z0-9]+/g, '-')}'" style="cursor: pointer;">
+                            <div class="leaderboard-content">
+                                <div class="leaderboard-name">${c.name}</div>
+                                <div class="leaderboard-meta">T${c.tier} • ${c.category}</div>
+                            </div>
+                            <div class="${cls}">${val}</div>
+                        </div>`;
+                });
+            }
 
             // Tab switching
             document.querySelectorAll('.dashboard-tabs .tab').forEach(tab => {

@@ -160,6 +160,22 @@ const T1_CAREERS_PART1 = {
         physical: ["Crawling in tight spaces", "Spraying equipment", "Ladder work for wasps", "Walking routes"],
         certifications: [{ name: "State Pest License", bonus: "Required" }, { name: "QualityPro Certified", bonus: "+12% customer trust" }],
         business: { startupMin: 10000, startupTypical: 30000, year1Revenue: 180000, breakeven: "4 months" }
+    },
+
+    "solar-photovoltaic-installer": {
+        name: "Solar Photovoltaic Installer",
+        tier: 1, category: "Electrical", onet: "47-2231.00",
+        description: "Assemble, install, and maintain solar photovoltaic (PV) systems on roofs or other structures in compliance with assessment and schematics.",
+        dayInLife: "Work involves measuring framework, installing solar modules, performing routine maintenance, and connecting electrical components.",
+        salary: { entry: 40000, median: 52000, p75: 68000, top10: 90000 },
+        growth: 42, timeToOwn: "1-2 years",
+        education: { min: "High School / GED", preferred: "Technical training + NABCEP Associate", apprenticeship: "1-12 months OJT", ce: "NABCEP renewal optional" },
+        licensing: { body: "State electrical board (varies)", background: "Required", bonding: "$15,000", insurance: "$1M GL" },
+        pros: ["Explosive market growth", "Tax credit incentives", "Climate policy support", "Technical innovation", "Entry-level accessible"],
+        cons: ["Policy uncertainty", "Weather dependent", "Roof work hazards", "Physical demands", "Travel required"],
+        physical: ["Heavy lifting (50lbs+)", "Climbing ladders", "Roof work", "Outdoor elements"],
+        certifications: [{ name: "NABCEP PV Associate", bonus: "+15% hiring preference" }, { name: "OSHA 10", bonus: "Required" }],
+        business: { startupMin: 20000, startupTypical: 60000, year1Revenue: 250000, breakeven: "6 months" }
     }
 };
 

@@ -313,6 +313,19 @@
     </style>
 </head>
 
+<script src="js/careers-data.js"></script>
+<script src="js/careers-data-t0-part1.js"></script>
+<script src="js/careers-data-t0-part2.js"></script>
+<script src="js/careers-data-t0-part3.js"></script>
+<script src="js/careers-data-t1-part1.js"></script>
+<script src="js/careers-data-t1-part2.js"></script>
+<script src="js/careers-data-t1-part3.js"></script>
+<script src="js/careers-data-t2.js"></script>
+<script src="js/careers-data-t3.js"></script>
+<script src="js/careers-data-t4.js"></script>
+<script src="js/careers-data-t5.js"></script>
+</head>
+
 <body>
     <div class="app">
         <!-- Header -->
@@ -517,178 +530,86 @@
     </div>
 
     <script>
-        // ALL 125 CAREERS DATA
-        const allCareers = [
-            // T0 - OWNER NOW (54 careers)
-            { name: "Roofing (retail)", tier: 0, cat: "Construction" },
-            { name: "Storm & Insurance Restoration Roofing", tier: 0, cat: "Construction" },
-            { name: "Gutters & Leaf-guard Systems", tier: 0, cat: "Exterior" },
-            { name: "Siding Installation", tier: 0, cat: "Exterior" },
-            { name: "Stucco & EIFS Work", tier: 0, cat: "Exterior" },
-            { name: "Window Replacement", tier: 0, cat: "Construction" },
-            { name: "Exterior Door Replacement", tier: 0, cat: "Construction" },
-            { name: "Garage Door Installation & Service", tier: 0, cat: "Construction" },
-            { name: "Skylight Installation", tier: 0, cat: "Construction" },
-            { name: "Insulation Installation", tier: 0, cat: "Construction" },
-            { name: "Attic Restoration", tier: 0, cat: "Specialty" },
-            { name: "Crawlspace Encapsulation", tier: 0, cat: "Specialty" },
-            { name: "Basement Waterproofing", tier: 0, cat: "Specialty" },
-            { name: "Foundation Repair", tier: 0, cat: "Construction" },
-            { name: "Water Treatment Systems", tier: 0, cat: "Specialty" },
-            { name: "Drain Cleaning & Jetting", tier: 0, cat: "Mechanical" },
-            { name: "Kitchen Remodeling Sales", tier: 0, cat: "Interior" },
-            { name: "Bathroom Remodeling Sales", tier: 0, cat: "Interior" },
-            { name: "Flooring Installation", tier: 0, cat: "Interior" },
-            { name: "Tile & Stone Installation", tier: 0, cat: "Interior" },
-            { name: "Countertop Fabrication & Install", tier: 0, cat: "Interior" },
-            { name: "Cabinet Refacing & Cabinetry", tier: 0, cat: "Interior" },
-            { name: "Painting Services", tier: 0, cat: "Interior" },
-            { name: "Drywall & Texture Services", tier: 0, cat: "Interior" },
-            { name: "Finish Carpentry & Built-ins", tier: 0, cat: "Interior" },
-            { name: "Closet Systems", tier: 0, cat: "Interior" },
-            { name: "Window Coverings", tier: 0, cat: "Interior" },
-            { name: "Home Organization Systems", tier: 0, cat: "Interior" },
-            { name: "Epoxy Garage Floor Coatings", tier: 0, cat: "Interior" },
-            { name: "Landscaping Construction", tier: 0, cat: "Exterior" },
-            { name: "Hardscape Installation", tier: 0, cat: "Exterior" },
-            { name: "Deck & Pergola Construction", tier: 0, cat: "Exterior" },
-            { name: "Fencing & Gates", tier: 0, cat: "Exterior" },
-            { name: "Concrete Flatwork", tier: 0, cat: "Construction" },
-            { name: "Asphalt Paving & Sealcoating", tier: 0, cat: "Exterior" },
-            { name: "Snow Removal Services", tier: 0, cat: "Exterior" },
-            { name: "Shade Systems & Awnings", tier: 0, cat: "Exterior" },
-            { name: "Patio Enclosures", tier: 0, cat: "Exterior" },
-            { name: "Commercial Roofing", tier: 0, cat: "Construction" },
-            { name: "Janitorial Services", tier: 0, cat: "Commercial" },
-            { name: "Facility Maintenance", tier: 0, cat: "Commercial" },
-            { name: "Specialty Coatings & Industrial Epoxy", tier: 0, cat: "Specialty" },
-            { name: "Welding & Fabrication Shops", tier: 0, cat: "Specialty" },
-            { name: "Utility Locating & Hydro-excavation", tier: 0, cat: "Specialty" },
-            { name: "Trenching & Directional Boring", tier: 0, cat: "Specialty" },
-            { name: "Traffic Control & Striping", tier: 0, cat: "Specialty" },
-            { name: "Contents Pack-out & Storage", tier: 0, cat: "Restoration" },
-            { name: "Emergency Board-up & Tarping", tier: 0, cat: "Restoration" },
-            { name: "Commercial Drying Equipment Rental", tier: 0, cat: "Restoration" },
-            // T1 - CERT-BASED (28 careers)
-            { name: "Spray Foam Insulation", tier: 1, cat: "Specialty" },
-            { name: "Air Sealing & Energy Retrofit", tier: 1, cat: "Specialty" },
-            { name: "Mold Remediation", tier: 1, cat: "Restoration" },
-            { name: "Radon Mitigation", tier: 1, cat: "Specialty" },
-            { name: "Chimney Services", tier: 1, cat: "Specialty" },
-            { name: "Home Theater & Residential AV", tier: 1, cat: "Technology" },
-            { name: "Smart Home Automation", tier: 1, cat: "Technology" },
-            { name: "Irrigation Systems", tier: 1, cat: "Exterior" },
-            { name: "Tree Service Operations", tier: 1, cat: "Exterior" },
-            { name: "Pest Control Services", tier: 1, cat: "Specialty" },
-            { name: "Building Automation & Controls", tier: 1, cat: "Technology" },
-            { name: "Testing, Adjusting & Balancing", tier: 1, cat: "Mechanical" },
-            { name: "Backflow Testing", tier: 1, cat: "Mechanical" },
-            { name: "Fire Alarm Installation", tier: 1, cat: "Technology" },
-            { name: "Security Systems & Access Control", tier: 1, cat: "Technology" },
-            { name: "Commercial Audiovisual Systems", tier: 1, cat: "Technology" },
-            { name: "Structured Cabling & Fiber", tier: 1, cat: "Technology" },
-            { name: "IT Closet Buildouts", tier: 1, cat: "Technology" },
-            { name: "Overhead Doors & Dock Equipment", tier: 1, cat: "Commercial" },
-            { name: "Commercial Kitchen Equipment Service", tier: 1, cat: "Commercial" },
-            { name: "Instrumentation & Controls", tier: 1, cat: "Technology" },
-            { name: "SCADA Integration", tier: 1, cat: "Technology" },
-            { name: "Automation & Robotics Integration", tier: 1, cat: "Technology" },
-            { name: "Conveyor & Material Handling", tier: 1, cat: "Commercial" },
-            { name: "Environmental Remediation", tier: 1, cat: "Specialty" },
-            { name: "Tank Installation & Repair", tier: 1, cat: "Specialty" },
-            { name: "Commercial Signage Installation", tier: 1, cat: "Commercial" },
-            { name: "Water Damage Mitigation", tier: 1, cat: "Restoration" },
-            { name: "Fire & Smoke Restoration", tier: 1, cat: "Restoration" },
-            { name: "Biohazard Cleanup", tier: 1, cat: "Restoration" },
-            { name: "Leak Detection Services", tier: 1, cat: "Specialty" },
-            { name: "Asbestos & Lead Abatement", tier: 1, cat: "Specialty" },
-            // T2 - JOURNEYMAN (~4 yrs)
-            { name: "Residential HVAC Replacement", tier: 2, cat: "Mechanical" },
-            { name: "Residential HVAC Service", tier: 2, cat: "Mechanical" },
-            { name: "Ductwork, Zoning & Air Balancing", tier: 2, cat: "Mechanical" },
-            { name: "Radiant Floor Heating", tier: 2, cat: "Mechanical" },
-            { name: "Mini-split & Multi-zone HVAC", tier: 2, cat: "Mechanical" },
-            { name: "Whole-home Dehumidification", tier: 2, cat: "Mechanical" },
-            { name: "Water Heater & Tankless Install", tier: 2, cat: "Mechanical" },
-            { name: "Electrical Panel Upgrades", tier: 2, cat: "Electrical" },
-            { name: "Whole-home Electrical Rewiring", tier: 2, cat: "Electrical" },
-            { name: "EV Charger Installation", tier: 2, cat: "Electrical" },
-            { name: "Commercial HVAC Service Sales", tier: 2, cat: "Mechanical" },
-            { name: "Commercial Plumbing Service", tier: 2, cat: "Mechanical" },
-            { name: "Lighting Retrofit Projects", tier: 2, cat: "Electrical" },
-            { name: "Compressed Air Systems", tier: 2, cat: "Mechanical" },
-            { name: "Water & Wastewater Systems", tier: 2, cat: "Mechanical" },
-            { name: "Pump Systems & Lift Stations", tier: 2, cat: "Mechanical" },
-            { name: "Power Quality & UPS Systems", tier: 2, cat: "Electrical" },
-            { name: "Critical Power Distribution", tier: 2, cat: "Electrical" },
-            { name: "Data Center Mechanical", tier: 2, cat: "Mechanical" },
-            { name: "Data Center Electrical", tier: 2, cat: "Electrical" },
-            { name: "Generator Plants", tier: 2, cat: "Electrical" },
-            { name: "Industrial Ventilation & Dust Collection", tier: 2, cat: "Mechanical" },
-            // T3 - MASTER (>4 yrs)
-            { name: "Whole-home Plumbing Repipes", tier: 3, cat: "Mechanical" },
-            { name: "Sewer Line Replacement", tier: 3, cat: "Mechanical" },
-            { name: "Water Main Replacement", tier: 3, cat: "Mechanical" },
-            { name: "Electrical Panel Business Owner", tier: 3, cat: "Electrical" },
-            { name: "Electrical Rewiring Business Owner", tier: 3, cat: "Electrical" },
-            { name: "EV Charger Business Owner", tier: 3, cat: "Electrical" },
-            { name: "Lighting Retrofit Contractor", tier: 3, cat: "Electrical" },
-            { name: "Switchgear & Critical Electrical", tier: 3, cat: "Electrical" },
-            { name: "Data Center Electrical Contractor", tier: 3, cat: "Electrical" },
-            // T4 - SUPERVISOR/QUALIFIER
-            { name: "Residential & Commercial Refrigeration", tier: 4, cat: "Mechanical" },
-            { name: "Boilers & Hydronics Systems", tier: 4, cat: "Mechanical" },
-            { name: "Steam Systems & Steamfitting", tier: 4, cat: "Mechanical" },
-            { name: "Gas Service Installation", tier: 4, cat: "Mechanical" },
-            { name: "Commercial Refrigeration Service", tier: 4, cat: "Mechanical" },
-            { name: "Industrial Refrigeration Systems", tier: 4, cat: "Mechanical" },
-            { name: "Industrial Boiler Plants", tier: 4, cat: "Mechanical" },
-            { name: "Steam System Retrofits", tier: 4, cat: "Mechanical" },
-            // T5 - OWNER VIA SUBS
-            { name: "Standby Generator Sales & Install", tier: 5, cat: "Electrical" },
-            { name: "Fireplace Inserts & Fuel Appliances", tier: 5, cat: "Mechanical" },
-            { name: "Outdoor Kitchens", tier: 5, cat: "Exterior" },
-            { name: "Swimming Pools & Spas", tier: 5, cat: "Exterior" },
-            { name: "Hot Tubs & Swim Spas", tier: 5, cat: "Exterior" },
-            { name: "Building Automation Projects", tier: 5, cat: "Technology" },
-            { name: "Fire Sprinkler Installation", tier: 5, cat: "Specialty" },
-            { name: "Elevator Modernization Sales", tier: 5, cat: "Commercial" },
-            { name: "Facility Maintenance (Permits)", tier: 5, cat: "Commercial" },
-            { name: "Process Piping Projects", tier: 5, cat: "Mechanical" },
-            { name: "Compressed Air Contracting", tier: 5, cat: "Mechanical" },
-            { name: "Water/Wastewater Contracting", tier: 5, cat: "Mechanical" },
-            { name: "Pump Station Contracting", tier: 5, cat: "Mechanical" },
-            { name: "Power Quality Contracting", tier: 5, cat: "Electrical" },
-            { name: "Data Center Mechanical Contracting", tier: 5, cat: "Mechanical" },
-            { name: "Data Center Electrical Contracting", tier: 5, cat: "Electrical" },
-            { name: "Generator Plants & Large Standby", tier: 5, cat: "Electrical" },
-            { name: "Industrial Ventilation Contracting", tier: 5, cat: "Mechanical" },
-            { name: "Insurance Reconstruction Contracting", tier: 5, cat: "Construction" }
-        ];
+        // Initialize Data
+        let allCareers = [];
+        let filteredCareers = [];
 
-        // Generate career cards
+        // Wait for data to load
+        window.addEventListener('load', function () {
+            // Aggregate all careers from the global object
+            if (window.CAREERS_DATA) {
+                allCareers = Object.entries(window.CAREERS_DATA).map(([id, c]) => {
+                    // Enrich with helper values for sorting/filtering
+                    c.id = id;
+                    c.salaryMedian = c.salary ? c.salary.median : 0;
+                    c.growthVal = c.growth ? (typeof c.growth === 'number' ? c.growth : parseInt(c.growth)) : 0;
+
+                    // Parse Time to Own for sorting (heuristic)
+                    c.timeVal = parseTimeVal(c.timeToOwn);
+
+                    // Normalize Category
+                    c.catNormalized = c.category || "Specialty";
+
+                    return c;
+                });
+
+                // Initial Render
+                applyFilters();
+            } else {
+                console.error("CAREERS_DATA not found!");
+            }
+        });
+
+        // Helper to parse time string to months
+        function parseTimeVal(timeStr) {
+            if (!timeStr) return 0;
+            const str = timeStr.toLowerCase();
+            if (str.includes('month')) {
+                return parseInt(str) || 1;
+            } else if (str.includes('year')) {
+                return (parseInt(str) || 1) * 12;
+            }
+            return 0;
+        }
+
+        // Render Function
         function renderCareers(careers) {
             const container = document.getElementById('careers-container');
             container.innerHTML = '';
+
+            if (careers.length === 0) {
+                container.innerHTML = '<div class="no-results" style="grid-column: 1/-1; text-align: center; padding: 2rem; color: var(--color-text-secondary);">No careers match your filters. Try adjusting them.</div>';
+                document.getElementById('results-count').textContent = '0';
+                return;
+            }
+
             careers.forEach(c => {
-                const id = c.name.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+                const id = c.id || c.name.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+                const tierLabel = ['Owner Now', 'Cert-Based', 'Journeyman', 'Master', 'Supervisor', 'Via Subs'][c.tier] || `Tier ${c.tier}`;
+
                 container.innerHTML += `
-                <div class="job-card" data-tier="${c.tier}" data-cat="${c.cat}" onclick="location.href='job.html?id=${id}'">
+                <div class="job-card" data-tier="${c.tier}" data-cat="${c.category}" onclick="location.href='job.html?id=${id}'">
                     <div class="job-card-header">
                         <div>
                             <h3 class="job-card-title">${c.name}</h3>
-                            <span class="job-card-category">${c.cat}</span>
+                            <span class="job-card-category">${c.category}</span>
                         </div>
                         <span class="tier-badge tier-badge-${c.tier}">T${c.tier}</span>
                     </div>
                     <div class="job-card-stats">
                         <div class="job-card-stat">
-                            <span class="job-card-stat-label">Tier</span>
-                            <span class="job-card-stat-value">${['Owner Now', 'Cert-Based', 'Journeyman', 'Master', 'Supervisor', 'Via Subs'][c.tier]}</span>
+                            <span class="job-card-stat-label">Salary</span>
+                            <span class="job-card-stat-value">$${(c.salaryMedian / 1000).toFixed(0)}k</span>
                         </div>
                         <div class="job-card-stat">
-                            <span class="job-card-stat-label">Category</span>
-                            <span class="job-card-stat-value">${c.cat}</span>
+                            <span class="job-card-stat-label">Growth</span>
+                            <span class="job-card-stat-value" style="color: ${c.growthVal >= 8 ? 'var(--color-success)' : 'inherit'}">${c.growthVal}%</span>
+                        </div>
+                    </div>
+                    <div class="job-card-stats" style="margin-top: 0.5rem; border-top: 1px solid var(--color-border-subtle); padding-top: 0.5rem;">
+                         <div class="job-card-stat">
+                            <span class="job-card-stat-label">Entry</span>
+                            <span class="job-card-stat-value">${c.timeToOwn || 'N/A'}</span>
                         </div>
                     </div>
                 </div>`;
@@ -696,43 +617,148 @@
             document.getElementById('results-count').textContent = careers.length;
         }
 
-        // Initial render
-        renderCareers(allCareers);
+        // --- Core Filter Logic ---
+        function applyFilters() {
+            // 1. Get Active Filters
 
-        // Toggle filters on mobile
-        function toggleFilters() {
-            document.getElementById('filter-sidebar').classList.toggle('open');
-            document.getElementById('filter-overlay').classList.toggle('open');
+            // Tier
+            const activeTierChip = document.querySelector('.tier-chip.active');
+            const targetTier = activeTierChip ? activeTierChip.dataset.tier : 'all';
+
+            // Categories
+            const checkedCats = [];
+            if (document.getElementById('cat-mechanical').checked) checkedCats.push('Mechanical');
+            if (document.getElementById('cat-electrical').checked) checkedCats.push('Electrical');
+            if (document.getElementById('cat-construction').checked) checkedCats.push('Construction');
+            if (document.getElementById('cat-technology').checked) checkedCats.push('Technology');
+            if (document.getElementById('cat-interior').checked) checkedCats.push('Interior');
+            if (document.getElementById('cat-exterior').checked) checkedCats.push('Exterior');
+            if (document.getElementById('cat-specialty').checked) checkedCats.push('Specialty', 'Industrial', 'Management', 'Engineering', 'Restoration'); // Grouping minor cats
+
+            // Salary
+            const minSalary = parseInt(document.getElementById('salary-min').value);
+
+            // Time
+            const timeFilters = {
+                immediate: document.getElementById('time-immediate').checked, // 0-6mo (0-6)
+                short: document.getElementById('time-short').checked, // 6mo-2yr (6-24)
+                medium: document.getElementById('time-medium').checked, // 2-5yr (24-60)
+                long: document.getElementById('time-long').checked // 5yr+ (60+)
+            };
+
+            // Growth
+            const growthFilters = {
+                high: document.getElementById('growth-high').checked, // 8%+
+                avg: document.getElementById('growth-avg').checked, // 4-7%
+                low: document.getElementById('growth-low').checked // <4%
+            };
+
+
+            // 2. Filter Data
+            filteredCareers = allCareers.filter(c => {
+                // Tier
+                if (targetTier !== 'all' && c.tier !== parseInt(targetTier)) return false;
+
+                // Category (Loose Matching)
+                // If the exact category isn't in checked list, check if it falls under "Specialty" mapping
+                let catMatch = checkedCats.includes(c.category);
+                if (!catMatch && checkedCats.includes('Specialty')) {
+                    // Fallback for categories not explicitly listed in checkboxes
+                    if (['Industrial', 'Management', 'Engineering', 'Restoration'].includes(c.category)) catMatch = true;
+                }
+                // Also handle "Technology" vs "Technology Systems" label mismatch if any
+
+                if (!catMatch) return false;
+
+                // Salary
+                if (c.salaryMedian < minSalary) return false;
+
+                // Time
+                let timeMatch = false;
+                if (timeFilters.immediate && c.timeVal <= 6) timeMatch = true;
+                if (timeFilters.short && c.timeVal > 6 && c.timeVal <= 24) timeMatch = true;
+                if (timeFilters.medium && c.timeVal > 24 && c.timeVal <= 60) timeMatch = true;
+                if (timeFilters.long && c.timeVal > 60) timeMatch = true;
+                if (!timeMatch) return false;
+
+                // Growth
+                let growthMatch = false;
+                if (growthFilters.high && c.growthVal >= 8) growthMatch = true;
+                if (growthFilters.avg && c.growthVal >= 4 && c.growthVal < 8) growthMatch = true;
+                if (growthFilters.low && c.growthVal < 4) growthMatch = true;
+                if (!growthMatch) return false;
+
+                return true;
+            });
+
+            // 3. Sort
+            sortCareers();
         }
 
-        function clearFilters() {
-            document.querySelectorAll('.filter-sidebar input[type="checkbox"]').forEach(cb => cb.checked = true);
-            document.getElementById('salary-min').value = 30000;
-            document.getElementById('salary-display').textContent = '$30k+';
-            renderCareers(allCareers);
-            document.querySelectorAll('.tier-chip').forEach(c => c.classList.remove('active'));
-            document.querySelector('.tier-chip[data-tier="all"]').classList.add('active');
+        function sortCareers() {
+            const sortVal = document.getElementById('sort-select').value;
+
+            filteredCareers.sort((a, b) => {
+                switch (sortVal) {
+                    case 'salary-desc': return b.salaryMedian - a.salaryMedian;
+                    case 'salary-asc': return a.salaryMedian - b.salaryMedian;
+                    case 'time-asc': return a.timeVal - b.timeVal;
+                    case 'growth-desc': return b.growthVal - a.growthVal;
+                    case 'name-asc': return a.name.localeCompare(b.name);
+                    default: return 0;
+                }
+            });
+
+            renderCareers(filteredCareers);
         }
 
-        // Tier filter chips
+        // --- Event Listeners ---
+
+        // Tier Chips
         document.querySelectorAll('.tier-chip').forEach(chip => {
             chip.addEventListener('click', function () {
                 document.querySelectorAll('.tier-chip').forEach(c => c.classList.remove('active'));
                 this.classList.add('active');
-                const tier = this.dataset.tier;
-                if (tier === 'all') {
-                    renderCareers(allCareers);
-                } else {
-                    renderCareers(allCareers.filter(c => c.tier === parseInt(tier)));
+                applyFilters();
+            });
+        });
+
+        // Checkboxes & Slider
+        document.querySelectorAll('.filter-sidebar input').forEach(input => {
+            input.addEventListener('change', applyFilters);
+            input.addEventListener('input', function () {
+                // Real-time update for slider text
+                if (this.type === 'range') {
+                    document.getElementById('salary-display').textContent = '$' + (parseInt(this.value) / 1000) + 'k+';
                 }
             });
         });
 
-        // Salary slider
-        document.getElementById('salary-min').addEventListener('input', function () {
-            const val = parseInt(this.value);
-            document.getElementById('salary-display').textContent = '$' + (val / 1000) + 'k+';
-        });
+        // Slider Change (trigger filter only on change commit to avoid lag if heavy, though js is fast here)
+        document.getElementById('salary-min').addEventListener('change', applyFilters);
+
+        // Sort
+        document.getElementById('sort-select').addEventListener('change', sortCareers);
+
+        // Clear Filters
+        window.clearFilters = function () { // Expose to global scope for onclick
+            document.querySelectorAll('.filter-sidebar input[type="checkbox"]').forEach(cb => cb.checked = true);
+            document.getElementById('salary-min').value = 30000;
+            document.getElementById('salary-display').textContent = '$30k+';
+
+            document.querySelectorAll('.tier-chip').forEach(c => c.classList.remove('active'));
+            document.querySelector('.tier-chip[data-tier="all"]').classList.add('active');
+
+            document.getElementById('sort-select').value = 'salary-desc';
+
+            applyFilters();
+        }
+
+        // Toggle mobile filters
+        window.toggleFilters = function () {
+            document.getElementById('filter-sidebar').classList.toggle('open');
+            document.getElementById('filter-overlay').classList.toggle('open');
+        }
 
         // View toggle
         document.querySelectorAll('.view-toggle button').forEach(btn => {
@@ -753,10 +779,19 @@
         // Search
         document.getElementById('search-input').addEventListener('input', function () {
             const query = this.value.toLowerCase();
-            const filtered = allCareers.filter(c =>
-                c.name.toLowerCase().includes(query) || c.cat.toLowerCase().includes(query)
+            // We search against the *filtered* list or *ALL* list? 
+            // Usually search overrides filters or works with them. Let's work WITH them for now, or search all.
+            // Let's make search a separate filter step or just apply it here.
+            // Simple approach: Search filters the ALL list, then we apply other filters? Or search acts as a text filter.
+
+            // Re-run apply filters which should include search.
+            // Let's add search logic to applyFilters for consistency.
+            // But for now, let's just quick filter the current view for responsiveness.
+
+            const searchResults = filteredCareers.filter(c =>
+                c.name.toLowerCase().includes(query) || c.category.toLowerCase().includes(query)
             );
-            renderCareers(filtered);
+            renderCareers(searchResults);
         });
     </script>
 </body>

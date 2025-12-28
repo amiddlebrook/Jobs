@@ -352,6 +352,118 @@ const T2_CAREERS = {
         physical: ["Working at heights", "Heavy duct handling", "Industrial environments", "Access challenges"],
         certifications: [{ name: "ACGIH Industrial Ventilation", bonus: "+15% design credibility" }],
         business: { startupMin: 35000, startupTypical: 90000, year1Revenue: 450000, breakeven: "7 months" }
+    },
+
+    "fire-sprinkler-fitter": {
+        name: "Fire Sprinkler Fitter",
+        tier: 2, category: "Mechanical", onet: "47-2152.01",
+        description: "Install, inspect, and maintain fire suppression systems including sprinkler piping, standpipes, and fire pumps for commercial buildings.",
+        dayInLife: "Work involves cutting/threading pipe, installing overhead piping, testing systems, and coordinating with fire marshals.",
+        salary: { entry: 45000, median: 60000, p75: 80000, top10: 105000 },
+        growth: 4, timeToOwn: "4-5 years (journeyman)",
+        education: { min: "High School / GED", preferred: "Apprenticeship", apprenticeship: "4-5 years / 8000 hours OJT + classroom", ce: "16 hours annually" },
+        licensing: { body: "State fire marshal/contractor board", background: "Required", bonding: "$15,000", insurance: "$1M GL" },
+        pros: ["Life safety trade", "Recession resistant", "Inspection revenue", "Strong union presence", "High hourly rates"],
+        cons: ["Physical overhead work", "Strict code compliance", "Emergency calls", "Water damage liability", "Travel required"],
+        physical: ["Heavy lifting overhead", "Ladder/lift work", "Pipe fitting", "Active work"],
+        certifications: [{ name: "ASSE 15000", bonus: "Required" }, { name: "NICET Level II", bonus: "+10% wage" }],
+        business: { startupMin: 40000, startupTypical: 120000, year1Revenue: 500000, breakeven: "9 months" }
+    },
+
+    "stationary-engineer": {
+        name: "Stationary Engineer",
+        tier: 2, category: "Mechanical", onet: "51-8021.00",
+        description: "Operate and maintain stationary engines, boilers, and other mechanical equipment to provide utilities for buildings or industrial processes.",
+        dayInLife: "Work involves monitoring boiler/chiller operations, performing rounds, testing water chemistry, and preventive maintenance.",
+        salary: { entry: 47000, median: 75190, p75: 95000, top10: 121000 },
+        growth: 4, timeToOwn: "4 years (license)",
+        education: { min: "High School / GED", preferred: "Apprenticeship/Vocational", apprenticeship: "4 years / 8000 hours", ce: "License renewal" },
+        licensing: { body: "Local/State boiler board", background: "Required", bonding: "N/A", insurance: "Employer provided" },
+        pros: ["High median wage ($75k)", "Stable employment", "Indoor work mostly", "Shift work options", "Critical facility role"],
+        cons: ["24/7 operations", "Safety hazards", "Noise/heat", "Shift work", "Responsibility for safety"],
+        physical: ["Walking rounds", "Climbing ladders", "Valve operation", "Moderate lifting"],
+        certifications: [{ name: "High Pressure Boiler License", bonus: "Required" }, { name: "Refrigeration Operator", bonus: "+10% wage" }],
+        business: { startupMin: 50000, startupTypical: 150000, year1Revenue: 400000, breakeven: "12 months" }
+    },
+
+    "millwright": {
+        name: "Millwright",
+        tier: 2, category: "Industrial", onet: "49-9044.00",
+        description: "Install, dismantle, or move machinery and heavy equipment according to layout plans, blueprints, or other drawings.",
+        dayInLife: "Work involves reading blueprints, precision leveling/aligning, welding, and assembling industrial machinery.",
+        salary: { entry: 44000, median: 63510, p75: 80000, top10: 91000 },
+        growth: 13, timeToOwn: "4 years (journeyman)",
+        education: { min: "High School / GED", preferred: "Apprenticeship", apprenticeship: "4 years / 8000 hours + 576 classroom hours", ce: "Safety training" },
+        licensing: { body: "State/Industry", background: "Often required", bonding: "$15,000", insurance: "$1M GL" },
+        pros: ["High growth (13%)", "Travel opportunities", "Overtime potential", "Precision work", "Industrial demand"],
+        cons: ["Travel required", "Heavy lifting", "Dangerous environments", "Precision pressure", "Shift work"],
+        physical: ["Heavy lifting", "Precision alignment", "Confined spaces", "Active work"],
+        certifications: [{ name: "AWS Welding", bonus: "+10% wage" }, { name: "Optical Alignment", bonus: "+15% specialist" }],
+        business: { startupMin: 60000, startupTypical: 150000, year1Revenue: 450000, breakeven: "10 months" }
+    },
+
+    "elevator-installer": {
+        name: "Elevator Installer & Repairer",
+        tier: 2, category: "Industrial", onet: "47-4021.00",
+        description: "Assemble, install, repair, and maintain electric or hydraulic freight and passenger elevators, escalators, and dumbwaiters.",
+        dayInLife: "Work involves assembling guide rails, installing cars/platforms, wiring controls, and testing safety devices.",
+        salary: { entry: 55000, median: 106580, p75: 130000, top10: 149000 },
+        growth: 5, timeToOwn: "4-5 years (mechanic license)",
+        education: { min: "High School / GED", preferred: "Apprenticeship", apprenticeship: "4-5 years / 8000 hours + classroom", ce: "8 hours annually" },
+        licensing: { body: "State elevator safety board", background: "Required", bonding: "$25,000", insurance: "$2M GL" },
+        pros: ["Highest trade wage ($100k+)", "Strong union", "Safety focused", "Exclusive trade", "Steady work"],
+        cons: ["Dangerous heights", "Confined spaces", "On-call service", "Physically demanding", "Hard to enter"],
+        physical: ["Heavy lifting", "Heights", "Confined shafts", "Electrical/mechanical"],
+        certifications: [{ name: "QEI (Qualified Elevator Inspector)", bonus: "+20% consulting" }, { name: "Certified Elevator Technician (CET)", bonus: "Required" }],
+        business: { startupMin: 100000, startupTypical: 300000, year1Revenue: 800000, breakeven: "18 months" }
+    },
+
+    "ironworker-structural": {
+        name: "Structural Ironworker",
+        tier: 2, category: "Industrial", onet: "47-2221.00",
+        description: "Raise, place, and unite iron or steel girders, columns, and other structural members to form completed structures or structural frameworks.",
+        dayInLife: "Work involves rigging steel, signaling cranes, bolting/welding connections, and working at height.",
+        salary: { entry: 42000, median: 62700, p75: 85000, top10: 107000 },
+        growth: 4, timeToOwn: "3-4 years (journeyman)",
+        education: { min: "High School / GED", preferred: "Apprenticeship", apprenticeship: "3-4 years / 6000-8000 hours", ce: "Welding certs" },
+        licensing: { body: "State/Industry", background: "Varies", bonding: "$25,000", insurance: "$2M GL" },
+        pros: ["Pride of work", "Union strength", "Good wages", "Travel options", "Camaraderie"],
+        cons: ["Extremely dangerous", "Weather exposure", "Physical toll", "Heights", "Travel required"],
+        physical: ["Heavy lifting", "Climbing", "Balancing", "Welding"],
+        certifications: [{ name: "AWS D1.1 Welding", bonus: "Required" }, { name: "OSHA 30", bonus: "Required" }],
+        business: { startupMin: 75000, startupTypical: 200000, year1Revenue: 600000, breakeven: "12 months" }
+    },
+
+    "boilermaker": {
+        name: "Boilermaker",
+        tier: 2, category: "Industrial", onet: "47-2011.00",
+        description: "Assemble, install, repair, and maintain boilers, vats, and other large vessels or containers that hold liquids and gases.",
+        dayInLife: "Work involves reading blueprints, welding pressure vessels, fitting pipe/plate, and working in confined spaces.",
+        salary: { entry: 48000, median: 73340, p75: 90000, top10: 107000 },
+        growth: 2, timeToOwn: "4 years (journeyman)",
+        education: { min: "High School / GED", preferred: "Apprenticeship", apprenticeship: "4 years / 6000 hours + classroom", ce: "Welding certs" },
+        licensing: { body: "State/Industry", background: "Often required", bonding: "$25,000", insurance: "$2M GL" },
+        pros: ["High hourly rate", "Travel per diem", "Skilled welding", "Union benefits", "Overtime common"],
+        cons: ["Travel required", "Confined spaces", "Dangerous work", "Seasonal shutdowns", "Physical demands"],
+        physical: ["Heavy lifting", "Confined spaces", "Welding", "Heat exposure"],
+        certifications: [{ name: "AWS Pressure Vessel Weld", bonus: "Required" }, { name: "OSHA 10", bonus: "Required" }],
+        business: { startupMin: 80000, startupTypical: 250000, year1Revenue: 700000, breakeven: "12 months" }
+    },
+
+    "industrial-maintenance-mechanic": {
+        name: "Industrial Maintenance Mechanic",
+        tier: 2, category: "Industrial", onet: "49-9041.00",
+        description: "Repair, install, adjust, or maintain industrial production and processing machinery or refinery and pipeline distribution systems.",
+        dayInLife: "Work involves troubleshooting PLC equipment, hydraulic repairs, preventive maintenance rounds, and emergency equipment repair.",
+        salary: { entry: 44000, median: 63510, p75: 78000, top10: 91000 },
+        growth: 13, timeToOwn: "4 years (journeyman)",
+        education: { min: "High School / GED", preferred: "Associate Degree / Apprenticeship", apprenticeship: "4 years OJT or 2-year degree + 2 years exp", ce: "Vendor training" },
+        licensing: { body: "N/A", background: "Often required", bonding: "N/A", insurance: "Employer provided" },
+        pros: ["High growth", "Indoor factory work", "Steady shifts", "Technical variety", "Clean tech options"],
+        cons: ["Shift work", "Production pressure", "Noise/hazards", "On-call", "Complex controls"],
+        physical: ["Lifting parts", "Climbing machinery", "Troubleshooting", "Active work"],
+        certifications: [{ name: "CMRP (Reliability Pro)", bonus: "+10% wage" }, { name: "Fluid Power Certified", bonus: "+5% wage" }],
+        business: { startupMin: 40000, startupTypical: 100000, year1Revenue: 350000, breakeven: "8 months" }
     }
 };
 

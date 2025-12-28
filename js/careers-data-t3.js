@@ -50,22 +50,6 @@ const T3_CAREERS = {
         business: { startupMin: 55000, startupTypical: 170000, year1Revenue: 850000, breakeven: "9 months" }
     },
 
-    "fire-protection-contractor": {
-        name: "Fire Protection Contractor",
-        tier: 3, category: "Mechanical", onet: "47-2152.02",
-        description: "Design, install, and maintain fire sprinkler and suppression systems for commercial, industrial, and residential properties.",
-        dayInLife: "Work involves hydraulic design, system installation supervision, inspection coordination, service work, and fire marshal relationships.",
-        salary: { entry: 65000, median: 95000, p75: 130000, top10: 180000 },
-        growth: 7, timeToOwn: "5-7 years (fire sprinkler license)",
-        education: { min: "High School / GED + journeyman", preferred: "NICET certification + contractor license", apprenticeship: "4-5 years", ce: "NICET renewal + state CE" },
-        licensing: { body: "State fire marshal/contractor board", background: "Required", bonding: "$50,000+", insurance: "$2M GL + WC" },
-        pros: ["Code-required systems", "Commercial demand", "Inspection revenue recurring", "Less seasonal variation", "Life-safety premium"],
-        cons: ["Complex licensing", "Hydraulic calculations", "Long project cycles", "Insurance requirements high", "Inspection failures costly"],
-        physical: ["Primarily supervision", "Some installation work", "Inspection attendance", "Customer meetings"],
-        certifications: [{ name: "NICET Level III/IV", bonus: "+25% on design-build" }, { name: "State fire sprinkler license", bonus: "Required" }],
-        business: { startupMin: 75000, startupTypical: 200000, year1Revenue: 1000000, breakeven: "10 months" }
-    },
-
     "refrigeration-systems": {
         name: "Refrigeration Systems",
         tier: 3, category: "Mechanical", onet: "49-9021.00",
@@ -82,37 +66,6 @@ const T3_CAREERS = {
         business: { startupMin: 50000, startupTypical: 140000, year1Revenue: 700000, breakeven: "8 months" }
     },
 
-    "boiler-systems": {
-        name: "Boiler Systems",
-        tier: 3, category: "Mechanical", onet: "51-8021.00",
-        description: "Design, install, and service steam and hot water boiler systems for commercial and industrial heating applications.",
-        dayInLife: "Work involves boiler installation, combustion tuning, preventive maintenance, safety inspections, and managing heating system operations.",
-        salary: { entry: 62000, median: 92000, p75: 120000, top10: 160000 },
-        growth: 4, timeToOwn: "5-7 years (boiler license)",
-        education: { min: "High School / GED + journeyman", preferred: "Boiler technician training + license", apprenticeship: "5+ years", ce: "Annual boiler CE" },
-        licensing: { body: "State boiler board", background: "Required", bonding: "$25,000", insurance: "$2M GL" },
-        pros: ["Specialized = premium rates", "Commercial/industrial demand", "Licensing barrier to entry", "Recurring maintenance", "Critical system priority"],
-        cons: ["High liability (explosions)", "State licensing complex", "Seasonal demand peaks", "Physical demands", "Code expertise required"],
-        physical: ["Heavy equipment", "Hot environments", "Mechanical work", "Transitioning to supervision"],
-        certifications: [{ name: "State boiler technician/operator", bonus: "Required" }, { name: "Combustion efficiency certification", bonus: "+15% on efficiency work" }],
-        business: { startupMin: 55000, startupTypical: 150000, year1Revenue: 750000, breakeven: "9 months" }
-    },
-
-    "solar-installation-contractor": {
-        name: "Solar Installation Contractor",
-        tier: 3, category: "Electrical", onet: "47-2231.00",
-        description: "Design and install residential and commercial solar photovoltaic systems including grid-tie, battery backup, and off-grid solutions.",
-        dayInLife: "Work involves system design, crew management, utility interconnection, permit coordination, and managing installation operations.",
-        salary: { entry: 40000, median: 52000, p75: 68000, top10: 90000 },
-        growth: 42, timeToOwn: "4-5 years (electrical + NABCEP)",
-        education: { min: "High School / GED", preferred: "Technical training + NABCEP", apprenticeship: "1-12 months OJT", ce: "NABCEP renewal optional" },
-        licensing: { body: "State electrical/contractor board", background: "Required", bonding: "$25,000", insurance: "$2M GL" },
-        pros: ["Explosive market growth", "Tax credit incentives", "Climate policy support", "Technical innovation", "Commercial rooftop demand"],
-        cons: ["Policy uncertainty", "Utility interconnection complexity", "Competition increasing", "Module price volatility", "Roof work hazards"],
-        physical: ["Primarily management", "Some installation", "Roof work", "Customer meetings"],
-        certifications: [{ name: "Electrical license", bonus: "Required" }, { name: "NABCEP PV Installation Professional", bonus: "+25% credibility" }],
-        business: { startupMin: 60000, startupTypical: 175000, year1Revenue: 1200000, breakeven: "8 months" }
-    },
 
     "medical-gas-systems": {
         name: "Medical Gas Systems",

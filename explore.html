@@ -493,10 +493,11 @@
                         <div class="sort-controls">
                             <label class="text-sm text-secondary">Sort by:</label>
                             <select class="sort-select" id="sort-select">
-                                <option value="salary-desc">Salary (High to Low)</option>
-                                <option value="salary-asc">Salary (Low to High)</option>
+                                <option value="salary-desc">Median Salary (High-Low)</option>
+                                <option value="salary-asc">Median Salary (Low-High)</option>
+                                <option value="top10-desc">Top 10% Salary (Potential)</option>
                                 <option value="time-asc">Time to Start (Fastest)</option>
-                                <option value="growth-desc">Growth (Highest)</option>
+                                <option value="growth-desc">Growth Rate (Highest)</option>
                                 <option value="name-asc">Name (A-Z)</option>
                             </select>
 
@@ -542,6 +543,7 @@
                     // Enrich with helper values for sorting/filtering
                     c.id = id;
                     c.salaryMedian = c.salary ? c.salary.median : 0;
+                    c.salaryTop10 = c.salary ? c.salary.top10 : 0;
                     c.growthVal = c.growth ? (typeof c.growth === 'number' ? c.growth : parseInt(c.growth)) : 0;
 
                     // Parse Time to Own for sorting (heuristic)
@@ -598,15 +600,19 @@
                     </div>
                     <div class="job-card-stats">
                         <div class="job-card-stat">
-                            <span class="job-card-stat-label">Salary</span>
+                            <span class="job-card-stat-label">Median</span>
                             <span class="job-card-stat-value">$${(c.salaryMedian / 1000).toFixed(0)}k</span>
                         </div>
                         <div class="job-card-stat">
-                            <span class="job-card-stat-label">Growth</span>
-                            <span class="job-card-stat-value" style="color: ${c.growthVal >= 8 ? 'var(--color-success)' : 'inherit'}">${c.growthVal}%</span>
+                            <span class="job-card-stat-label">Top 10%</span>
+                            <span class="job-card-stat-value">$${(c.salaryTop10 / 1000).toFixed(0)}k</span>
                         </div>
                     </div>
                     <div class="job-card-stats" style="margin-top: 0.5rem; border-top: 1px solid var(--color-border-subtle); padding-top: 0.5rem;">
+                         <div class="job-card-stat">
+                            <span class="job-card-stat-label">Growth</span>
+                            <span class="job-card-stat-value" style="color: ${c.growthVal >= 8 ? 'var(--color-success)' : 'inherit'}">${c.growthVal}%</span>
+                        </div>
                          <div class="job-card-stat">
                             <span class="job-card-stat-label">Entry</span>
                             <span class="job-card-stat-value">${c.timeToOwn || 'N/A'}</span>
@@ -702,6 +708,7 @@
                 switch (sortVal) {
                     case 'salary-desc': return b.salaryMedian - a.salaryMedian;
                     case 'salary-asc': return a.salaryMedian - b.salaryMedian;
+                    case 'top10-desc': return b.salaryTop10 - a.salaryTop10;
                     case 'time-asc': return a.timeVal - b.timeVal;
                     case 'growth-desc': return b.growthVal - a.growthVal;
                     case 'name-asc': return a.name.localeCompare(b.name);
